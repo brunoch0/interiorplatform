@@ -36,7 +36,7 @@ export default function QuoteConfirm() {
           On confirmation, the other contractors receive a polite decline notification automatically. A draft contract is generated and has no legal effect until both parties e-sign.
         </Notice>
 
-        <Link href="/contract" className="mt-6 block w-full rounded-xl bg-emerald-500 py-4 text-center text-sm font-bold text-white hover:bg-emerald-600">
+        <Link href="/contract" className="mt-6 block w-full rounded-xl bg-terracotta py-4 text-center text-sm font-bold text-cream hover:bg-terracotta-deep">
           Confirm and draft the contract →
         </Link>
       </Card>

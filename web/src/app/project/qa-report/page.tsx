@@ -30,7 +30,7 @@ export default function QAReport() {
             <div key={q.id} className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3 text-sm">
               <div>
                 <p className="font-medium">{q.label}</p>
-                {q.comment && <p className="text-xs text-gray-400">{q.comment} {q.photos > 0 && `· 📷 ${q.photos} photos`}</p>}
+                {q.comment && <p className="text-xs text-gray-400">{q.comment} {q.photos > 0 && `· ${q.photos} photos`}</p>}
               </div>
               {q.result === "Pass" && <Badge tone="green">Pass</Badge>}
               {q.result === "Fail" && <Badge tone="red">Fail</Badge>}

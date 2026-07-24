@@ -45,11 +45,11 @@ export default async function CompanyDetail({ params }: { params: Promise<{ id: 
             </div>
           </div>
           {c.verified ? (
-            <Link href="/quote" className="rounded-xl bg-emerald-500 px-8 py-3 text-sm font-bold text-white hover:bg-emerald-600">
+            <Link href="/quote" className="rounded-xl bg-terracotta px-8 py-3 text-sm font-bold text-cream hover:bg-terracotta-deep">
               Add to quote basket
             </Link>
           ) : (
-            <Link href="/supplier/license" className="rounded-xl bg-slate-900 px-8 py-3 text-sm font-bold text-white hover:bg-slate-700">
+            <Link href="/supplier/license" className="rounded-xl bg-walnut px-8 py-3 text-sm font-bold text-cream hover:bg-walnut-deep">
               Own this business? Claim it →
             </Link>
           )}
@@ -77,7 +77,7 @@ export default async function CompanyDetail({ params }: { params: Promise<{ id: 
                   {m.label}
                   <span className="cursor-help rounded-full bg-gray-200 px-1.5 text-[10px] text-gray-500" title={m.tip}>?</span>
                 </p>
-                <div className="pointer-events-none absolute inset-x-2 -bottom-2 z-10 translate-y-full rounded-lg bg-slate-900 p-3 text-left text-[11px] leading-relaxed text-white opacity-0 shadow-lg transition group-hover:opacity-100">
+                <div className="pointer-events-none absolute inset-x-2 -bottom-2 z-10 translate-y-full rounded-lg bg-walnut p-3 text-left text-[11px] leading-relaxed text-cream opacity-0 shadow-lg transition group-hover:opacity-100">
                   {m.tip}
                   <p className="mt-1 text-[10px] text-slate-400">※ Metrics are factual data and do not constitute a legal assessment.</p>
                 </div>

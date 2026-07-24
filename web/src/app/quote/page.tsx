@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { MailCheck } from "lucide-react";
 import { companies } from "@/lib/data";
 import { Badge, Card, Notice, PageHeader, Steps } from "@/components/ui";
 
@@ -18,12 +19,12 @@ export default function QuoteRequest() {
   if (sent)
     return (
       <div className="mx-auto max-w-xl px-4 py-20 text-center">
-        <span className="text-5xl">📨</span>
+        <span className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-terracotta-tint"><MailCheck className="h-7 w-7 text-terracotta-deep" strokeWidth={1.75} /></span>
         <h1 className="mt-4 text-2xl font-bold">Quote requests sent</h1>
         <p className="mt-2 text-sm text-gray-500">
           Sent to {targets.length} contractors simultaneously. Each contractor must submit a quotation within <b>7 days</b>; we&apos;ll notify you as they arrive.
         </p>
-        <Link href="/quote/compare" className="mt-8 inline-block rounded-xl bg-slate-900 px-8 py-3 text-sm font-bold text-white hover:bg-slate-700">
+        <Link href="/quote/compare" className="mt-8 inline-block rounded-xl bg-walnut px-8 py-3 text-sm font-bold text-cream hover:bg-walnut-deep">
           Go to quote comparison →
         </Link>
       </div>
@@ -41,11 +42,11 @@ export default function QuoteRequest() {
             <label
               key={c.id}
               className={`flex cursor-pointer items-center justify-between rounded-xl border px-4 py-3 text-sm transition ${
-                targets.includes(c.id) ? "border-emerald-400 bg-emerald-50" : "border-gray-200 hover:border-gray-300"
+                targets.includes(c.id) ? "border-terracotta bg-terracotta-tint" : "border-gray-200 hover:border-gray-300"
               }`}
             >
               <span className="flex items-center gap-2">
-                <input type="checkbox" checked={targets.includes(c.id)} onChange={() => toggle(c.id)} className="accent-emerald-500" />
+                <input type="checkbox" checked={targets.includes(c.id)} onChange={() => toggle(c.id)} className="accent-terracotta" />
                 <span className="font-medium">{c.name}</span>
               </span>
               <Badge tone="green">{c.scheduleComplianceRate}% on schedule</Badge>
@@ -100,7 +101,7 @@ export default function QuoteRequest() {
       <button
         onClick={() => setSent(true)}
         disabled={targets.length === 0}
-        className="mt-6 w-full rounded-xl bg-emerald-500 py-4 text-sm font-bold text-white transition hover:bg-emerald-600 disabled:bg-gray-300"
+        className="mt-6 w-full rounded-xl bg-terracotta py-4 text-sm font-bold text-cream transition hover:bg-terracotta-deep disabled:bg-gray-300"
       >
         Send quote request to {targets.length} contractors
       </button>

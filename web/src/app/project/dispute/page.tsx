@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Scale } from "lucide-react";
 import { contract, fmt } from "@/lib/data";
 import { BackLink, Card, FileDrop, Notice, PageHeader } from "@/components/ui";
 
@@ -10,7 +11,7 @@ export default function DisputeFile() {
   if (submitted)
     return (
       <div className="mx-auto max-w-xl px-4 py-20 text-center">
-        <span className="text-5xl">⚖️</span>
+        <span className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-red-50"><Scale className="h-7 w-7 text-red-600" strokeWidth={1.75} /></span>
         <h1 className="mt-4 text-2xl font-bold">Dispute filed</h1>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-gray-500">
           Case No. <b>DSP-2026-0724-01</b> · The escrow payment for milestone M2 (<b>AED {fmt(36250)}</b>) has been automatically held
@@ -62,7 +63,7 @@ export default function DisputeFile() {
           <Notice tone="amber">
             To prevent abuse, confirmed false claims may result in account restrictions. The operator reviews both parties&apos; evidence and decides whether to release or refund the held payment.
           </Notice>
-          <button onClick={() => setSubmitted(true)} className="w-full rounded-xl bg-red-500 py-4 text-sm font-bold text-white hover:bg-red-600">
+          <button onClick={() => setSubmitted(true)} className="w-full rounded-xl bg-red-500 py-4 text-sm font-bold text-cream hover:bg-red-600">
             File dispute &amp; hold payment
           </button>
         </div>

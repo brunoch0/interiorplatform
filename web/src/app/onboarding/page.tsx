@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Home, Hammer } from "lucide-react";
 import { Card } from "@/components/ui";
 
 export default function Onboarding() {
@@ -11,7 +12,7 @@ export default function Onboarding() {
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         <Link href="/signup/consumer">
           <Card className="h-full transition hover:border-emerald-300 hover:shadow-md">
-            <span className="text-3xl">🏠</span>
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-terracotta-tint"><Home className="h-5 w-5 text-terracotta-deep" strokeWidth={1.75} /></span>
             <h2 className="mt-4 text-lg font-bold">I need an interior contractor</h2>
             <p className="mt-1 text-sm font-medium text-emerald-600">Sign up as a Homeowner</p>
             <ul className="mt-4 space-y-2 text-sm text-gray-500">
@@ -23,7 +24,7 @@ export default function Onboarding() {
         </Link>
         <Link href="/signup/supplier">
           <Card className="h-full transition hover:border-sky-300 hover:shadow-md">
-            <span className="text-3xl">🔨</span>
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50"><Hammer className="h-5 w-5 text-sky-700" strokeWidth={1.75} /></span>
             <h2 className="mt-4 text-lg font-bold">I&apos;m a contractor</h2>
             <p className="mt-1 text-sm font-medium text-sky-600">Sign up as a Contractor</p>
             <ul className="mt-4 space-y-2 text-sm text-gray-500">

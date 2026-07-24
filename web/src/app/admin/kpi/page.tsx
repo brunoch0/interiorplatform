@@ -23,7 +23,7 @@ export default function AdminKPI() {
               <button
                 key={p}
                 onClick={() => setPeriod(p)}
-                className={`rounded-md px-4 py-1.5 text-xs font-medium ${period === p ? "bg-slate-900 text-white" : "text-gray-500"}`}
+                className={`rounded-md px-4 py-1.5 text-xs font-medium ${period === p ? "bg-walnut text-cream" : "text-gray-500"}`}
               >
                 {p}
               </button>
@@ -63,7 +63,7 @@ export default function AdminKPI() {
               <div key={m.month} className="flex items-center gap-3 text-sm">
                 <span className="w-14 text-xs text-gray-400">{m.month.slice(5)}</span>
                 <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-gray-100">
-                  <div className="h-full rounded-full bg-emerald-500" style={{ width: `${(m.claims / m.companies) * 100 * 3}%` }} />
+                  <div className="h-full rounded-full bg-terracotta" style={{ width: `${(m.claims / m.companies) * 100 * 3}%` }} />
                 </div>
                 <span className="w-40 text-right text-xs">
                   <b>{m.claims}</b> of {m.companies} claimed ({Math.round((m.claims / m.companies) * 100)}%)
@@ -78,8 +78,8 @@ export default function AdminKPI() {
           <div className="flex items-center gap-4">
             <div className="h-32 w-32 shrink-0 rounded-full" style={{ background: `conic-gradient(#0f172a 0% ${Math.round((kpi.leadRevenue / (kpi.leadRevenue + kpi.packageRevenue)) * 100)}%, #10b981 0% 100%)` }} />
             <div className="space-y-2 text-sm">
-              <p><span className="mr-2 inline-block h-3 w-3 rounded-sm bg-slate-900" />Lead fees AED {fmt(kpi.leadRevenue)}</p>
-              <p><span className="mr-2 inline-block h-3 w-3 rounded-sm bg-emerald-500" />Packages AED {fmt(kpi.packageRevenue)}</p>
+              <p><span className="mr-2 inline-block h-3 w-3 rounded-sm bg-walnut" />Lead fees AED {fmt(kpi.leadRevenue)}</p>
+              <p><span className="mr-2 inline-block h-3 w-3 rounded-sm bg-terracotta" />Packages AED {fmt(kpi.packageRevenue)}</p>
               <p className="border-t border-gray-100 pt-2 font-bold">Total AED {fmt(kpi.leadRevenue + kpi.packageRevenue)}</p>
             </div>
           </div>

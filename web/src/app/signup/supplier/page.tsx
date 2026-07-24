@@ -30,7 +30,7 @@ export default function SupplierSignup() {
           <Notice>
             Companies not yet listed will get a new profile. Please have your trade license and DET fit-out license documents ready (PDF/JPG).
           </Notice>
-          <Link href="/supplier/license" className="block w-full rounded-xl bg-sky-600 py-3.5 text-center text-sm font-bold text-white transition hover:bg-sky-700">
+          <Link href="/supplier/license" className="block w-full rounded-xl bg-sky-600 py-3.5 text-center text-sm font-bold text-cream transition hover:bg-sky-700">
             Check company match →
           </Link>
         </div>

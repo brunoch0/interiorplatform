@@ -15,7 +15,7 @@ export default function QuoteCompare() {
           const c = getCompany(q.companyId)!;
           const lowest = Math.min(...received.map((r) => r.amount!));
           return (
-            <Card key={q.id} className={q.amount === lowest ? "ring-2 ring-emerald-400" : ""}>
+            <Card key={q.id} className={q.amount === lowest ? "ring-2 ring-terracotta" : ""}>
               <div className="flex items-center justify-between">
                 <h2 className="font-bold">{c.name}</h2>
                 {q.amount === lowest && <Badge tone="green">Lowest</Badge>}
@@ -34,7 +34,7 @@ export default function QuoteCompare() {
               <p className="mt-3 rounded-lg bg-gray-50 p-3 text-xs leading-relaxed text-gray-500">{q.note}</p>
               <Link
                 href={`/quote/confirm?c=${c.id}`}
-                className="mt-4 block w-full rounded-xl bg-slate-900 py-3 text-center text-sm font-bold text-white hover:bg-slate-700"
+                className="mt-4 block w-full rounded-xl bg-walnut py-3 text-center text-sm font-bold text-cream hover:bg-walnut-deep"
               >
                 Choose this contractor
               </Link>

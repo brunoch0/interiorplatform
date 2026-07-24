@@ -6,7 +6,7 @@ export default function SupplierProfile() {
       <PageHeader
         title="Profile & Portfolio"
         desc="Registered content appears on your public profile after operator moderation."
-        action={<button className="rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-bold text-white hover:bg-slate-700">Save changes</button>}
+        action={<button className="rounded-lg bg-walnut px-5 py-2.5 text-sm font-bold text-cream hover:bg-walnut-deep">Save changes</button>}
       />
 
       <Card className="mb-6">

@@ -46,10 +46,10 @@ export default function AdminDisputes() {
               <div className="mt-4 rounded-xl border border-gray-100 p-4">
                 <p className="text-sm font-bold">Mediation decision</p>
                 <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <button onClick={() => resolve(d.id, "Hold released — full payment to contractor")} className="rounded-lg bg-emerald-500 px-4 py-2.5 text-xs font-bold text-white hover:bg-emerald-600">
+                  <button onClick={() => resolve(d.id, "Hold released — full payment to contractor")} className="rounded-lg bg-terracotta px-4 py-2.5 text-xs font-bold text-cream hover:bg-terracotta-deep">
                     Release (pay contractor)
                   </button>
-                  <button onClick={() => resolve(d.id, "Full refund to consumer")} className="rounded-lg bg-red-500 px-4 py-2.5 text-xs font-bold text-white hover:bg-red-600">
+                  <button onClick={() => resolve(d.id, "Full refund to consumer")} className="rounded-lg bg-red-500 px-4 py-2.5 text-xs font-bold text-cream hover:bg-red-600">
                     Refund (consumer)
                   </button>
                   <div className="flex items-center gap-2">
@@ -61,7 +61,7 @@ export default function AdminDisputes() {
                     />
                     <button
                       onClick={() => resolve(d.id, `Partial settlement — AED ${amount || "0"} to contractor, remainder refunded`)}
-                      className="rounded-lg bg-slate-900 px-4 py-2.5 text-xs font-bold text-white hover:bg-slate-700"
+                      className="rounded-lg bg-walnut px-4 py-2.5 text-xs font-bold text-cream hover:bg-walnut-deep"
                     >
                       Execute partial settlement
                     </button>

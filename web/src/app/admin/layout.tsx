@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LayoutDashboard, ScrollText, SearchCheck, Scale, HardHat, TrendingUp } from "lucide-react";
 
 const menu = [
-  { href: "/admin", label: "Dashboard", icon: "📊" },
-  { href: "/admin/licenses", label: "License Review", icon: "📜" },
-  { href: "/admin/reviews", label: "Review Monitoring", icon: "🔍" },
-  { href: "/admin/disputes", label: "Dispute Mediation", icon: "⚖️" },
-  { href: "/admin/inspections", label: "QA Inspections", icon: "🏗️" },
-  { href: "/admin/kpi", label: "KPI Analytics", icon: "📈" },
+  { href: "/admin", label: "Dashboard", Icon: LayoutDashboard },
+  { href: "/admin/licenses", label: "License Review", Icon: ScrollText },
+  { href: "/admin/reviews", label: "Review Monitoring", Icon: SearchCheck },
+  { href: "/admin/disputes", label: "Dispute Mediation", Icon: Scale },
+  { href: "/admin/inspections", label: "QA Inspections", Icon: HardHat },
+  { href: "/admin/kpi", label: "KPI Analytics", Icon: TrendingUp },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -25,10 +26,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 key={m.href}
                 href={m.href}
                 className={`flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm ${
-                  active ? "bg-slate-900 font-semibold text-white" : "text-gray-500 hover:bg-gray-100"
+                  active ? "bg-walnut font-semibold text-cream" : "text-gray-500 hover:bg-gray-100"
                 }`}
               >
-                <span>{m.icon}</span> {m.label}
+                <m.Icon className="h-4 w-4" strokeWidth={1.75} /> {m.label}
               </Link>
             );
           })}

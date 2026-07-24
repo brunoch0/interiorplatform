@@ -23,7 +23,7 @@ export default function AdminInspections() {
                 <td className="py-3 text-right">
                   {i.status === "Pending Approval" && (
                     <span className="flex justify-end gap-1.5">
-                      <button className="rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-bold text-white">Approve reschedule</button>
+                      <button className="rounded-lg bg-terracotta px-3 py-1.5 text-xs font-bold text-cream">Approve reschedule</button>
                       <button className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-500">Deny</button>
                     </span>
                   )}
@@ -50,7 +50,7 @@ export default function AdminInspections() {
           </div>
           <div className="mt-4 flex gap-2">
             <input className="flex-1 rounded-xl border border-gray-200 px-4 py-2.5 text-sm" placeholder="Type a message (sends push notification)" />
-            <button className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-bold text-white">Send</button>
+            <button className="rounded-xl bg-walnut px-5 py-2.5 text-sm font-bold text-cream">Send</button>
           </div>
         </Card>
         <Card>

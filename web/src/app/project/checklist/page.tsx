@@ -22,7 +22,7 @@ export default function ChecklistInput() {
       <BackLink href="/project" label="Back to project" />
       <PageHeader title="On-site Inspection Checklist" desc="M2. Electrical & Plumbing · Inspector-only input screen (Inspector: J. Chung)" />
 
-      <Notice tone="blue">💾 {savedAt} — Data is saved locally even if the network drops, and stays hidden from the homeowner and contractor until submitted.</Notice>
+      <Notice tone="blue">{savedAt} — Data is saved locally even if the network drops, and stays hidden from the homeowner and contractor until submitted.</Notice>
 
       <div className="mt-6 space-y-4">
         {items.map((it) => (
@@ -37,20 +37,20 @@ export default function ChecklistInput() {
               <div className="flex gap-2">
                 <button
                   onClick={() => setResult(it.id, "Pass")}
-                  className={`rounded-lg px-4 py-2 text-xs font-bold ${it.result === "Pass" ? "bg-emerald-500 text-white" : "bg-gray-100 text-gray-500 hover:bg-gray-200"}`}
+                  className={`rounded-lg px-4 py-2 text-xs font-bold ${it.result === "Pass" ? "bg-terracotta text-cream" : "bg-gray-100 text-gray-500 hover:bg-gray-200"}`}
                 >
                   Pass
                 </button>
                 <button
                   onClick={() => setResult(it.id, "Fail")}
-                  className={`rounded-lg px-4 py-2 text-xs font-bold ${it.result === "Fail" ? "bg-red-500 text-white" : "bg-gray-100 text-gray-500 hover:bg-gray-200"}`}
+                  className={`rounded-lg px-4 py-2 text-xs font-bold ${it.result === "Fail" ? "bg-red-500 text-cream" : "bg-gray-100 text-gray-500 hover:bg-gray-200"}`}
                 >
                   Fail
                 </button>
               </div>
             </div>
             <div className="mt-3 flex items-center gap-2 border-t border-gray-50 pt-3 text-xs text-gray-400">
-              <span>📷 Photos {it.photos}/5</span>
+              <span>Photos {it.photos}/5</span>
               <button className="rounded border border-dashed border-gray-300 px-2 py-1 hover:border-gray-400">+ Add photo (JPG·PNG)</button>
               <input className="ml-auto w-40 rounded border border-gray-200 px-2 py-1" placeholder="Item comment" defaultValue={it.comment} />
             </div>
@@ -65,7 +65,7 @@ export default function ChecklistInput() {
         href={canSubmit ? "/project/qa-report" : "#"}
         aria-disabled={!canSubmit}
         className={`mt-4 block w-full rounded-xl py-4 text-center text-sm font-bold ${
-          canSubmit ? "bg-slate-900 text-white hover:bg-slate-700" : "pointer-events-none bg-gray-200 text-gray-400"
+          canSubmit ? "bg-walnut text-cream hover:bg-walnut-deep" : "pointer-events-none bg-gray-200 text-gray-400"
         }`}
       >
         Submit checklist → auto-generate QA report

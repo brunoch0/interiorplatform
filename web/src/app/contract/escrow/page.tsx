@@ -18,7 +18,7 @@ export default function EscrowDeposit() {
           Deposit the full contract amount into the platform&apos;s escrow account. Construction start approval activates once the deposit is confirmed.
         </p>
 
-        <div className="mt-6 rounded-2xl bg-slate-900 p-6 text-white">
+        <div className="mt-6 rounded-2xl bg-walnut p-6 text-cream">
           <p className="text-xs text-slate-400">Deposit amount (contract total)</p>
           <p className="mt-1 text-4xl font-black">AED {fmt(contract.totalAmount)}</p>
           <div className="mt-4 flex items-center justify-between border-t border-slate-700 pt-4 text-xs text-slate-300">
@@ -33,9 +33,9 @@ export default function EscrowDeposit() {
             ["UAE bank transfer", "No fee · confirmed within 1 business day", true],
             ["Credit card (Visa/Master)", "2.5% fee · instant confirmation", false],
           ].map(([label, desc, def]) => (
-            <label key={label as string} className="flex cursor-pointer items-center justify-between rounded-xl border border-gray-200 px-4 py-3 text-sm has-[:checked]:border-emerald-400 has-[:checked]:bg-emerald-50">
+            <label key={label as string} className="flex cursor-pointer items-center justify-between rounded-xl border border-gray-200 px-4 py-3 text-sm has-[:checked]:border-terracotta has-[:checked]:bg-terracotta-tint">
               <span className="flex items-center gap-3">
-                <input type="radio" name="pay" defaultChecked={def as boolean} className="accent-emerald-500" />
+                <input type="radio" name="pay" defaultChecked={def as boolean} className="accent-terracotta" />
                 <span className="font-medium">{label}</span>
               </span>
               <span className="text-xs text-gray-400">{desc}</span>
@@ -51,12 +51,12 @@ export default function EscrowDeposit() {
           <div className="mt-6 rounded-xl bg-emerald-50 p-6 text-center">
             <p className="text-lg font-bold text-emerald-700">✓ Deposit confirmed</p>
             <p className="mt-1 text-sm text-emerald-600">The contractor has been notified. Construction start approval is now active.</p>
-            <Link href="/project" className="mt-4 inline-block rounded-xl bg-slate-900 px-8 py-3 text-sm font-bold text-white hover:bg-slate-700">
+            <Link href="/project" className="mt-4 inline-block rounded-xl bg-walnut px-8 py-3 text-sm font-bold text-cream hover:bg-walnut-deep">
               Go to project management →
             </Link>
           </div>
         ) : (
-          <button onClick={() => setDeposited(true)} className="mt-6 w-full rounded-xl bg-emerald-500 py-4 text-sm font-bold text-white hover:bg-emerald-600">
+          <button onClick={() => setDeposited(true)} className="mt-6 w-full rounded-xl bg-terracotta py-4 text-sm font-bold text-cream hover:bg-terracotta-deep">
             Deposit AED {fmt(contract.totalAmount)} into escrow
           </button>
         )}

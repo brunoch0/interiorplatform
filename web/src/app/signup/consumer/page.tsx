@@ -32,14 +32,14 @@ export default function ConsumerSignup() {
             <label className="text-sm font-medium">Space type of interest</label>
             <div className="mt-2 flex flex-wrap gap-2">
               {["Apartment", "Villa", "Commercial", "Not sure yet"].map((t) => (
-                <label key={t} className="cursor-pointer rounded-full border border-gray-200 px-4 py-1.5 text-sm text-gray-600 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50 has-[:checked]:text-emerald-700">
+                <label key={t} className="cursor-pointer rounded-full border border-gray-200 px-4 py-1.5 text-sm text-gray-600 has-[:checked]:border-terracotta has-[:checked]:bg-terracotta-tint has-[:checked]:text-terracotta-deep">
                   <input type="checkbox" className="hidden" /> {t}
                 </label>
               ))}
             </div>
           </div>
           <Notice tone="blue">Identity verification is required at sign-up, and proof of project completion is required to post verified reviews.</Notice>
-          <Link href="/companies" className="block w-full rounded-xl bg-slate-900 py-3.5 text-center text-sm font-bold text-white transition hover:bg-slate-700">
+          <Link href="/companies" className="block w-full rounded-xl bg-walnut py-3.5 text-center text-sm font-bold text-cream transition hover:bg-walnut-deep">
             Continue →
           </Link>
         </div>

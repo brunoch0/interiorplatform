@@ -1,5 +1,104 @@
 @import "tailwindcss";
 
+/*
+  Dubai Interior — brand tokens
+  Source: claude.ai design system ec472a33 (warm-neutral premium, Home Centre-inspired)
+  Strategy: brand utilities (walnut/terracotta/…) + palette remap of the neutral/semantic
+  families the codebase already uses (slate→walnut neutrals, gray→warm greys,
+  emerald→success green, sky→info, amber→warning, red→danger).
+*/
+@theme {
+  /* Brand */
+  --color-walnut: #4a3524;
+  --color-walnut-deep: #382719;
+  --color-clay: #8c765b;
+  --color-terracotta: #c06a45;
+  --color-terracotta-deep: #a5522f;
+  --color-terracotta-tint: #f5e5db;
+  --color-sand: #f6f0e6;
+  --color-cream: #fffdf9;
+  --color-charcoal: #2a2520;
+
+  /* Neutrals (slate → walnut-toned) */
+  --color-slate-900: #4a3524;
+  --color-slate-700: #382719;
+  --color-slate-600: #5c4a38;
+  --color-slate-400: #b9a88f;
+  --color-slate-300: #efe6d8;
+  --color-slate-100: #f1e9da;
+
+  /* Warm greys (gray → sand/taupe) */
+  --color-gray-50: #f9f4ea;
+  --color-gray-100: #f1e9da;
+  --color-gray-200: #e9ddcb;
+  --color-gray-300: #dbcbb2;
+  --color-gray-400: #9c8e7c;
+  --color-gray-500: #6b5f52;
+  --color-gray-600: #5c5245;
+
+  /* Card surface */
+  --color-white: #fffdf9;
+
+  /* Semantic — earth-leaning, muted */
+  --color-emerald-50: #edf0e8;
+  --color-emerald-400: #7d926f;
+  --color-emerald-500: #5e7355;
+  --color-emerald-600: #53664b;
+  --color-emerald-700: #485a41;
+  --color-sky-50: #e9eef2;
+  --color-sky-100: #dbe4ea;
+  --color-sky-200: #c3d1db;
+  --color-sky-600: #5b7183;
+  --color-sky-700: #4d6070;
+  --color-amber-50: #f6eedd;
+  --color-amber-200: #e3cfa3;
+  --color-amber-300: #d4b878;
+  --color-amber-400: #c49a4a;
+  --color-amber-600: #b4842b;
+  --color-amber-700: #96702a;
+  --color-amber-800: #7d5e26;
+  --color-red-50: #f4e6e1;
+  --color-red-200: #e2c2b8;
+  --color-red-500: #b4472f;
+  --color-red-600: #9c3d28;
+  --color-red-700: #8a3623;
+
+  /* Warm-tinted elevation */
+  --shadow-sm: 0 2px 6px rgba(58, 42, 26, 0.07);
+  --shadow-md: 0 6px 16px rgba(58, 42, 26, 0.1);
+  --shadow-lg: 0 12px 28px rgba(58, 42, 26, 0.12);
+
+  /* Type */
+  --font-sans: var(--font-plex-sans), -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-sans);
+  background: var(--color-sand);
+  color: var(--color-charcoal);
+}
+
+/* Display serif for headlines — Newsreader, tight tracking (Latin only) */
+h1,
+h2 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+/* Focus ring — terracotta glow */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(192, 106, 69, 0.28);
+}
+
+/* Press state — small physical nudge */
+button:active,
+a:active {
+  transform: translateY(1px);
 }

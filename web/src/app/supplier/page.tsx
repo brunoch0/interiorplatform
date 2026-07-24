@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Images, ScrollText, Inbox, Rocket } from "lucide-react";
 import { fmt, supplierLeads } from "@/lib/data";
 import { Badge, Card, PageHeader, Stat } from "@/components/ui";
 
@@ -21,14 +22,14 @@ export default function SupplierDashboard() {
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {[
-          { href: "/supplier/profile", icon: "🖼️", title: "Profile & Portfolio", desc: "42 photos registered · 3 awaiting moderation" },
-          { href: "/supplier/license", icon: "📜", title: "License Verification", desc: "Verified · renewal reminder due 2027-02-15" },
-          { href: "/supplier/leads", icon: "📥", title: "Incoming Quote Requests", desc: `${newLeads} new · awaiting your response` },
-          { href: "/supplier/packages", icon: "🚀", title: "Exposure Packages", desc: "Premium active · expires Aug 15" },
+          { href: "/supplier/profile", Icon: Images, title: "Profile & Portfolio", desc: "42 photos registered · 3 awaiting moderation" },
+          { href: "/supplier/license", Icon: ScrollText, title: "License Verification", desc: "Verified · renewal reminder due 2027-02-15" },
+          { href: "/supplier/leads", Icon: Inbox, title: "Incoming Quote Requests", desc: `${newLeads} new · awaiting your response` },
+          { href: "/supplier/packages", Icon: Rocket, title: "Exposure Packages", desc: "Premium active · expires Aug 15" },
         ].map((m) => (
           <Link key={m.href} href={m.href}>
             <Card className="h-full transition hover:shadow-md">
-              <span className="text-2xl">{m.icon}</span>
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-terracotta-tint"><m.Icon className="h-5 w-5 text-terracotta-deep" strokeWidth={1.75} /></span>
               <h2 className="mt-3 font-bold">{m.title}</h2>
               <p className="mt-1.5 text-xs leading-relaxed text-gray-400">{m.desc}</p>
             </Card>

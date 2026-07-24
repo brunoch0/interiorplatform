@@ -42,7 +42,7 @@ export default function SupplierLeads() {
                 {l.status === "New" && (
                   <div className="mt-2 flex gap-2">
                     <button onClick={() => act(l.id, "Declined")} className="flex-1 rounded-lg border border-gray-200 py-2 text-xs font-medium text-gray-500 hover:border-gray-400">Decline</button>
-                    <button onClick={() => act(l.id, "Accepted")} className="flex-1 rounded-lg bg-emerald-500 py-2 text-xs font-bold text-white hover:bg-emerald-600">Accept</button>
+                    <button onClick={() => act(l.id, "Accepted")} className="flex-1 rounded-lg bg-terracotta py-2 text-xs font-bold text-cream hover:bg-terracotta-deep">Accept</button>
                   </div>
                 )}
                 {l.status === "Accepted" && <p className="mt-2 text-xs text-emerald-600">✓ Homeowner notified<br />Submit your quotation within 7 days</p>}
@@ -50,7 +50,7 @@ export default function SupplierLeads() {
               </div>
             </div>
             {l.status === "Accepted" && (
-              <button className="mt-4 w-full rounded-xl bg-slate-900 py-3 text-sm font-bold text-white hover:bg-slate-700">Write &amp; submit quotation →</button>
+              <button className="mt-4 w-full rounded-xl bg-walnut py-3 text-sm font-bold text-cream hover:bg-walnut-deep">Write &amp; submit quotation →</button>
             )}
           </Card>
         ))}

@@ -28,7 +28,7 @@ export default function Packages() {
             </ul>
             <button
               className={`mt-5 w-full rounded-xl py-3 text-sm font-bold ${
-                i === 1 ? "bg-gray-100 text-gray-400" : "bg-slate-900 text-white hover:bg-slate-700"
+                i === 1 ? "bg-gray-100 text-gray-400" : "bg-walnut text-cream hover:bg-walnut-deep"
               }`}
               disabled={i === 1}
             >

@@ -54,7 +54,7 @@ export default function CompaniesPage() {
             key={o}
             onClick={() => onChange(value === o ? null : o)}
             className={`rounded-full border px-3 py-1 text-xs transition ${
-              value === o ? "border-slate-900 bg-slate-900 text-white" : "border-gray-200 bg-white text-gray-600 hover:border-gray-400"
+              value === o ? "border-slate-900 bg-walnut text-cream" : "border-gray-200 bg-white text-gray-600 hover:border-gray-400"
             }`}
           >
             {o}
@@ -135,7 +135,7 @@ export default function CompaniesPage() {
                 <button
                   onClick={() => toggleSelect(c.id)}
                   className={`flex-1 rounded-lg py-2 text-sm font-bold transition ${
-                    selected.includes(c.id) ? "bg-emerald-500 text-white" : "bg-slate-900 text-white hover:bg-slate-700"
+                    selected.includes(c.id) ? "bg-terracotta text-cream" : "bg-walnut text-cream hover:bg-walnut-deep"
                   }`}
                 >
                   {selected.includes(c.id) ? "✓ Added" : "Add to quote basket"}
@@ -156,7 +156,7 @@ export default function CompaniesPage() {
             <p className="text-sm">
               <b className="text-emerald-600">{selected.length}</b> contractors selected (max 5)
             </p>
-            <Link href="/quote" className="rounded-xl bg-emerald-500 px-8 py-3 text-sm font-bold text-white hover:bg-emerald-600">
+            <Link href="/quote" className="rounded-xl bg-terracotta px-8 py-3 text-sm font-bold text-cream hover:bg-terracotta-deep">
               Request quotes →
             </Link>
           </div>

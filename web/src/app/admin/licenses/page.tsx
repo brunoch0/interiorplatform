@@ -30,8 +30,8 @@ export default function AdminLicenses() {
                 </div>
                 <p className="mt-1 text-xs text-gray-400">Submitted {a.submittedAt} · Claim ID {a.id.toUpperCase()}</p>
                 <div className="mt-3 flex flex-wrap gap-2 text-xs">
-                  <span className="rounded-lg border border-gray-200 px-3 py-1.5">📄 {a.tradeLicense}</span>
-                  <span className="rounded-lg border border-gray-200 px-3 py-1.5">📄 {a.detLicense}</span>
+                  <span className="rounded-lg border border-gray-200 px-3 py-1.5">{a.tradeLicense}</span>
+                  <span className="rounded-lg border border-gray-200 px-3 py-1.5">{a.detLicense}</span>
                   <button className="rounded-lg bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-200">Check DET validity</button>
                 </div>
                 {a.rejectReason && <p className="mt-2 text-xs text-red-500">Rejection reason: {a.rejectReason}</p>}
@@ -39,7 +39,7 @@ export default function AdminLicenses() {
               {a.status === "Under Review" && (
                 <div className="flex gap-2">
                   <button onClick={() => decide(a.id, "Rejected")} className="rounded-lg border border-red-200 px-5 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50">Reject</button>
-                  <button onClick={() => decide(a.id, "Approved")} className="rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-bold text-white hover:bg-emerald-600">Approve — transfer ownership</button>
+                  <button onClick={() => decide(a.id, "Approved")} className="rounded-lg bg-terracotta px-5 py-2.5 text-sm font-bold text-cream hover:bg-terracotta-deep">Approve — transfer ownership</button>
                 </div>
               )}
             </div>

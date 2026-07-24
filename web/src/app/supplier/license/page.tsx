@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CheckCircle2 } from "lucide-react";
 import { Card, FileDrop, Notice, PageHeader, Steps } from "@/components/ui";
 
 export default function LicenseUpload() {
@@ -25,7 +26,7 @@ export default function LicenseUpload() {
             <div className="flex justify-between"><dt className="text-gray-400">Categories</dt><dd>Carpentry · Painting</dd></div>
           </dl>
           <Notice tone="blue">This is an auto-generated &lsquo;Unclaimed&rsquo; profile built from public information. You can request corrections during review if anything is wrong.</Notice>
-          <button onClick={() => setStep(1)} className="mt-5 w-full rounded-xl bg-slate-900 py-3.5 text-sm font-bold text-white hover:bg-slate-700">
+          <button onClick={() => setStep(1)} className="mt-5 w-full rounded-xl bg-walnut py-3.5 text-sm font-bold text-cream hover:bg-walnut-deep">
             Details are correct — continue →
           </button>
         </Card>
@@ -48,7 +49,7 @@ export default function LicenseUpload() {
               <input type="date" className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm" />
             </div>
           </div>
-          <button onClick={() => setStep(2)} className="mt-5 w-full rounded-xl bg-slate-900 py-3.5 text-sm font-bold text-white hover:bg-slate-700">
+          <button onClick={() => setStep(2)} className="mt-5 w-full rounded-xl bg-walnut py-3.5 text-sm font-bold text-cream hover:bg-walnut-deep">
             Uploaded — continue →
           </button>
         </Card>
@@ -64,7 +65,7 @@ export default function LicenseUpload() {
           <Notice>
             Operator review takes 1–2 business days. On approval: ownership transfer + portfolio unlock. On rejection: the reason and resubmission guide arrive via push notification.
           </Notice>
-          <button onClick={() => setStep(3)} className="mt-5 w-full rounded-xl bg-emerald-500 py-3.5 text-sm font-bold text-white hover:bg-emerald-600">
+          <button onClick={() => setStep(3)} className="mt-5 w-full rounded-xl bg-terracotta py-3.5 text-sm font-bold text-cream hover:bg-terracotta-deep">
             Submit for review
           </button>
         </Card>
@@ -72,7 +73,7 @@ export default function LicenseUpload() {
 
       {step === 3 && (
         <Card className="text-center">
-          <span className="text-5xl">✅</span>
+          <span className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50"><CheckCircle2 className="h-7 w-7 text-emerald-600" strokeWidth={1.75} /></span>
           <h2 className="mt-4 text-xl font-bold">Submitted for review</h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-gray-500">
             Reference <b>CLM-2026-0724-18</b> · You&apos;ll get the result via push notification. If you leave mid-way, a reminder will help you pick up where you left off.

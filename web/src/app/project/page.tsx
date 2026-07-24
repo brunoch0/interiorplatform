@@ -18,7 +18,7 @@ export default function ProjectDashboard() {
         action={
           <div className="flex gap-2">
             <Link href="/project/dispute" className="rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50">File dispute</Link>
-            <Link href="/project/inspection" className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700">QA schedule</Link>
+            <Link href="/project/inspection" className="rounded-lg bg-walnut px-4 py-2 text-sm font-bold text-cream hover:bg-walnut-deep">QA schedule</Link>
           </div>
         }
       />
@@ -36,7 +36,7 @@ export default function ProjectDashboard() {
           {contract.milestones.map((m, i) => (
             <div key={m.id} className="flex flex-wrap items-center gap-4 rounded-xl border border-gray-100 p-4">
               <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
-                m.status === "Completed" ? "bg-emerald-500 text-white" : m.status === "Awaiting QA" ? "bg-amber-400 text-white" : "bg-gray-100 text-gray-400"
+                m.status === "Completed" ? "bg-terracotta text-cream" : m.status === "Awaiting QA" ? "bg-amber-400 text-cream" : "bg-gray-100 text-gray-400"
               }`}>
                 {m.status === "Completed" ? "✓" : i + 1}
               </span>
@@ -53,7 +53,7 @@ export default function ProjectDashboard() {
                 </Badge>
               </div>
               {m.status === "Awaiting QA" && (
-                <Link href="/project/qa-report" className="rounded-lg bg-slate-900 px-4 py-2 text-xs font-bold text-white hover:bg-slate-700">
+                <Link href="/project/qa-report" className="rounded-lg bg-walnut px-4 py-2 text-xs font-bold text-cream hover:bg-walnut-deep">
                   QA report →
                 </Link>
               )}

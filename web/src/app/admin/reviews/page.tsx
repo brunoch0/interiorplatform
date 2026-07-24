@@ -53,7 +53,7 @@ export default function AdminReviews() {
                 <p className="mt-2 text-xs text-red-500">Detection reason: {f.reason}</p>
               </div>
               <div className="flex flex-col gap-2">
-                <button className="rounded-lg bg-red-500 px-5 py-2 text-sm font-bold text-white hover:bg-red-600">Delete</button>
+                <button className="rounded-lg bg-red-500 px-5 py-2 text-sm font-bold text-cream hover:bg-red-600">Delete</button>
                 <button className="rounded-lg border border-gray-200 px-5 py-2 text-sm text-gray-500 hover:border-gray-400">Request edit</button>
                 <button className="rounded-lg border border-gray-200 px-5 py-2 text-sm text-gray-500 hover:border-gray-400">Allow publication</button>
               </div>

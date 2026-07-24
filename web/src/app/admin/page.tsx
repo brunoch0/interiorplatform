@@ -24,16 +24,16 @@ export default function AdminHome() {
           </div>
           <div className="space-y-2 text-sm">
             <Link href="/admin/licenses" className="flex items-center justify-between rounded-xl bg-amber-50 px-4 py-3 hover:bg-amber-100">
-              <span>📜 License reviews pending</span><b className="text-amber-700">{pendingLicenses}</b>
+              <span>License reviews pending</span><b className="text-amber-700">{pendingLicenses}</b>
             </Link>
             <Link href="/admin/disputes" className="flex items-center justify-between rounded-xl bg-red-50 px-4 py-3 hover:bg-red-100">
-              <span>⚖️ Dispute cases to review</span><b className="text-red-600">{openDisputes}</b>
+              <span>Dispute cases to review</span><b className="text-red-600">{openDisputes}</b>
             </Link>
             <Link href="/admin/inspections" className="flex items-center justify-between rounded-xl bg-sky-50 px-4 py-3 hover:bg-sky-100">
-              <span>🏗️ Reschedule approvals pending</span><b className="text-sky-700">1</b>
+              <span>Reschedule approvals pending</span><b className="text-sky-700">1</b>
             </Link>
             <Link href="/admin/reviews" className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3 hover:bg-gray-100">
-              <span>🔍 Flagged reviews to check</span><b>2</b>
+              <span>Flagged reviews to check</span><b>2</b>
             </Link>
           </div>
         </Card>
@@ -46,7 +46,7 @@ export default function AdminHome() {
             <div className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3 text-sm">
               <span>Exposure package sales</span><b>AED {fmt(kpi.packageRevenue)}</b>
             </div>
-            <div className="flex items-center justify-between rounded-xl bg-slate-900 px-4 py-3 text-sm text-white">
+            <div className="flex items-center justify-between rounded-xl bg-walnut px-4 py-3 text-sm text-cream">
               <span>Total</span><b>AED {fmt(kpi.leadRevenue + kpi.packageRevenue)}</b>
             </div>
           </div>
