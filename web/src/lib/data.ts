@@ -366,3 +366,22 @@ export function getCompany(id: string) {
 }
 
 export const fmt = (n: number) => n.toLocaleString("en-US");
+
+// Real interior photography (Unsplash CDN) — replaces gradient placeholders
+// until claimed contractors upload their own portfolios.
+const photoIds = [
+  "1600210492486-724fe5c67fb0",
+  "1600585154340-be6161a56a0c",
+  "1618221195710-dd6b41faaea6",
+  "1600566753086-00f18fb6b3ea",
+  "1556912173-3bb406ef7e77",
+  "1615873968403-89e068629265",
+  "1586023492125-27b2c045efd7",
+  "1600607687939-ce8a6c25118c",
+  "1616486338812-3dadae4b4ace",
+  "1600607687920-4e2a09cf159d",
+];
+
+export function interiorPhoto(i: number, w = 800) {
+  return `https://images.unsplash.com/photo-${photoIds[i % photoIds.length]}?w=${w}&q=80&auto=format&fit=crop`;
+}
