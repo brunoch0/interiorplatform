@@ -4,12 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const menu = [
-  { href: "/admin", label: "대시보드", icon: "📊" },
-  { href: "/admin/licenses", label: "라이선스 심사", icon: "📜" },
-  { href: "/admin/reviews", label: "리뷰 모니터링", icon: "🔍" },
-  { href: "/admin/disputes", label: "분쟁 중재", icon: "⚖️" },
-  { href: "/admin/inspections", label: "감리 일정 관리", icon: "🏗️" },
-  { href: "/admin/kpi", label: "KPI 통계", icon: "📈" },
+  { href: "/admin", label: "Dashboard", icon: "📊" },
+  { href: "/admin/licenses", label: "License Review", icon: "📜" },
+  { href: "/admin/reviews", label: "Review Monitoring", icon: "🔍" },
+  { href: "/admin/disputes", label: "Dispute Mediation", icon: "⚖️" },
+  { href: "/admin/inspections", label: "QA Inspections", icon: "🏗️" },
+  { href: "/admin/kpi", label: "KPI Analytics", icon: "📈" },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

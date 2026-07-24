@@ -41,7 +41,7 @@ export function Stat({ label, value, sub, tone = "default" }: { label: string; v
 }
 
 export function MetricValue({ value, suffix = "" }: { value: number | null; suffix?: string }) {
-  if (value === null) return <span className="text-sm text-gray-400">데이터 부족</span>;
+  if (value === null) return <span className="text-sm text-gray-400">Insufficient data</span>;
   return <span>{value}{suffix}</span>;
 }
 
@@ -89,7 +89,7 @@ export function FileDrop({ label, hint }: { label: string; hint?: string }) {
     <div className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 px-6 py-8 text-center transition hover:border-slate-400">
       <span className="text-2xl">📄</span>
       <p className="mt-2 text-sm font-medium text-slate-700">{label}</p>
-      <p className="mt-1 text-xs text-gray-400">{hint ?? "PDF, JPG · 최대 10MB"}</p>
+      <p className="mt-1 text-xs text-gray-400">{hint ?? "PDF, JPG · max 10MB"}</p>
     </div>
   );
 }

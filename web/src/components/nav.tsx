@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const consumerLinks = [
-  { href: "/companies", label: "업체 찾기" },
-  { href: "/quote/compare", label: "견적 비교" },
-  { href: "/project", label: "공사 관리" },
+  { href: "/companies", label: "Find Contractors" },
+  { href: "/quote/compare", label: "Compare Quotes" },
+  { href: "/project", label: "My Project" },
 ];
 
 export default function Nav() {
@@ -21,7 +21,7 @@ export default function Nav() {
           <Link href="/" className="flex items-center gap-2">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-sm font-black text-white">D</span>
             <span className="text-lg font-bold tracking-tight text-slate-900">
-              두바이<span className="text-emerald-600">인테리어</span>
+              Dubai<span className="text-emerald-600">Interior</span>
             </span>
           </Link>
           {!isAdmin && !isSupplier && (
@@ -37,21 +37,21 @@ export default function Nav() {
               ))}
             </nav>
           )}
-          {isSupplier && <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">공급자 센터</span>}
-          {isAdmin && <span className="rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">운영자 어드민</span>}
+          {isSupplier && <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">Contractor Center</span>}
+          {isAdmin && <span className="rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">Operator Admin</span>}
         </div>
         <div className="flex items-center gap-3">
           <Link href="/supplier" className={`text-xs ${isSupplier ? "font-bold text-sky-700" : "text-gray-400 hover:text-slate-900"}`}>
-            업체회원
+            For Contractors
           </Link>
           <Link href="/admin" className={`text-xs ${isAdmin ? "font-bold text-slate-900" : "text-gray-400 hover:text-slate-900"}`}>
-            어드민
+            Admin
           </Link>
           <Link
             href="/onboarding"
             className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
           >
-            시작하기
+            Get Started
           </Link>
         </div>
       </div>

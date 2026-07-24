@@ -3,13 +3,16 @@
 두바이 인테리어 시장의 정보 비대칭과 신뢰 부재 문제를 해결하는 신뢰 기반 오픈 마켓플레이스.
 별점 대신 **정량 지표(공기 준수율 · 추가 비용 미청구율 · 정부 승인 처리 속도)**를 전면 노출하는 UAE 법적 안전 설계.
 
+**UI 언어: English (기본 베이스)**
+
 ## 구조
 
 ```
 web/          Next.js 16 (App Router) + TypeScript + Tailwind v4
-  src/lib/data.ts        목데이터 레이어 (Phase 2에서 Supabase로 교체)
-  src/components/        공용 UI 컴포넌트
-  src/app/               32개 와이어프레임 기반 라우트
+  src/lib/data.ts             목데이터 레이어 (Phase 2에서 Supabase로 교체)
+  src/lib/seed-companies.ts   실제 두바이 업체 40개 시드 (공개 웹 소스 수집, 미인증 프로필로 노출)
+  src/components/             공용 UI 컴포넌트
+  src/app/                    32개 와이어프레임 기반 라우트
 docs (root)   기능명세서 · 유저플로우 · ManyFast 와이어프레임 HTML
 ```
 
