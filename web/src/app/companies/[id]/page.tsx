@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { fmt, getCompany, reviews } from "@/lib/data";
+import { fetchCompanyById } from "@/lib/db";
 import { Badge, BackLink, Card, MetricValue, Notice, Placeholder } from "@/components/ui";
 
 export default async function CompanyDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const c = getCompany(id);
+  // Real directory rows use UUIDs; legacy demo ids (c1…) fall back to mock data
+  const c = /^[0-9a-f-]{36}$/.test(id) ? await fetchCompanyById(id) : getCompany(id);
   if (!c) notFound();
   const companyReviews = reviews.filter((r) => r.companyId === c.id);
 

@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { companies, fmt, interiorPhoto } from "@/lib/data";
+import { fmt, interiorPhoto } from "@/lib/data";
+import { fetchCompanies } from "@/lib/db";
 import { Badge, Card, MetricValue } from "@/components/ui";
+
+export const revalidate = 300;
 
 const areasTicker = [
   "Business Bay", "الخليج التجاري", "Dubai Marina", "Palm Jumeirah", "نخلة جميرا",
@@ -25,8 +28,11 @@ const steps = [
   },
 ];
 
-export default function Home() {
-  const featured = companies.filter((c) => c.verified).slice(0, 3);
+export default async function Home() {
+  const companies = await fetchCompanies();
+  const total = companies.length;
+  const areas = new Set(companies.map((c) => c.area)).size;
+  const featured = companies.filter((c) => c.categories.includes("Full Renovation")).slice(0, 3);
   return (
     <div className="grain">
       {/* Hero — asymmetric editorial split */}
@@ -64,10 +70,9 @@ export default function Home() {
               </Link>
             </div>
             <p className="mt-12 text-xs text-slate-400">
-              <span className="font-mono text-base font-semibold text-cream">483</span> listed ·{" "}
-              <span className="font-mono text-base font-semibold text-cream">97</span> verified ·{" "}
-              <span className="font-mono text-base font-semibold text-cream">571</span> quote requests
-              <span className="ml-2 text-slate-400">— updated Thursday 14:02</span>
+              <span className="font-mono text-base font-semibold text-cream">{fmt(total)}</span> companies listed ·{" "}
+              <span className="font-mono text-base font-semibold text-cream">{areas}</span> Dubai areas
+              <span className="ml-2 text-slate-400">— sourced from the public register &amp; verified web data</span>
             </p>
           </div>
 
@@ -126,11 +131,11 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 pb-20">
         <div className="flex items-end justify-between border-t border-gray-300 pt-8">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta-deep">This week</p>
-            <h2 className="mt-2 text-2xl">Contractors worth your shortlist</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta-deep">From the register</p>
+            <h2 className="mt-2 text-2xl">Recently listed contractors</h2>
           </div>
           <Link href="/companies" className="text-sm font-semibold text-terracotta-deep hover:underline">
-            All 483 →
+            All {fmt(total)} →
           </Link>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -140,23 +145,18 @@ export default function Home() {
                 <img src={interiorPhoto(i * 2, 700)} alt={`${c.name} project`} className="aspect-[4/3] w-full rounded-t-2xl object-cover" />
                 <div className="p-5">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-bold">{c.name}</h3>
-                    <Badge tone="green">Verified</Badge>
-                    {c.exposurePackage === "premium" && <Badge tone="amber">Ad</Badge>}
+                    <h3 className="truncate font-bold">{c.name}</h3>
+                    {c.verified ? <Badge tone="green">Verified</Badge> : <Badge tone="gray">Unclaimed</Badge>}
                   </div>
-                  <p className="mt-1 text-xs text-gray-400">{c.area} · {c.priceRange}</p>
+                  <p className="mt-1 text-xs text-gray-400">{c.area} · {c.categories.slice(0, 2).join(" · ")}</p>
                   <div className="mt-4 flex items-baseline gap-5 border-t border-gray-100 pt-4">
                     <div>
                       <p className="font-mono text-lg font-semibold text-emerald-600"><MetricValue value={c.scheduleComplianceRate} suffix="%" /></p>
                       <p className="text-[10px] text-gray-400">on schedule</p>
                     </div>
                     <div>
-                      <p className="font-mono text-lg font-semibold"><MetricValue value={c.noExtraChargeRate} suffix="%" /></p>
-                      <p className="text-[10px] text-gray-400">no extra charges</p>
-                    </div>
-                    <div>
                       <p className="font-mono text-lg font-semibold">{fmt(c.verifiedReviewCount)}</p>
-                      <p className="text-[10px] text-gray-400">reviews</p>
+                      <p className="text-[10px] text-gray-400">verified reviews</p>
                     </div>
                   </div>
                 </div>
