@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import AuthButton from "@/components/auth-button";
 
 const consumerLinks = [
   { href: "/companies", label: "Find Contractors" },
@@ -48,12 +49,7 @@ export default function Nav() {
           <Link href="/admin" className={`text-xs ${isAdmin ? "font-bold text-charcoal" : "text-gray-400 hover:text-charcoal"}`}>
             Admin
           </Link>
-          <Link
-            href="/onboarding"
-            className="rounded-xl bg-walnut px-4 py-2 text-sm font-semibold text-cream transition hover:bg-walnut-deep"
-          >
-            Get Started
-          </Link>
+          <AuthButton />
         </div>
       </div>
     </header>
