@@ -26,6 +26,8 @@ type Row = {
   license_expiry: string | null;
   contact_verified: boolean;
   portfolio_verified: boolean;
+  google_rating: number | null;
+  google_rating_count: number | null;
 };
 
 function toCompany(r: Row): Company {
@@ -50,11 +52,13 @@ function toCompany(r: Row): Company {
     exposurePackage: (r.exposure_package as Company["exposurePackage"]) ?? null,
     contactVerified: r.contact_verified,
     portfolioVerified: r.portfolio_verified,
+    googleRating: r.google_rating,
+    googleRatingCount: r.google_rating_count,
   };
 }
 
 const COLS =
-  "id,name,area,categories,space_types,website,verified,price_range,intro,schedule_compliance_rate,no_extra_charge_rate,verified_review_count,avg_approval_weeks,portfolio_count,exposure_package,license_expiry,contact_verified,portfolio_verified";
+  "id,name,area,categories,space_types,website,verified,price_range,intro,schedule_compliance_rate,no_extra_charge_rate,verified_review_count,avg_approval_weeks,portfolio_count,exposure_package,license_expiry,contact_verified,portfolio_verified,google_rating,google_rating_count";
 
 export async function fetchCompanies(): Promise<Company[]> {
   const { data, error } = await supabase
@@ -82,6 +86,10 @@ export async function fetchPipelineAed(): Promise<number> {
   return (data as { pipeline_aed?: number } | null)?.pipeline_aed ?? 0;
 }
 
+export type ProjectBlock =
+  | { type: "text"; text: string }
+  | { type: "image"; path: string; caption?: string };
+
 export type Project = {
   id: string;
   slug: string | null;
@@ -92,11 +100,12 @@ export type Project = {
   duration_weeks: number | null;
   description: string | null;
   photos: string[];
+  content: ProjectBlock[];
   company_id: string | null;
   created_at: string;
 };
 
-const PROJECT_COLS = "id,slug,title,area,space_type,budget_band,duration_weeks,description,photos,company_id,created_at";
+const PROJECT_COLS = "id,slug,title,area,space_type,budget_band,duration_weeks,description,photos,content,company_id,created_at";
 
 export async function fetchProjects(): Promise<Project[]> {
   const { data, error } = await supabase

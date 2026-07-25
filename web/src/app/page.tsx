@@ -73,12 +73,16 @@ export default async function Home() {
                 I&apos;m a contractor — claim my profile
               </Link>
             </div>
-            <p className="mt-12 text-xs text-slate-400">
-              <span className="font-mono text-lg font-semibold text-terracotta">AED {fmt(pipelineAed)}</span> in renovation
-              quotes requested ·{" "}
-              <span className="font-mono text-base font-semibold text-cream">{fmt(total)}</span> companies ·{" "}
-              <span className="font-mono text-base font-semibold text-cream">{areas}</span> areas
-            </p>
+            <div className="mt-12 border-t border-cream/15 pt-6">
+              <p className="font-mono text-3xl font-bold tracking-tight text-terracotta md:text-4xl">
+                AED {fmt(pipelineAed)}
+              </p>
+              <p className="mt-1.5 text-xs text-slate-400">
+                in renovation quotes requested through Dubai Interior ·{" "}
+                <span className="font-mono font-semibold text-cream">{fmt(total)}</span> companies ·{" "}
+                <span className="font-mono font-semibold text-cream">{areas}</span> areas
+              </p>
+            </div>
           </div>
 
           {/* Arch-masked photo with tilted stamp */}

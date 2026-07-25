@@ -5,6 +5,7 @@ import { fmt, getCompany, reviews } from "@/lib/data";
 import { fetchCompanyById } from "@/lib/db";
 import { SITE_URL } from "@/lib/site";
 import ShareButtons from "@/components/share-buttons";
+import { GoogleRating } from "@/app/companies/companies-browser";
 import { Badge, BackLink, Card, MetricValue, Notice, Placeholder } from "@/components/ui";
 
 async function loadCompany(id: string) {
@@ -72,6 +73,9 @@ export default async function CompanyDetail({ params }: { params: Promise<{ id: 
                 {c.exposurePackage === "premium" && <Badge tone="amber">Premium</Badge>}
               </div>
               <p className="mt-1 text-sm text-gray-400">{c.legalName} · {c.area} · Typical budget {c.priceRange}</p>
+              {c.googleRating != null && c.googleRatingCount != null && (
+                <p className="mt-1.5"><GoogleRating rating={c.googleRating} count={c.googleRatingCount} size="lg" /></p>
+              )}
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {c.categories.map((cat) => (
                   <Badge key={cat} tone="blue">{cat}</Badge>

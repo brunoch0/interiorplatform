@@ -13,7 +13,14 @@ export async function submitQuoteRequest(formData: FormData): Promise<SubmitResu
   const name = String(formData.get("name") ?? "").trim();
   const phone = String(formData.get("phone") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
-  const details = String(formData.get("details") ?? "").trim();
+  let details = String(formData.get("details") ?? "").trim();
+  // Fold style/household preferences into details — keeps quote_requests schema stable
+  const style = String(formData.get("style") ?? "").trim();
+  const household = formData.getAll("household").map(String).filter(Boolean);
+  const prefs = [style && style !== "No preference" ? `Style: ${style}` : "", household.length ? `Household: ${household.join(", ")}` : ""]
+    .filter(Boolean)
+    .join(" · ");
+  if (prefs) details = details ? `[${prefs}]\n${details}` : `[${prefs}]`;
   const companyIds = String(formData.get("companyIds") ?? "")
     .split(",")
     .map((s) => s.trim())

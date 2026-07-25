@@ -39,20 +39,43 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <span className="ml-auto"><ShareButtons title={p.title} path={`/projects/${slug}`} compact /></span>
       </div>
 
-      <div className="mt-8 grid gap-3 md:grid-cols-2">
-        {p.photos.map((ph, i) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img key={ph} src={projectPhotoUrl(ph)} alt={`${p.title} — photo ${i + 1}`}
-            className={`w-full rounded-xl object-cover ${i === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"}`} />
-        ))}
-      </div>
-
-      {p.description && (
-        <div className="mt-8 space-y-3 border-t border-gray-300 pt-8">
-          {p.description.split("\n").filter(Boolean).map((para, i) => (
-            <p key={i} className="text-[15px] leading-relaxed text-gray-600">{para}</p>
-          ))}
+      {p.content.length > 0 ? (
+        /* Blog-style story: text and photos interleaved as the contractor authored them */
+        <div className="mt-8 space-y-6">
+          {p.content.map((blk, i) =>
+            blk.type === "text" ? (
+              <div key={i} className="space-y-3">
+                {blk.text.split("\n").filter(Boolean).map((para, j) => (
+                  <p key={j} className="text-[15px] leading-relaxed text-gray-600">{para}</p>
+                ))}
+              </div>
+            ) : (
+              <figure key={i}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={projectPhotoUrl(blk.path)} alt={blk.caption ?? `${p.title} — photo`}
+                  className="w-full rounded-xl object-cover" />
+                {blk.caption && <figcaption className="mt-2 text-center text-xs text-gray-400">{blk.caption}</figcaption>}
+              </figure>
+            ),
+          )}
         </div>
+      ) : (
+        <>
+          <div className="mt-8 grid gap-3 md:grid-cols-2">
+            {p.photos.map((ph, i) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={ph} src={projectPhotoUrl(ph)} alt={`${p.title} — photo ${i + 1}`}
+                className={`w-full rounded-xl object-cover ${i === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"}`} />
+            ))}
+          </div>
+          {p.description && (
+            <div className="mt-8 space-y-3 border-t border-gray-300 pt-8">
+              {p.description.split("\n").filter(Boolean).map((para, i) => (
+                <p key={i} className="text-[15px] leading-relaxed text-gray-600">{para}</p>
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       <Card className="mt-10 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">

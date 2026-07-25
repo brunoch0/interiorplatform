@@ -10,6 +10,8 @@ import { submitQuoteRequest } from "./actions";
 const spaceTypes = ["Apartment", "Villa", "Commercial", "Not sure yet"];
 const budgets = ["Under AED 50K", "AED 50K–100K", "AED 100K–200K", "AED 200K–500K", "AED 500K+"];
 const timelines = ["As soon as possible", "Within 1–2 months", "Within 3–6 months", "Just exploring"];
+const styles = ["No preference", "Modern / Minimal", "Contemporary luxury", "Arabic / Majlis", "Scandinavian", "Industrial", "Bohemian / Exotic", "Classic European", "Japandi"];
+const householdOptions = ["Pets at home", "Young children", "Elderly family members", "Accessibility needs"];
 
 export default function QuoteForm({ companies, preselected }: { companies: Company[]; preselected: string[] }) {
   const [targets, setTargets] = useState<string[]>(preselected);
@@ -137,6 +139,23 @@ export default function QuoteForm({ companies, preselected }: { companies: Compa
               <select name="timeline" className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm">
                 {timelines.map((t) => <option key={t}>{t}</option>)}
               </select>
+            </div>
+            <div>
+              <label className="text-sm font-medium">Preferred style</label>
+              <select name="style" className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm">
+                {styles.map((s) => <option key={s}>{s}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="text-sm font-medium">Who lives here?</label>
+              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
+                {householdOptions.map((h) => (
+                  <label key={h} className="flex items-center gap-1.5 text-xs text-gray-600">
+                    <input type="checkbox" name="household" value={h} className="h-3.5 w-3.5 accent-[#C06A45]" />
+                    {h}
+                  </label>
+                ))}
+              </div>
             </div>
           </div>
           <div className="mt-4">

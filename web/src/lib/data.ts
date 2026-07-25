@@ -21,6 +21,9 @@ export type Company = {
   exposurePackage: "premium" | "basic" | null;
   contactVerified?: boolean;
   portfolioVerified?: boolean;
+  // Public Google Maps rating (displayed with "Google" attribution, refreshed monthly)
+  googleRating?: number | null;
+  googleRatingCount?: number | null;
 };
 
 const curatedCompanies: Company[] = [

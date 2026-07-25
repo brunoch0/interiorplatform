@@ -9,6 +9,10 @@ const supabase = createClient(
 
 export type ShowcaseResult = { ok: true } | { ok: false; error: string };
 
+export type ContentBlock =
+  | { type: "text"; text: string }
+  | { type: "image"; path: string; caption?: string };
+
 export async function submitShowcase(payload: {
   companyId: string | null;
   companyName: string;
@@ -21,6 +25,7 @@ export async function submitShowcase(payload: {
   durationWeeks: number | null;
   description: string;
   photos: string[];
+  content?: ContentBlock[];
 }): Promise<ShowcaseResult> {
   if (!payload.title || payload.title.trim().length < 5) return { ok: false, error: "Please add a project title (min 5 characters)." };
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.email)) return { ok: false, error: "A valid email is required — we send the live link there." };
@@ -38,6 +43,13 @@ export async function submitShowcase(payload: {
     duration_weeks: payload.durationWeeks,
     description: payload.description.slice(0, 4000) || null,
     photos: payload.photos.slice(0, 10),
+    content: (payload.content ?? [])
+      .slice(0, 40)
+      .map((b) =>
+        b.type === "text"
+          ? { type: "text", text: String(b.text).slice(0, 4000) }
+          : { type: "image", path: String(b.path).slice(0, 200), caption: b.caption ? String(b.caption).slice(0, 200) : undefined },
+      ),
     status: "pending",
   });
 
