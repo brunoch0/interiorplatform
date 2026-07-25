@@ -8,6 +8,7 @@ const consumerLinks = [
   { href: "/companies", label: "Find Contractors" },
   { href: "/projects", label: "Projects" },
   { href: "/guides", label: "Guides" },
+  { href: "/consult", label: "Free Consult" },
   { href: "/quote", label: "Get Quotes" },
 ];
 

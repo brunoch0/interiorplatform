@@ -64,15 +64,20 @@ export default async function Home() {
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <Link
-                href="/companies"
+                href="/consult"
                 className="rounded-xl bg-terracotta px-8 py-3.5 text-sm font-bold text-cream transition hover:bg-terracotta-deep"
               >
-                Browse verified contractors
+                Not sure where to start? Free consult
               </Link>
-              <Link href="/supplier/license" className="text-sm text-slate-300 underline decoration-terracotta decoration-2 underline-offset-4 hover:text-cream">
-                I&apos;m a contractor — claim my profile
+              <Link href="/companies" className="rounded-xl border border-cream/30 px-6 py-3.5 text-sm font-semibold text-cream transition hover:border-cream/60">
+                Browse contractors
               </Link>
             </div>
+            <p className="mt-4 text-xs text-slate-400">
+              <Link href="/supplier/license" className="underline decoration-terracotta decoration-2 underline-offset-4 hover:text-cream">
+                I&apos;m a contractor — claim my profile
+              </Link>
+            </p>
             <div className="mt-12 border-t border-cream/15 pt-6">
               <p className="font-mono text-3xl font-bold tracking-tight text-terracotta md:text-4xl">
                 AED {fmt(pipelineAed)}

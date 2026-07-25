@@ -62,6 +62,12 @@ export default function QuoteForm({ companies, preselected }: { companies: Compa
     <div className="mx-auto max-w-3xl px-4 py-10">
       <PageHeader title="Request Quotes" desc="One brief, up to 5 quotes from licensed Dubai contractors — free, no account needed." />
 
+      <p className="-mt-4 mb-6 text-sm text-gray-500">
+        Not sure what you need yet?{" "}
+        <Link href="/consult" className="font-semibold text-terracotta-deep underline">Start with a free consult</Link>{" "}
+        — describe it in your own words and we&apos;ll build the brief for you.
+      </p>
+
       <Card className="mb-6">
         <h2 className="mb-1 font-bold">Who should quote? ({targets.length}/5)</h2>
         {targets.length === 0 && (

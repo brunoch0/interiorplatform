@@ -8,6 +8,7 @@ type Lead = {
   id: string; ref: string; name: string; phone: string | null; email: string | null;
   space_type: string | null; area: string | null; budget: string | null; timeline: string | null;
   details: string | null; status: string; created_at: string; companies: LeadCompany[] | null;
+  type: string; brief: Record<string, string> | null; transcript: { role: string; content: string }[] | null;
 };
 
 async function fetchLeads(key: string): Promise<Lead[] | null> {
@@ -51,6 +52,7 @@ export default async function AdminLeads({ searchParams }: { searchParams: Promi
           <Card key={l.id}>
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-sm font-bold">{l.ref}</span>
+              {l.type === "consultation" && <Badge tone="amber">AI consult</Badge>}
               <Badge tone={l.status === "new" ? "blue" : "gray"}>{l.status}</Badge>
               <span className="ml-auto text-xs text-gray-400">{new Date(l.created_at).toLocaleString("en-GB", { timeZone: "Asia/Dubai" })} (Dubai)</span>
             </div>
@@ -80,7 +82,22 @@ export default async function AdminLeads({ searchParams }: { searchParams: Promi
                 )}
               </div>
             </div>
-            {l.details && <p className="mt-3 rounded-xl bg-gray-50 p-3 text-sm text-gray-600">{l.details}</p>}
+            {l.details && <p className="mt-3 whitespace-pre-line rounded-xl bg-gray-50 p-3 text-sm text-gray-600">{l.details}</p>}
+            {l.transcript && l.transcript.length > 0 && (
+              <details className="mt-3 rounded-xl border border-gray-100 p-3">
+                <summary className="cursor-pointer text-xs font-semibold text-gray-500">
+                  AI conversation transcript ({l.transcript.length} messages)
+                </summary>
+                <div className="mt-3 space-y-2">
+                  {l.transcript.map((m, i) => (
+                    <p key={i} className={`rounded-lg px-3 py-2 text-xs leading-relaxed ${m.role === "user" ? "bg-terracotta-tint text-terracotta-deep" : "bg-gray-50 text-gray-600"}`}>
+                      <b className="mr-1 uppercase text-[10px] opacity-60">{m.role === "user" ? "Customer" : "AI"}</b>
+                      {m.content}
+                    </p>
+                  ))}
+                </div>
+              </details>
+            )}
           </Card>
         ))}
       </div>
