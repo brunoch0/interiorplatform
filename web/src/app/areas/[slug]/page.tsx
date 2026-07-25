@@ -41,6 +41,21 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
   if (!data) notFound();
   const { area, companies, otherAreas } = data;
 
+  const faqs = [
+    {
+      q: `How much does apartment renovation cost in ${area}?`,
+      a: `Most ${area} apartment renovations fall between AED 60,000 and AED 250,000 depending on size and finish level — roughly AED 150–250 per sqft for a standard scope. Kitchens and bathrooms drive the biggest swings. See our 2026 cost guide for a full breakdown.`,
+    },
+    {
+      q: `Do I need approvals to renovate in ${area}?`,
+      a: `Almost always. You'll need an NOC from your building or community management (refundable deposit AED 2,000–5,000 is typical), and Dubai Municipality approval for structural, electrical or plumbing changes. Only licensed contractors can apply for DM permits.`,
+    },
+    {
+      q: `How do I choose between contractors in ${area}?`,
+      a: `Compare at least three quotes line-by-line, verify each company's trade licence and DET fit-out activity, and ask who supervises the site day-to-day. You can request quotes from up to five ${area} contractors through this page — free.`,
+    },
+  ];
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -53,10 +68,20 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
       url: `${SITE_URL}/companies/${c.id}`,
     })),
   };
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <PageHeader
         title={`Interior Companies in ${area}`}
         desc={`${fmt(companies.length)} licensed interior & fit-out contractors based in or serving ${area} — listed from public sources, compared by evidence.`}
@@ -90,6 +115,22 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
       </div>
 
       <div className="mt-12 border-t border-gray-200 pt-8">
+        <h2 className="text-xl font-bold">Renovating in {area} — quick answers</h2>
+        <div className="mt-4 space-y-3">
+          {faqs.map((f) => (
+            <div key={f.q} className="rounded-xl border border-gray-200 bg-cream p-4">
+              <p className="font-semibold">{f.q}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-gray-600">{f.a}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-4 text-sm text-gray-500">
+          Deeper dives: <Link href="/guides/apartment-renovation-cost-dubai" className="font-semibold text-terracotta-deep hover:underline">2026 cost guide</Link> ·{" "}
+          <Link href="/guides/dubai-renovation-permits-dm-approval-noc" className="font-semibold text-terracotta-deep hover:underline">permits &amp; NOC guide</Link>
+        </p>
+      </div>
+
+      <div className="mt-10">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">Other areas</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {otherAreas.map((a) => (

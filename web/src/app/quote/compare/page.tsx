@@ -1,3 +1,4 @@
+import DemoBanner from "@/components/demo-banner";
 import Link from "next/link";
 import { fmt, getCompany, quoteRequests } from "@/lib/data";
 import { Badge, Card, PageHeader } from "@/components/ui";
@@ -8,6 +9,7 @@ export default function QuoteCompare() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
+      <DemoBanner />
       <PageHeader title="Compare Quotes" desc="Sent 2026-07-18 · 3BR Apartment · Business Bay · 3 received / 1 pending" />
 
       <div className="grid gap-5 md:grid-cols-3">

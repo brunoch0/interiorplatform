@@ -1,8 +1,10 @@
+import DemoBanner from "@/components/demo-banner";
 import { Badge, Card, FileDrop, Notice, PageHeader, Placeholder } from "@/components/ui";
 
 export default function SupplierProfile() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
+      <DemoBanner />
       <PageHeader
         title="Profile & Portfolio"
         desc="Registered content appears on your public profile after operator moderation."

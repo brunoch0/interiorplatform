@@ -1,5 +1,6 @@
 "use client";
 
+import DemoBanner from "@/components/demo-banner";
 import { useState } from "react";
 import { supplierLeads, type Lead } from "@/lib/data";
 import { Badge, Card, Notice, PageHeader } from "@/components/ui";
@@ -16,6 +17,7 @@ export default function SupplierLeads() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
+      <DemoBanner />
       <PageHeader
         title="Incoming Quote Requests"
         desc="A per-lead fee is charged when you accept. Declined or unanswered leads (24h) are passed to the next-ranked contractor automatically."

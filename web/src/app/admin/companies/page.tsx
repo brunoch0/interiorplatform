@@ -6,8 +6,11 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminCompanies({ searchParams }: { searchParams: Promise<{ key?: string }> }) {
   const { key } = await searchParams;
+  const { cookies } = await import("next/headers");
+  const cookieKey = (await cookies()).get("ops_key")?.value;
   const adminKey = process.env.LEADS_ADMIN_KEY;
-  const authorized = !!key && !!adminKey && key === adminKey;
+  const provided = key ?? cookieKey;
+  const authorized = !!provided && !!adminKey && provided === adminKey;
 
   if (!authorized)
     return (
@@ -24,7 +27,7 @@ export default async function AdminCompanies({ searchParams }: { searchParams: P
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
-  const { data, error } = await supabase.rpc("admin_list_companies", { p_key: key });
+  const { data, error } = await supabase.rpc("admin_list_companies", { p_key: provided });
   if (error || !data)
     return (
       <div>
@@ -33,5 +36,5 @@ export default async function AdminCompanies({ searchParams }: { searchParams: P
       </div>
     );
 
-  return <CompaniesAdmin companies={data as AdminCompany[]} adminKey={key!} />;
+  return <CompaniesAdmin companies={data as AdminCompany[]} adminKey={provided!} />;
 }

@@ -1,3 +1,4 @@
+import DemoBanner from "@/components/demo-banner";
 import Link from "next/link";
 import { Images, ScrollText, Inbox, Rocket } from "lucide-react";
 import { fmt, supplierLeads } from "@/lib/data";
@@ -7,6 +8,7 @@ export default function SupplierDashboard() {
   const newLeads = supplierLeads.filter((l) => l.status === "New").length;
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
+      <DemoBanner />
       <PageHeader
         title="Contractor Dashboard"
         desc="Al Noor Interiors (Al Noor Interiors LLC) · Verified · Premium exposure active"

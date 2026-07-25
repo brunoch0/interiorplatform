@@ -1,3 +1,4 @@
+import DemoBanner from "@/components/demo-banner";
 import Link from "next/link";
 import { fmt } from "@/lib/data";
 import { BackLink, Card, Notice, Steps } from "@/components/ui";
@@ -5,6 +6,7 @@ import { BackLink, Card, Notice, Steps } from "@/components/ui";
 export default function QuoteConfirm() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
+      <DemoBanner />
       <BackLink href="/quote/compare" label="Back to comparison" />
       <Steps items={["Compare quotes", "Confirm contractor", "Sign contract", "Escrow deposit"]} current={1} />
 

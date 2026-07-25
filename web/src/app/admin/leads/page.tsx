@@ -22,9 +22,12 @@ async function fetchLeads(key: string): Promise<Lead[] | null> {
 
 export default async function AdminLeads({ searchParams }: { searchParams: Promise<{ key?: string }> }) {
   const { key } = await searchParams;
+  const { cookies } = await import("next/headers");
+  const cookieKey = (await cookies()).get("ops_key")?.value;
   const adminKey = process.env.LEADS_ADMIN_KEY;
-  const authorized = !!key && !!adminKey && key === adminKey;
-  const leads = authorized ? await fetchLeads(key!) : null;
+  const provided = key ?? cookieKey;
+  const authorized = !!provided && !!adminKey && provided === adminKey;
+  const leads = authorized ? await fetchLeads(provided!) : null;
 
   if (!authorized || leads === null)
     return (

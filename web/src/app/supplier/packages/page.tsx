@@ -1,9 +1,11 @@
+import DemoBanner from "@/components/demo-banner";
 import { exposurePackages } from "@/lib/data";
 import { Badge, Card, Notice, PageHeader } from "@/components/ui";
 
 export default function Packages() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
+      <DemoBanner />
       <PageHeader
         title="Exposure Packages"
         desc="Benefits activate immediately on purchase. No auto-renewal — listings return to organic ranking on expiry."
