@@ -37,12 +37,13 @@ export default function CompaniesBrowser({ companies }: { companies: Company[] }
       if (category && !c.categories.includes(category)) return false;
       return true;
     });
-    // Verified first → premium → schedule compliance → name
+    // Verification ladder ranking: claimed → portfolio ✓ → contact ✓ → rest
+    const score = (c: Company) =>
+      (c.verified ? 8 : 0) + (c.portfolioVerified ? 4 : 0) + (c.contactVerified ? 2 : 0) +
+      (c.exposurePackage === "premium" ? 1 : 0);
     list = [...list].sort((a, b) => {
-      if (a.verified !== b.verified) return a.verified ? -1 : 1;
-      const pa = a.exposurePackage === "premium" ? 1 : 0;
-      const pb = b.exposurePackage === "premium" ? 1 : 0;
-      if (pa !== pb) return pb - pa;
+      const d = score(b) - score(a);
+      if (d !== 0) return d;
       return (b.scheduleComplianceRate ?? -1) - (a.scheduleComplianceRate ?? -1);
     });
     return list;
@@ -129,6 +130,8 @@ export default function CompaniesBrowser({ companies }: { companies: Company[] }
                 <div className="flex flex-wrap items-center gap-2">
                   <Link href={`/companies/${c.id}`} className="font-bold hover:underline">{c.name}</Link>
                   {c.verified ? <Badge tone="green">Verified</Badge> : <Badge tone="gray">Unclaimed</Badge>}
+                  {c.contactVerified && <Badge tone="blue">✓ Contact</Badge>}
+                  {c.portfolioVerified && <Badge tone="blue">✓ Portfolio</Badge>}
                 </div>
                 <p className="mt-0.5 truncate text-xs text-gray-400">
                   {c.area} · {c.categories.slice(0, 3).join(" · ") || "Interior"}

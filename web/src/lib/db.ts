@@ -24,6 +24,8 @@ type Row = {
   portfolio_count: number;
   exposure_package: string | null;
   license_expiry: string | null;
+  contact_verified: boolean;
+  portfolio_verified: boolean;
 };
 
 function toCompany(r: Row): Company {
@@ -46,11 +48,13 @@ function toCompany(r: Row): Company {
     portfolioCount: r.portfolio_count,
     licenseExpiry: r.license_expiry ?? "-",
     exposurePackage: (r.exposure_package as Company["exposurePackage"]) ?? null,
+    contactVerified: r.contact_verified,
+    portfolioVerified: r.portfolio_verified,
   };
 }
 
 const COLS =
-  "id,name,area,categories,space_types,website,verified,price_range,intro,schedule_compliance_rate,no_extra_charge_rate,verified_review_count,avg_approval_weeks,portfolio_count,exposure_package,license_expiry";
+  "id,name,area,categories,space_types,website,verified,price_range,intro,schedule_compliance_rate,no_extra_charge_rate,verified_review_count,avg_approval_weeks,portfolio_count,exposure_package,license_expiry,contact_verified,portfolio_verified";
 
 export async function fetchCompanies(): Promise<Company[]> {
   const { data, error } = await supabase
@@ -71,4 +75,9 @@ export async function fetchCompanyById(id: string): Promise<Company | null> {
 export async function fetchStats() {
   const { count } = await supabase.from("companies").select("*", { count: "exact", head: true });
   return { total: count ?? 0 };
+}
+
+export async function fetchPipelineAed(): Promise<number> {
+  const { data } = await supabase.rpc("public_stats");
+  return (data as { pipeline_aed?: number } | null)?.pipeline_aed ?? 0;
 }

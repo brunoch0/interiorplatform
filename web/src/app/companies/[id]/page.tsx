@@ -67,6 +67,8 @@ export default async function CompanyDetail({ params }: { params: Promise<{ id: 
               <div className="flex flex-wrap items-center gap-2">
                 <h1 className="text-2xl font-bold">{c.name}</h1>
                 {c.verified ? <Badge tone="green">Verified</Badge> : <Badge tone="gray">Unclaimed</Badge>}
+                {c.contactVerified && <Badge tone="blue">✓ Contact verified</Badge>}
+                {c.portfolioVerified && <Badge tone="blue">✓ Portfolio verified</Badge>}
                 {c.exposurePackage === "premium" && <Badge tone="amber">Premium</Badge>}
               </div>
               <p className="mt-1 text-sm text-gray-400">{c.legalName} · {c.area} · Typical budget {c.priceRange}</p>

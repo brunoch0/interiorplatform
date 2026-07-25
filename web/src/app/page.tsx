@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { fmt, interiorPhoto } from "@/lib/data";
-import { fetchCompanies } from "@/lib/db";
+import { fetchCompanies, fetchPipelineAed } from "@/lib/db";
 import { areaSlug } from "@/lib/site";
 import { Badge, Card, MetricValue } from "@/components/ui";
 
@@ -30,7 +30,7 @@ const steps = [
 ];
 
 export default async function Home() {
-  const companies = await fetchCompanies();
+  const [companies, pipelineAed] = await Promise.all([fetchCompanies(), fetchPipelineAed()]);
   const total = companies.length;
   const areas = new Set(companies.map((c) => c.area)).size;
   const featured = companies.filter((c) => c.categories.includes("Full Renovation")).slice(0, 3);
@@ -74,9 +74,10 @@ export default async function Home() {
               </Link>
             </div>
             <p className="mt-12 text-xs text-slate-400">
-              <span className="font-mono text-base font-semibold text-cream">{fmt(total)}</span> companies listed ·{" "}
-              <span className="font-mono text-base font-semibold text-cream">{areas}</span> Dubai areas
-              <span className="ml-2 text-slate-400">— sourced from the public register &amp; verified web data</span>
+              <span className="font-mono text-lg font-semibold text-terracotta">AED {fmt(pipelineAed)}</span> in renovation
+              quotes requested ·{" "}
+              <span className="font-mono text-base font-semibold text-cream">{fmt(total)}</span> companies ·{" "}
+              <span className="font-mono text-base font-semibold text-cream">{areas}</span> areas
             </p>
           </div>
 
@@ -218,8 +219,8 @@ export default async function Home() {
           <div>
             <h2 className="text-2xl">Run a fit-out company?</h2>
             <p className="mt-2 max-w-md text-sm text-gray-500">
-              Your profile may already be listed from the public DED register. Claiming it is free — you&apos;ll need your
-              trade license and DET fit-out license, nothing else.
+              <b className="text-terracotta-deep">AED {fmt(pipelineAed)}</b> in project demand has come through this
+              platform. Your profile may already be listed — claiming it is free, and verified profiles rank first.
             </p>
           </div>
           <Link href="/supplier/license" className="rounded-xl bg-walnut px-7 py-3.5 text-sm font-bold text-cream transition hover:bg-walnut-deep">

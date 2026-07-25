@@ -19,6 +19,8 @@ export type Company = {
   portfolioCount: number;
   licenseExpiry: string;
   exposurePackage: "premium" | "basic" | null;
+  contactVerified?: boolean;
+  portfolioVerified?: boolean;
 };
 
 const curatedCompanies: Company[] = [
