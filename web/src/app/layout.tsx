@@ -79,9 +79,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">Get started</p>
               <ul className="mt-3 space-y-1.5 text-sm">
                 <li><Link href="/companies" className="text-gray-500 hover:text-terracotta-deep">Browse all contractors</Link></li>
+                <li><Link href="/consult" className="text-gray-500 hover:text-terracotta-deep">Free consultation</Link></li>
                 <li><Link href="/quote" className="text-gray-500 hover:text-terracotta-deep">Request free quotes</Link></li>
+                <li><Link href="/protection" className="text-gray-500 hover:text-terracotta-deep">How you&apos;re protected</Link></li>
+                <li><Link href="/report" className="text-gray-500 hover:text-terracotta-deep">Report a contractor issue</Link></li>
                 <li><Link href="/guides" className="text-gray-500 hover:text-terracotta-deep">Renovation guides</Link></li>
-                <li><Link href="/projects" className="text-gray-500 hover:text-terracotta-deep">Real projects</Link></li>
+                <li><Link href="/requests" className="text-gray-500 hover:text-terracotta-deep">Open project briefs</Link></li>
                 <li><Link href="/supplier/license" className="text-gray-500 hover:text-terracotta-deep">Claim your company profile</Link></li>
                 <li><Link href="/supplier/showcase" className="text-gray-500 hover:text-terracotta-deep">Publish your project (free)</Link></li>
               </ul>

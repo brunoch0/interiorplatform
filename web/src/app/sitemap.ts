@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const companies = await fetchCompanies();
   const areas = [...new Set(companies.map((c) => c.area))].filter((a) => a !== "Dubai");
 
-  const statics: MetadataRoute.Sitemap = ["", "/companies", "/quote", "/consult", "/requests", "/onboarding", "/supplier/license", "/guides", "/projects", "/supplier/showcase"].map((p) => ({
+  const statics: MetadataRoute.Sitemap = ["", "/companies", "/quote", "/consult", "/requests", "/protection", "/report", "/onboarding", "/supplier/license", "/guides", "/projects", "/supplier/showcase"].map((p) => ({
     url: `${SITE_URL}${p}`,
     changeFrequency: "weekly",
     priority: p === "" ? 1 : 0.8,

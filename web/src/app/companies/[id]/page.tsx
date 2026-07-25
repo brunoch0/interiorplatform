@@ -207,9 +207,15 @@ export default async function CompanyDetail({ params }: { params: Promise<{ id: 
             <h3 className="font-bold">Safe transaction guide</h3>
             <ul className="mt-3 space-y-2 text-xs leading-relaxed text-gray-500">
               <li>✓ We recommend using the platform&apos;s standard contract before signing</li>
-              <li>✓ With escrow, funds are released per milestone only after QA inspection passes</li>
+              <li>✓ Pay in stages tied to milestones — never more than 20–30% upfront</li>
               <li>✓ Dispute mediation support is limited for off-platform transactions</li>
             </ul>
+            <p className="mt-3 border-t border-gray-50 pt-3 text-xs">
+              <Link href="/protection" className="font-semibold text-terracotta-deep underline">How you&apos;re protected →</Link>
+            </p>
+            <p className="mt-2 text-xs">
+              <Link href={`/report?c=${id}`} className="text-gray-400 underline hover:text-charcoal">Report an issue with this contractor</Link>
+            </p>
           </Card>
         </div>
       </div>
