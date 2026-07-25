@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { guides } from "@/lib/guides";
 import { SITE_URL } from "@/lib/site";
 import ShareButtons from "@/components/share-buttons";
+import EmailCapture from "@/components/email-capture";
 import { BackLink } from "@/components/ui";
 
 export function generateStaticParams() {
@@ -118,7 +119,11 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         </div>
       </section>
 
-      <div className="mt-12 flex flex-col items-start justify-between gap-4 rounded-2xl bg-walnut p-8 text-cream md:flex-row md:items-center">
+      <div className="mt-10">
+        <EmailCapture source={`guide:${g.slug}`} />
+      </div>
+
+      <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-2xl bg-walnut p-8 text-cream md:flex-row md:items-center">
         <div>
           <p className="font-serif text-xl">Ready to get real numbers for your project?</p>
           <p className="mt-1 text-sm text-slate-300">Send one brief — get quotes from up to 5 licensed Dubai contractors. Free.</p>

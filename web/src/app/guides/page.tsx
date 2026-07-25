@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { guides } from "@/lib/guides";
 import { SITE_URL } from "@/lib/site";
+import EmailCapture from "@/components/email-capture";
 import { Card, PageHeader } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -28,6 +29,9 @@ export default function GuidesIndex() {
             </Card>
           </Link>
         ))}
+      </div>
+      <div className="mt-10">
+        <EmailCapture source="guides-index" />
       </div>
     </div>
   );
