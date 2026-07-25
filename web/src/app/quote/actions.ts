@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
+import { trySubscribe } from "@/lib/subscribe";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -55,6 +56,8 @@ export async function submitQuoteRequest(formData: FormData): Promise<SubmitResu
     console.error("quote insert failed", error);
     return { ok: false, error: "Something went wrong — please try again." };
   }
+
+  if (email && formData.get("newsletter") != null) await trySubscribe(email, "quote");
 
   if (companyIds.length > 0) {
     const { error: joinError } = await supabase

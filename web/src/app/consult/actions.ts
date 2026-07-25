@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
+import { trySubscribe } from "@/lib/subscribe";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -27,6 +28,7 @@ export async function submitConsultation(payload: {
   email: string;
   honeypot: string;
   isPublic: boolean;
+  newsletter: boolean;
   brief: Brief | null;
   transcript: { role: string; content: string }[];
 }): Promise<ConsultResult> {
@@ -66,5 +68,6 @@ export async function submitConsultation(payload: {
     console.error("consultation insert failed", error);
     return { ok: false, error: "Something went wrong — please try again." };
   }
+  if (email && payload.newsletter) await trySubscribe(email, "consult");
   return { ok: true, ref };
 }

@@ -110,6 +110,7 @@ export default function ShowcaseForm({ companies }: { companies: CompanyOpt[] })
           description,
           photos: paths,
           content,
+          newsletter: formData.get("newsletter") != null,
         });
         if (res.ok) setDone(true);
         else setError(res.error);
@@ -265,6 +266,10 @@ export default function ShowcaseForm({ companies }: { companies: CompanyOpt[] })
             <input name="phone" placeholder="WhatsApp / phone (shown to clients)"
               className="rounded-xl border border-gray-200 px-4 py-3 text-sm" />
           </div>
+          <label className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-gray-500">
+            <input type="checkbox" name="newsletter" defaultChecked className="mt-0.5 h-3.5 w-3.5 accent-[#C06A45]" />
+            Email me when new project briefs are posted and about contractor features (optional — unsubscribe anytime)
+          </label>
         </Card>
 
         {error && <Notice tone="red">{error}</Notice>}

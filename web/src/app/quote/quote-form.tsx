@@ -195,6 +195,10 @@ export default function QuoteForm({ companies, preselected }: { companies: Compa
           {/* honeypot */}
           <input name="company_website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
           <p className="mt-3 text-xs text-gray-400">Phone or email — at least one, so contractors can reach you.</p>
+          <label className="mt-2 flex items-start gap-2 text-xs leading-relaxed text-gray-500">
+            <input type="checkbox" name="newsletter" defaultChecked className="mt-0.5 h-3.5 w-3.5 accent-[#C06A45]" />
+            Email me renovation tips and platform updates (optional — unsubscribe anytime)
+          </label>
         </Card>
 
         {error && <Notice tone="red">{error}</Notice>}

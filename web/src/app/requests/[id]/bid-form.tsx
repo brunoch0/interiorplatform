@@ -36,6 +36,7 @@ export default function BidForm({ requestId, companies }: { requestId: string; c
         priceBand: String(formData.get("priceBand") ?? ""),
         timeline: String(formData.get("timeline") ?? ""),
         message: String(formData.get("message") ?? ""),
+        newsletter: formData.get("newsletter") != null,
         honeypot: String(formData.get("company_website") ?? ""),
       });
       if (res.ok) setDone(true);
@@ -111,6 +112,11 @@ export default function BidForm({ requestId, companies }: { requestId: string; c
           <input name="phone" placeholder="WhatsApp / phone" className="rounded-xl border border-gray-200 px-4 py-3 text-sm" />
         </div>
         <input name="company_website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+
+        <label className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-gray-500">
+          <input type="checkbox" name="newsletter" defaultChecked className="mt-0.5 h-3.5 w-3.5 accent-[#C06A45]" />
+          Email me when new briefs matching my trade are posted (optional — unsubscribe anytime)
+        </label>
 
         {error && <div className="mt-3"><Notice tone="red">{error}</Notice></div>}
 

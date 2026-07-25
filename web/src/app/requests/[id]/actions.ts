@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
+import { trySubscribe } from "@/lib/subscribe";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -19,6 +20,7 @@ export async function submitBid(payload: {
   priceBand: string;
   timeline: string;
   message: string;
+  newsletter: boolean;
   honeypot: string;
 }): Promise<BidResult> {
   if (payload.honeypot !== "") return { ok: true };
@@ -42,5 +44,6 @@ export async function submitBid(payload: {
     console.error("bid insert failed", error);
     return { ok: false, error: "Something went wrong — please try again." };
   }
+  if (payload.newsletter) await trySubscribe(payload.email, "bid");
   return { ok: true };
 }

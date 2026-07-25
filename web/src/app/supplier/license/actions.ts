@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
+import { trySubscribe } from "@/lib/subscribe";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -19,6 +20,7 @@ export async function submitClaim(payload: {
   detLicensePath: string | null;
   licenseNumber: string;
   licenseExpiry: string | null;
+  newsletter?: boolean;
 }): Promise<ClaimResult> {
   if (!payload.contactName.trim()) return { ok: false, error: "Please enter the contact person's name." };
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.email)) return { ok: false, error: "A valid work email is required." };
@@ -41,5 +43,6 @@ export async function submitClaim(payload: {
     console.error("claim insert failed", error);
     return { ok: false, error: "Something went wrong — please try again." };
   }
+  if (payload.newsletter) await trySubscribe(payload.email, "claim");
   return { ok: true };
 }

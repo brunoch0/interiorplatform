@@ -36,6 +36,7 @@ export default function ClaimForm({ companies }: { companies: CompanyOpt[] }) {
   const [company, setCompany] = useState<CompanyOpt | null>(null);
   const [contactName, setContactName] = useState("");
   const [email, setEmail] = useState("");
+  const [newsletter, setNewsletter] = useState(true);
   const [phone, setPhone] = useState("");
   const [tradeFile, setTradeFile] = useState<File | null>(null);
   const [detFile, setDetFile] = useState<File | null>(null);
@@ -74,6 +75,7 @@ export default function ClaimForm({ companies }: { companies: CompanyOpt[] }) {
           detLicensePath: detPath,
           licenseNumber,
           licenseExpiry: licenseExpiry || null,
+          newsletter,
         });
         if (res.ok) setDone(true);
         else setError(res.error);
@@ -142,6 +144,11 @@ export default function ClaimForm({ companies }: { companies: CompanyOpt[] }) {
             <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="WhatsApp / phone"
               className="rounded-xl border border-gray-200 px-4 py-3 text-sm" />
           </div>
+          <label className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-gray-500">
+            <input type="checkbox" checked={newsletter} onChange={(e) => setNewsletter(e.target.checked)}
+              className="mt-0.5 h-3.5 w-3.5 accent-[#C06A45]" />
+            Email me when new project briefs are posted and about contractor features (optional — unsubscribe anytime)
+          </label>
           <button
             onClick={() => {
               if (!contactName.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { setError("Name and a valid work email are required."); return; }

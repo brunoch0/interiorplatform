@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
+import { trySubscribe } from "@/lib/subscribe";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -26,6 +27,7 @@ export async function submitShowcase(payload: {
   description: string;
   photos: string[];
   content?: ContentBlock[];
+  newsletter?: boolean;
 }): Promise<ShowcaseResult> {
   if (!payload.title || payload.title.trim().length < 5) return { ok: false, error: "Please add a project title (min 5 characters)." };
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.email)) return { ok: false, error: "A valid email is required — we send the live link there." };
@@ -57,5 +59,6 @@ export async function submitShowcase(payload: {
     console.error("showcase insert failed", error);
     return { ok: false, error: "Something went wrong — please try again." };
   }
+  if (payload.newsletter) await trySubscribe(payload.email, "showcase");
   return { ok: true };
 }
