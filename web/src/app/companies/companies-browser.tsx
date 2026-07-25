@@ -189,7 +189,7 @@ export default function CompaniesBrowser({ companies }: { companies: Company[] }
             <p className="text-sm">
               <b className="text-terracotta-deep">{selected.length}</b> contractors selected (max 5)
             </p>
-            <Link href="/quote" className="rounded-xl bg-terracotta px-8 py-3 text-sm font-bold text-cream hover:bg-terracotta-deep">
+            <Link href={`/quote?c=${selected.join(",")}`} className="rounded-xl bg-terracotta px-8 py-3 text-sm font-bold text-cream hover:bg-terracotta-deep">
               Request quotes →
             </Link>
           </div>
