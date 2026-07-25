@@ -1,14 +1,47 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { fmt, getCompany, reviews } from "@/lib/data";
 import { fetchCompanyById } from "@/lib/db";
+import { SITE_URL } from "@/lib/site";
+import ShareButtons from "@/components/share-buttons";
 import { Badge, BackLink, Card, MetricValue, Notice, Placeholder } from "@/components/ui";
+
+async function loadCompany(id: string) {
+  // Real directory rows use UUIDs; legacy demo ids (c1…) fall back to mock data
+  return /^[0-9a-f-]{36}$/.test(id) ? await fetchCompanyById(id) : (getCompany(id) ?? null);
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const c = await loadCompany(id);
+  if (!c) return {};
+  const title = `${c.name} — Interior Contractor in ${c.area}, Dubai`;
+  const description = `${c.name} (${c.area}, Dubai) on Dubai Interior: ${c.categories.slice(0, 3).join(", ") || "interior fit-out"}. ${
+    c.verified ? "DET-verified contractor with quantitative trust metrics." : "Listed from the public register — request quotes or claim this profile."
+  }`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `${SITE_URL}/companies/${id}` },
+    openGraph: { title, description, url: `${SITE_URL}/companies/${id}` },
+  };
+}
 
 export default async function CompanyDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  // Real directory rows use UUIDs; legacy demo ids (c1…) fall back to mock data
-  const c = /^[0-9a-f-]{36}$/.test(id) ? await fetchCompanyById(id) : getCompany(id);
+  const c = await loadCompany(id);
   if (!c) notFound();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    name: c.name,
+    url: `${SITE_URL}/companies/${id}`,
+    address: { "@type": "PostalAddress", addressLocality: c.area, addressRegion: "Dubai", addressCountry: "AE" },
+    areaServed: "Dubai",
+    knowsAbout: c.categories,
+  };
   const companyReviews = reviews.filter((r) => r.companyId === c.id);
 
   const metrics = [
@@ -20,6 +53,7 @@ export default async function CompanyDetail({ params }: { params: Promise<{ id: 
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <BackLink href="/companies" label="Back to contractors" />
 
       {/* Header */}
@@ -46,15 +80,19 @@ export default async function CompanyDetail({ params }: { params: Promise<{ id: 
               )}
             </div>
           </div>
-          {c.verified ? (
-            <Link href="/quote" className="rounded-xl bg-terracotta px-8 py-3 text-sm font-bold text-cream hover:bg-terracotta-deep">
-              Add to quote basket
+          <div className="flex flex-col items-stretch gap-2">
+            <Link href={`/quote?c=${id}`} className="rounded-xl bg-terracotta px-8 py-3 text-center text-sm font-bold text-cream hover:bg-terracotta-deep">
+              Request a quote — free
             </Link>
-          ) : (
-            <Link href="/supplier/license" className="rounded-xl bg-walnut px-8 py-3 text-sm font-bold text-cream hover:bg-walnut-deep">
-              Own this business? Claim it →
-            </Link>
-          )}
+            {!c.verified && (
+              <Link href="/supplier/license" className="rounded-xl border border-gray-300 px-8 py-2.5 text-center text-xs font-semibold text-gray-500 hover:border-clay">
+                Own this business? Claim it →
+              </Link>
+            )}
+          </div>
+        </div>
+        <div className="mt-5 border-t border-gray-100 pt-4">
+          <ShareButtons title={c.name} path={`/companies/${id}`} />
         </div>
       </Card>
 

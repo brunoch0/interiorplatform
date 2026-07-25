@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { fmt, interiorPhoto } from "@/lib/data";
 import { fetchCompanies } from "@/lib/db";
+import { areaSlug } from "@/lib/site";
 import { Badge, Card, MetricValue } from "@/components/ui";
 
 export const revalidate = 300;
@@ -33,6 +34,9 @@ export default async function Home() {
   const total = companies.length;
   const areas = new Set(companies.map((c) => c.area)).size;
   const featured = companies.filter((c) => c.categories.includes("Full Renovation")).slice(0, 3);
+  const areaCounts = new Map<string, number>();
+  for (const c of companies) if (c.area !== "Dubai") areaCounts.set(c.area, (areaCounts.get(c.area) ?? 0) + 1);
+  const topAreas = [...areaCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12);
   return (
     <div className="grain">
       {/* Hero — asymmetric editorial split */}
@@ -185,6 +189,25 @@ export default async function Home() {
               no sponsored reviews.
             </p>
             <p className="mt-6 font-serif text-lg italic text-walnut">— Bruno, Founder · دار</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Browse by area — internal links for SEO + navigation */}
+      <section className="mx-auto max-w-6xl px-4 pt-16">
+        <div className="border-t border-gray-300 pt-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta-deep">Browse by area</p>
+          <h2 className="mt-2 text-2xl">Where&apos;s your project?</h2>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {topAreas.map(([a, n]) => (
+              <Link
+                key={a}
+                href={`/areas/${areaSlug(a)}`}
+                className="rounded-full border border-gray-300 bg-cream px-4 py-2 text-sm text-gray-600 transition hover:border-terracotta hover:text-terracotta-deep"
+              >
+                {a} <span className="ml-1 font-mono text-xs text-gray-400">{n}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
