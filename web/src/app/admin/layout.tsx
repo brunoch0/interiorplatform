@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ScrollText, SearchCheck, Scale, HardHat, TrendingUp, Inbox, Building2 } from "lucide-react";
+import { LayoutDashboard, ScrollText, SearchCheck, Scale, HardHat, TrendingUp, Inbox, Building2, Images } from "lucide-react";
 
 const menu = [
   { href: "/admin", label: "Dashboard", Icon: LayoutDashboard },
   { href: "/admin/leads", label: "Leads", Icon: Inbox },
   { href: "/admin/companies", label: "Companies", Icon: Building2 },
+  { href: "/admin/projects", label: "Showcases", Icon: Images },
   { href: "/admin/licenses", label: "License Review", Icon: ScrollText },
   { href: "/admin/reviews", label: "Review Monitoring", Icon: SearchCheck },
   { href: "/admin/disputes", label: "Dispute Mediation", Icon: Scale },

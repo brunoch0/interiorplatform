@@ -81,7 +81,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <li><Link href="/companies" className="text-gray-500 hover:text-terracotta-deep">Browse all contractors</Link></li>
                 <li><Link href="/quote" className="text-gray-500 hover:text-terracotta-deep">Request free quotes</Link></li>
                 <li><Link href="/guides" className="text-gray-500 hover:text-terracotta-deep">Renovation guides</Link></li>
+                <li><Link href="/projects" className="text-gray-500 hover:text-terracotta-deep">Real projects</Link></li>
                 <li><Link href="/supplier/license" className="text-gray-500 hover:text-terracotta-deep">Claim your company profile</Link></li>
+                <li><Link href="/supplier/showcase" className="text-gray-500 hover:text-terracotta-deep">Publish your project (free)</Link></li>
               </ul>
             </div>
           </div>

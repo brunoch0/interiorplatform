@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const consumerLinks = [
   { href: "/companies", label: "Find Contractors" },
+  { href: "/projects", label: "Projects" },
   { href: "/guides", label: "Guides" },
   { href: "/quote", label: "Get Quotes" },
 ];

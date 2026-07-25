@@ -81,3 +81,46 @@ export async function fetchPipelineAed(): Promise<number> {
   const { data } = await supabase.rpc("public_stats");
   return (data as { pipeline_aed?: number } | null)?.pipeline_aed ?? 0;
 }
+
+export type Project = {
+  id: string;
+  slug: string | null;
+  title: string;
+  area: string | null;
+  space_type: string | null;
+  budget_band: string | null;
+  duration_weeks: number | null;
+  description: string | null;
+  photos: string[];
+  company_id: string | null;
+  created_at: string;
+};
+
+const PROJECT_COLS = "id,slug,title,area,space_type,budget_band,duration_weeks,description,photos,company_id,created_at";
+
+export async function fetchProjects(): Promise<Project[]> {
+  const { data, error } = await supabase
+    .from("projects")
+    .select(PROJECT_COLS)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as Project[];
+}
+
+export async function fetchProjectBySlug(slug: string): Promise<Project | null> {
+  const { data } = await supabase.from("projects").select(PROJECT_COLS).eq("slug", slug).maybeSingle();
+  return (data as Project) ?? null;
+}
+
+export async function fetchCompanyProjects(companyId: string): Promise<Project[]> {
+  const { data } = await supabase
+    .from("projects")
+    .select(PROJECT_COLS)
+    .eq("company_id", companyId)
+    .order("created_at", { ascending: false });
+  return (data ?? []) as Project[];
+}
+
+export function projectPhotoUrl(path: string) {
+  return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/projects/${path}`;
+}
