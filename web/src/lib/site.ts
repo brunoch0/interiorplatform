@@ -8,3 +8,11 @@ export function areaSlug(area: string) {
 export function whatsappShareUrl(text: string) {
   return `https://wa.me/?text=${encodeURIComponent(text)}`;
 }
+
+export function timeAgo(iso: string) {
+  const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86_400_000);
+  if (days <= 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 30) return `${days} days ago`;
+  return `${Math.floor(days / 30)} mo ago`;
+}

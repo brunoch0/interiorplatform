@@ -199,6 +199,12 @@ export default function QuoteForm({ companies, preselected }: { companies: Compa
 
         {error && <Notice tone="red">{error}</Notice>}
 
+        <label className="mt-2 flex items-start gap-2 text-xs leading-relaxed text-gray-500">
+          <input type="checkbox" name="isPublic" defaultChecked className="mt-0.5 h-3.5 w-3.5 accent-[#C06A45]" />
+          Also post my brief anonymously on the Open Projects board so more contractors can quote. Your name and
+          contact details are never shown.
+        </label>
+
         <button
           type="submit"
           disabled={pending}

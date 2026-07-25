@@ -232,9 +232,14 @@ export default async function Home() {
               platform. Your profile may already be listed — claiming it is free, and verified profiles rank first.
             </p>
           </div>
-          <Link href="/supplier/license" className="rounded-xl bg-walnut px-7 py-3.5 text-sm font-bold text-cream transition hover:bg-walnut-deep">
-            Claim your profile →
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/requests" className="rounded-xl border border-gray-300 px-7 py-3.5 text-sm font-semibold text-charcoal transition hover:border-clay">
+              See open briefs
+            </Link>
+            <Link href="/supplier/license" className="rounded-xl bg-walnut px-7 py-3.5 text-sm font-bold text-cream transition hover:bg-walnut-deep">
+              Claim your profile →
+            </Link>
+          </div>
         </div>
       </section>
     </div>

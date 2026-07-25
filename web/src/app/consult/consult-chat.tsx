@@ -72,6 +72,7 @@ export default function ConsultChat() {
         phone: String(formData.get("phone") ?? ""),
         email: String(formData.get("email") ?? ""),
         honeypot: String(formData.get("company_website") ?? ""),
+        isPublic: formData.get("isPublic") != null,
         brief,
         transcript: messages,
       });
@@ -196,6 +197,11 @@ export default function ConsultChat() {
               <input name="email" type="email" placeholder="Email" className="rounded-xl border border-gray-200 px-4 py-3 text-sm" />
             </div>
             <input name="company_website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+            <label className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-gray-500">
+              <input type="checkbox" name="isPublic" defaultChecked className="mt-0.5 h-3.5 w-3.5 accent-[#C06A45]" />
+              Also post this brief anonymously on the Open Projects board so more contractors can quote. Your name and
+              contact details are never shown.
+            </label>
             {error && <div className="mt-3"><Notice tone="red">{error}</Notice></div>}
             <button type="submit" disabled={pending}
               className="mt-4 w-full rounded-xl bg-terracotta py-3.5 text-sm font-bold text-cream transition hover:bg-terracotta-deep disabled:opacity-50">

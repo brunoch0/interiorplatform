@@ -26,6 +26,7 @@ export async function submitConsultation(payload: {
   phone: string;
   email: string;
   honeypot: string;
+  isPublic: boolean;
   brief: Brief | null;
   transcript: { role: string; content: string }[];
 }): Promise<ConsultResult> {
@@ -56,6 +57,7 @@ export async function submitConsultation(payload: {
     area: b?.area || null,
     timeline: b?.timeline || null,
     details: detailsParts.filter(Boolean).join("\n") || null,
+    is_public: payload.isPublic,
     brief: b ?? null,
     transcript: payload.transcript.slice(0, 24).map((m) => ({ role: m.role, content: String(m.content).slice(0, 1500) })),
   });

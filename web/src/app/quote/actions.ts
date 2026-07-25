@@ -48,6 +48,7 @@ export async function submitQuoteRequest(formData: FormData): Promise<SubmitResu
     budget: String(formData.get("budget") ?? "") || null,
     timeline: String(formData.get("timeline") ?? "") || null,
     details: details || null,
+    is_public: formData.get("isPublic") != null,
   });
 
   if (error) {

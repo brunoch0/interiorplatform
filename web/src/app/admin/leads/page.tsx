@@ -9,6 +9,10 @@ type Lead = {
   space_type: string | null; area: string | null; budget: string | null; timeline: string | null;
   details: string | null; status: string; created_at: string; companies: LeadCompany[] | null;
   type: string; brief: Record<string, string> | null; transcript: { role: string; content: string }[] | null;
+  is_public: boolean; bids: {
+    id: string; company_name: string; contact_name: string | null; email: string; phone: string | null;
+    price_band: string | null; timeline: string | null; message: string | null; status: string; created_at: string;
+  }[] | null;
 };
 
 async function fetchLeads(key: string): Promise<Lead[] | null> {
@@ -53,6 +57,8 @@ export default async function AdminLeads({ searchParams }: { searchParams: Promi
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-sm font-bold">{l.ref}</span>
               {l.type === "consultation" && <Badge tone="amber">AI consult</Badge>}
+              {l.is_public && <Badge tone="green">On board</Badge>}
+              {(l.bids?.length ?? 0) > 0 && <Badge tone="blue">{l.bids!.length} bid{l.bids!.length > 1 ? "s" : ""}</Badge>}
               <Badge tone={l.status === "new" ? "blue" : "gray"}>{l.status}</Badge>
               <span className="ml-auto text-xs text-gray-400">{new Date(l.created_at).toLocaleString("en-GB", { timeZone: "Asia/Dubai" })} (Dubai)</span>
             </div>
@@ -83,6 +89,27 @@ export default async function AdminLeads({ searchParams }: { searchParams: Promi
               </div>
             </div>
             {l.details && <p className="mt-3 whitespace-pre-line rounded-xl bg-gray-50 p-3 text-sm text-gray-600">{l.details}</p>}
+            {l.bids && l.bids.length > 0 && (
+              <div className="mt-3 rounded-xl border border-terracotta/30 bg-terracotta-tint/40 p-3">
+                <p className="text-xs font-bold text-terracotta-deep">Contractor bids — relay to homeowner</p>
+                <div className="mt-2 space-y-2">
+                  {l.bids.map((b) => (
+                    <div key={b.id} className="rounded-lg bg-white p-3 text-xs">
+                      <p>
+                        <b>{b.company_name}</b>
+                        {b.price_band && <span className="ml-2 font-mono">{b.price_band}</span>}
+                        {b.timeline && <span className="ml-2 text-gray-500">{b.timeline}</span>}
+                        <span className="ml-2 text-gray-400">{new Date(b.created_at).toLocaleString("en-GB", { timeZone: "Asia/Dubai" })}</span>
+                      </p>
+                      <p className="mt-1 font-mono text-gray-500">
+                        {b.contact_name && <>{b.contact_name} · </>}{b.email}{b.phone && <> · {b.phone}</>}
+                      </p>
+                      {b.message && <p className="mt-1 text-gray-600">{b.message}</p>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             {l.transcript && l.transcript.length > 0 && (
               <details className="mt-3 rounded-xl border border-gray-100 p-3">
                 <summary className="cursor-pointer text-xs font-semibold text-gray-500">
