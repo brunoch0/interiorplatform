@@ -1,9 +1,10 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
-import { MailCheck } from "lucide-react";
+import Link from "next/link";
+import { MailCheck, Search } from "lucide-react";
 import type { Company } from "@/lib/data";
-import { Card, Notice, PageHeader, Steps } from "@/components/ui";
+import { Card, Notice, PageHeader } from "@/components/ui";
 import { submitQuoteRequest } from "./actions";
 
 const spaceTypes = ["Apartment", "Villa", "Commercial", "Not sure yet"];
@@ -57,12 +58,26 @@ export default function QuoteForm({ companies, preselected }: { companies: Compa
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <PageHeader title="Request Quotes" desc="Tell us about your project once — we send it to up to 5 contractors of your choice." />
-      <Steps items={["Select contractors", "Project brief", "Send"]} current={1} />
+      <PageHeader title="Request Quotes" desc="One brief, up to 5 quotes from licensed Dubai contractors — free, no account needed." />
 
       <Card className="mb-6">
-        <h2 className="mb-1 font-bold">Selected contractors ({targets.length}/5)</h2>
-        <p className="mb-4 text-xs text-gray-400">Optional — leave empty and our team will shortlist for you based on your brief.</p>
+        <h2 className="mb-1 font-bold">Who should quote? ({targets.length}/5)</h2>
+        {targets.length === 0 && (
+          <div className="mb-4 mt-3 grid gap-3 sm:grid-cols-2">
+            <Link href="/companies" className="rounded-xl border border-gray-200 p-4 transition hover:border-terracotta">
+              <p className="flex items-center gap-2 font-semibold"><Search className="h-4 w-4 text-terracotta-deep" /> Pick them yourself</p>
+              <p className="mt-1 text-xs leading-relaxed text-gray-500">
+                Browse the directory and tap &ldquo;Add to quote basket&rdquo; — your picks carry over here automatically.
+              </p>
+            </Link>
+            <div className="rounded-xl border-2 border-terracotta bg-terracotta-tint p-4">
+              <p className="font-semibold text-terracotta-deep">Or leave it to us — recommended</p>
+              <p className="mt-1 text-xs leading-relaxed text-terracotta-deep/80">
+                Skip selection. Our team shortlists 3–5 verified contractors matched to your brief, area and budget.
+              </p>
+            </div>
+          </div>
+        )}
         {targets.length > 0 && (
           <div className="mb-3 flex flex-wrap gap-2">
             {targets.map((id) => (
