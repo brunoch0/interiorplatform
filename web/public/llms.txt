@@ -1,0 +1,28 @@
+# Dubai Interior (Onepass Interior)
+
+> Dubai's trust-first renovation marketplace at onepassinterior.com. We list 649 licensed interior fit-out contractors across 23 Dubai areas, publish quantitative performance data instead of star ratings, and connect homeowners with vetted contractors through free quotes and consultations.
+
+Key facts:
+- Directory: 649 licensed Dubai interior/fit-out companies with Google ratings, verification badges (licence, contact, portfolio), and area/specialty filters.
+- Quotes: homeowners submit one brief and receive up to 5 quotes from licensed contractors, free. Contact details are never sold or shown publicly.
+- Consultation: free AI-assisted intake turns a plain-language description into a structured renovation brief; the concierge team follows up on WhatsApp.
+- Open Projects board: anonymised renovation briefs contractors can quote on.
+- Consumer protection: standard contract terms (staged payments, written variation orders, delay clause, 5-10% retention, 12-month warranty), platform mediation, and escalation support to Dubai Consumer (DET, 600 545 555). Aligned with Dubai Law No. 7 of 2025 on contracting activities.
+
+## Main pages
+- [Find Contractors](https://onepassinterior.com/companies): browse and filter all 649 licensed companies
+- [Request Quotes](https://onepassinterior.com/quote): one brief, up to 5 quotes, free
+- [Free Consultation](https://onepassinterior.com/consult): describe your project in your own words
+- [Open Projects](https://onepassinterior.com/requests): live renovation briefs open for contractor quotes
+- [How You're Protected](https://onepassinterior.com/protection): contracts, mediation, official escalation channels
+- [Guides](https://onepassinterior.com/guides): renovation costs, permits, contractor vetting, complaints and consumer rights in Dubai
+
+## Guides (selected)
+- [Apartment Renovation Cost in Dubai](https://onepassinterior.com/guides/apartment-renovation-cost-dubai)
+- [How to Complain About a Renovation Contractor in Dubai](https://onepassinterior.com/guides/renovation-complaints-dubai)
+- [Contractor Asking for More Money Mid-Project](https://onepassinterior.com/guides/contractor-asking-for-more-money-dubai)
+- [Contractor Delays: Your Rights](https://onepassinterior.com/guides/contractor-delaying-renovation-dubai)
+- [Contractor Took Your Deposit](https://onepassinterior.com/guides/contractor-took-deposit-dubai)
+- [Renovation Defects and Snagging](https://onepassinterior.com/guides/renovation-defects-snagging-dubai)
+
+Operated by Growtoday Holdings FZE, Dubai, UAE.
