@@ -14,6 +14,8 @@ export type Guide = {
   intro: string[];
   sections: GuideSection[];
   faqs: { q: string; a: string }[];
+  // Direct links to government portals — shown as an "Official resources" box
+  officialLinks?: { label: string; href: string; note?: string }[];
 };
 
 export const guides: Guide[] = [
@@ -620,8 +622,14 @@ export const guides: Guide[] = [
     slug: "renovation-complaints-dubai",
     title: "How to Complain About a Renovation Contractor in Dubai (2026)",
     description: "Step-by-step guide to escalating a renovation dispute in Dubai: written notice, DET complaint, Dubai Police for fraud, and civil court. Know your rights.",
-    updated: "2026-07-25",
+    updated: "2026-07-27",
     readMinutes: 12,
+    officialLinks: [
+      { label: "File a consumer complaint — Dubai Consumer (DET)", href: "https://consumerrights.ae/en/Pages/consumer-complaint.aspx", note: "Free · hotline 600 545 555 · typical first response 3-5 working days" },
+      { label: "Verify a trade licence — Invest in Dubai", href: "https://invest.dubai.ae/", note: "Check any Dubai company's licence status before paying a deposit" },
+      { label: "Report fraud — Dubai Police eCrime", href: "https://www.dubaipolice.gov.ae/", note: "Deposit taken and contractor disappeared is a criminal matter · non-emergency 901" },
+      { label: "Dubai Municipality — permits & contractor register", href: "https://www.dm.gov.ae/", note: "Under Law No. 7 of 2025, DM runs the unified Contractor Register and classification" },
+    ],
     intro: [
       "Most renovation disputes in Dubai do not need a lawyer or a court. They need a homeowner who knows exactly which lever to pull at which moment. The escalation path runs from a formal written notice to the contractor, through the Department of Economy and Tourism consumer complaint system, and - when a contractor has taken money and vanished - to Dubai Police as a criminal matter. Understanding that sequence saves time, money, and a lot of frustration.",
       "The Federal Consumer Protection Law (Federal Law No. 15 of 2020) gives you real standing as a consumer in a fit-out dispute. The platforms and hotlines that enforce it are free to use. What weakens your position is the same in almost every case: no written contract, no staged payment milestones, no photo documentation, and no written record of problems raised. This guide walks you through every escalation channel, what evidence to prepare, and when each step is appropriate."

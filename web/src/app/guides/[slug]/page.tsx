@@ -67,6 +67,25 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         ))}
       </div>
 
+      {g.officialLinks && (
+        <aside className="mt-8 rounded-2xl border border-terracotta/25 bg-sand p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-terracotta-deep">Official resources — go direct</p>
+          <ul className="mt-3 space-y-3">
+            {g.officialLinks.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-charcoal underline decoration-terracotta decoration-2 underline-offset-4 hover:text-terracotta-deep">
+                  {l.label} ↗
+                </a>
+                {l.note && <p className="mt-0.5 text-xs text-gray-500">{l.note}</p>}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-[11px] text-gray-400">
+            These are UAE government portals — filing is free and you never need a middleman to use them.
+          </p>
+        </aside>
+      )}
+
       {g.sections.map((s) => (
         <section key={s.h2} className="mt-10">
           <h2 className="text-xl font-bold">{s.h2}</h2>

@@ -52,8 +52,10 @@ export default function ProtectionPage() {
           <h2 className="text-lg font-bold">The standard contract, free with every match</h2>
         </div>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-500">
-          Every project matched through Dubai Interior comes with our standard contract template. A contractor who
-          refuses these terms is telling you something — that refusal is itself a screening tool.
+          Dubai has no government-issued renovation contract for homeowners — the commercial market runs on
+          FIDIC-style forms, and consumers are left to negotiate alone. So every project matched through Dubai
+          Interior comes with our standard contract template, built on the same market-standard protections. A
+          contractor who refuses these terms is telling you something — that refusal is itself a screening tool.
         </p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {CONTRACT_TERMS.map(([term, desc]) => (
@@ -84,6 +86,30 @@ export default function ProtectionPage() {
             <ShieldCheck className="h-5 w-5 shrink-0 text-clay" strokeWidth={1.75} />
             <p className="text-gray-500"><b className="text-charcoal">Metrics are public.</b> Delays and extra charges show on their profile as verified facts — permanently.</p>
           </div>
+        </div>
+      </Card>
+
+      {/* Official channels — direct government links build trust; we're not gatekeeping them */}
+      <Card className="mt-6">
+        <h2 className="text-lg font-bold">Official channels — you can always go direct</h2>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-500">
+          Since January 2026, Dubai&apos;s Law No. 7 of 2025 requires every contractor to be registered and classified
+          in a unified register run by Dubai Municipality — with fines up to AED 100,000, suspension or removal for
+          violations. These government services are free; our job is making sure you arrive with the evidence to win.
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          <a href="https://consumerrights.ae/en/Pages/consumer-complaint.aspx" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-gray-200 p-4 transition hover:border-terracotta">
+            <p className="text-sm font-bold">Dubai Consumer (DET) ↗</p>
+            <p className="mt-1 text-xs leading-relaxed text-gray-500">File a complaint free — consumerrights.ae, the Dubai Consumer app, or 600 545 555.</p>
+          </a>
+          <a href="https://invest.dubai.ae/" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-gray-200 p-4 transition hover:border-terracotta">
+            <p className="text-sm font-bold">Invest in Dubai ↗</p>
+            <p className="mt-1 text-xs leading-relaxed text-gray-500">Verify any company&apos;s trade licence status before paying a deposit.</p>
+          </a>
+          <a href="https://www.dubaipolice.gov.ae/" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-gray-200 p-4 transition hover:border-terracotta">
+            <p className="text-sm font-bold">Dubai Police ↗</p>
+            <p className="mt-1 text-xs leading-relaxed text-gray-500">Deposit taken and contractor vanished is criminal fraud — 901 or the eCrime portal.</p>
+          </a>
         </div>
       </Card>
 
