@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
@@ -50,6 +51,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${plexSans.variable} ${newsreader.variable} ${plexMono.variable}`}>
       <body className="min-h-screen bg-sand text-charcoal antialiased">
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-CV1WNNG7SM" strategy="afterInteractive" />
+        <Script id="ga4" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CV1WNNG7SM');`}
+        </Script>
         <Nav />
         <main>{children}</main>
         <footer className="mt-20 border-t border-gray-200 bg-cream py-12">
