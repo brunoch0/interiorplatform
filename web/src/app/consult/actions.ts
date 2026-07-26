@@ -17,6 +17,7 @@ export type Brief = {
   occupied?: string;
   style?: string;
   household?: string;
+  photo_notes?: string;
   summary: string;
 };
 
@@ -30,7 +31,7 @@ export async function submitConsultation(payload: {
   isPublic: boolean;
   newsletter: boolean;
   brief: Brief | null;
-  transcript: { role: string; content: string }[];
+  transcript: { role: string; content: string; images?: string[] }[];
 }): Promise<ConsultResult> {
   if (payload.honeypot !== "") return { ok: true, ref: "CR-OK" };
 
@@ -45,7 +46,7 @@ export async function submitConsultation(payload: {
   const b = payload.brief;
 
   const detailsParts = b
-    ? [b.summary, b.budget_hint && `Budget: ${b.budget_hint}`, b.occupied && b.occupied !== "unknown" && `Living there during works: ${b.occupied}`, b.style && `Style: ${b.style}`, b.household && `Household: ${b.household}`]
+    ? [b.summary, b.budget_hint && `Budget: ${b.budget_hint}`, b.occupied && b.occupied !== "unknown" && `Living there during works: ${b.occupied}`, b.style && `Style: ${b.style}`, b.household && `Household: ${b.household}`, b.photo_notes && `From photos: ${b.photo_notes}`]
     : [];
 
   const { error } = await supabase.from("quote_requests").insert({
@@ -61,7 +62,11 @@ export async function submitConsultation(payload: {
     details: detailsParts.filter(Boolean).join("\n") || null,
     is_public: payload.isPublic,
     brief: b ?? null,
-    transcript: payload.transcript.slice(0, 24).map((m) => ({ role: m.role, content: String(m.content).slice(0, 1500) })),
+    transcript: payload.transcript.slice(0, 24).map((m) => ({
+      role: m.role,
+      content: String(m.content).slice(0, 1500),
+      ...(m.images && m.images.length > 0 ? { images: m.images.slice(0, 5).map(String) } : {}),
+    })),
   });
 
   if (error) {

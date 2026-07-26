@@ -8,7 +8,8 @@ type Lead = {
   id: string; ref: string; name: string; phone: string | null; email: string | null;
   space_type: string | null; area: string | null; budget: string | null; timeline: string | null;
   details: string | null; status: string; created_at: string; companies: LeadCompany[] | null;
-  type: string; brief: Record<string, string> | null; transcript: { role: string; content: string }[] | null;
+  type: string; brief: Record<string, string> | null;
+  transcript: { role: string; content: string; images?: string[] }[] | null;
   is_public: boolean; bids: {
     id: string; company_name: string; contact_name: string | null; email: string; phone: string | null;
     price_band: string | null; timeline: string | null; message: string | null; status: string; created_at: string;
@@ -117,10 +118,20 @@ export default async function AdminLeads({ searchParams }: { searchParams: Promi
                 </summary>
                 <div className="mt-3 space-y-2">
                   {l.transcript.map((m, i) => (
-                    <p key={i} className={`rounded-lg px-3 py-2 text-xs leading-relaxed ${m.role === "user" ? "bg-terracotta-tint text-terracotta-deep" : "bg-gray-50 text-gray-600"}`}>
+                    <div key={i} className={`rounded-lg px-3 py-2 text-xs leading-relaxed ${m.role === "user" ? "bg-terracotta-tint text-terracotta-deep" : "bg-gray-50 text-gray-600"}`}>
                       <b className="mr-1 uppercase text-[10px] opacity-60">{m.role === "user" ? "Customer" : "AI"}</b>
                       {m.content}
-                    </p>
+                      {m.images && m.images.length > 0 && (
+                        <span className="mt-2 flex flex-wrap gap-1.5">
+                          {m.images.map((u) => (
+                            <a key={u} href={u} target="_blank" rel="noopener noreferrer">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img src={u} alt="" className="h-20 w-20 rounded-lg object-cover" />
+                            </a>
+                          ))}
+                        </span>
+                      )}
+                    </div>
                   ))}
                 </div>
               </details>

@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 import Link from "next/link";
-import { CheckCircle2, MessageCircle, Send, Sparkles } from "lucide-react";
+import { CheckCircle2, ImagePlus, MessageCircle, Send, Sparkles, X } from "lucide-react";
+import { supabaseBrowser } from "@/lib/supabase-browser";
 import { Card, Notice } from "@/components/ui";
 import { submitConsultation, type Brief } from "./actions";
 
-type Msg = { role: "user" | "assistant"; content: string };
+type Msg = { role: "user" | "assistant"; content: string; images?: string[] };
 
 const OPENER =
-  "Hi! Tell me about your place and what you'd like to change — in your own words, any language. No renovation jargon needed.";
+  "Hi! Tell me about your place and what you'd like to change — in your own words, any language. Photos help a lot: snap the rooms you want to work on and attach them.";
 
 const CHIPS = [
   "Just moved to a new apartment, not sure where to start",
@@ -18,27 +19,65 @@ const CHIPS = [
   "인테리어 처음인데 뭐부터 해야 할지 모르겠어요",
 ];
 
+const MAX_PHOTOS = 5;
+const publicUrl = (path: string) =>
+  `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/projects/${path}`;
+
 export default function ConsultChat() {
   const [messages, setMessages] = useState<Msg[]>([{ role: "assistant", content: OPENER }]);
   const [input, setInput] = useState("");
+  const [pendingImages, setPendingImages] = useState<string[]>([]);
+  const [uploading, setUploading] = useState(false);
   const [thinking, setThinking] = useState(false);
   const [brief, setBrief] = useState<Brief | null>(null);
   const [unavailable, setUnavailable] = useState(false);
+  const [limited, setLimited] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [ref, setRef] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const [sessionId] = useState(() => crypto.randomUUID());
   const bottomRef = useRef<HTMLDivElement>(null);
+  const photoCount = useRef(0);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [messages, thinking, brief]);
 
+  const totalPhotos = () =>
+    messages.reduce((n, m) => n + (m.images?.length ?? 0), 0) + pendingImages.length;
+
+  const addPhotos = async (list: FileList | null) => {
+    if (!list || brief) return;
+    const room = MAX_PHOTOS - totalPhotos();
+    const files = Array.from(list)
+      .filter((f) => f.size <= 5 * 1024 * 1024 && /^image\/(jpeg|png|webp)$/.test(f.type))
+      .slice(0, room);
+    if (files.length === 0) return;
+    setUploading(true);
+    try {
+      const urls: string[] = [];
+      for (const f of files) {
+        const ext = (f.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+        const path = `consult/${sessionId}/${photoCount.current++}.${ext}`;
+        const { error: upErr } = await supabaseBrowser.storage.from("projects").upload(path, f, { contentType: f.type });
+        if (!upErr) urls.push(publicUrl(path));
+      }
+      setPendingImages((p) => [...p, ...urls]);
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const send = async (text: string) => {
     const content = text.trim();
-    if (!content || thinking || brief) return;
-    const next: Msg[] = [...messages, { role: "user", content }];
+    if ((!content && pendingImages.length === 0) || thinking || brief) return;
+    const next: Msg[] = [
+      ...messages,
+      { role: "user", content: content || "Here are some photos of the space.", images: pendingImages.length ? pendingImages : undefined },
+    ];
     setMessages(next);
     setInput("");
+    setPendingImages([]);
     setThinking(true);
     try {
       const res = await fetch("/api/consult", {
@@ -47,13 +86,17 @@ export default function ConsultChat() {
         // Opener is UI-only; the API expects the conversation to start with the user
         body: JSON.stringify({ messages: next.slice(1) }),
       });
+      if (res.status === 429) {
+        setLimited(true);
+        return;
+      }
       if (!res.ok) throw new Error("unavailable");
       const data = await res.json();
       if (data.type === "brief") {
         setBrief(data.brief);
         setMessages((m) => [...m, { role: "assistant", content: "Perfect — I've put your brief together. Check it below and add your contact so our team can follow up." }]);
       } else if (data.type === "question") {
-        setMessages((m) => [...m, { role: "assistant", content: data.text }]);
+        setMessages((m) => [...m, { role: "assistant", content: String(data.text).replace(/\*\*/g, "") }]);
       } else {
         throw new Error("unavailable");
       }
@@ -96,6 +139,17 @@ export default function ConsultChat() {
       </div>
     );
 
+  if (limited)
+    return (
+      <Card>
+        <Notice tone="amber">
+          The assistant has hit today&apos;s usage limit. You can still{" "}
+          <Link href="/quote" className="font-semibold underline">request quotes with the standard form</Link> — it takes 2
+          minutes and reaches the same team.
+        </Notice>
+      </Card>
+    );
+
   if (unavailable)
     return (
       <Card>
@@ -123,6 +177,14 @@ export default function ConsultChat() {
                   m.role === "user" ? "bg-walnut text-cream" : "bg-gray-50 text-gray-700"
                 }`}
               >
+                {m.images && m.images.length > 0 && (
+                  <div className="mb-2 flex flex-wrap gap-1.5">
+                    {m.images.map((u) => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img key={u} src={u} alt="" className="h-16 w-16 rounded-lg object-cover" />
+                    ))}
+                  </div>
+                )}
                 {m.content}
               </div>
             </div>
@@ -147,22 +209,40 @@ export default function ConsultChat() {
         )}
 
         {!brief && (
-          <form
-            onSubmit={(e) => { e.preventDefault(); send(input); }}
-            className="flex items-center gap-2 border-t border-gray-100 px-4 py-3"
-          >
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type here — any language works…"
-              maxLength={1500}
-              className="flex-1 rounded-xl border border-gray-200 px-4 py-2.5 text-sm"
-            />
-            <button type="submit" disabled={thinking || !input.trim()}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-terracotta text-cream transition hover:bg-terracotta-deep disabled:opacity-40">
-              <Send className="h-4 w-4" />
-            </button>
-          </form>
+          <div className="border-t border-gray-100 px-4 py-3">
+            {pendingImages.length > 0 && (
+              <div className="mb-2 flex flex-wrap gap-1.5">
+                {pendingImages.map((u) => (
+                  <span key={u} className="relative">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={u} alt="" className="h-14 w-14 rounded-lg object-cover" />
+                    <button type="button" onClick={() => setPendingImages((p) => p.filter((x) => x !== u))}
+                      className="absolute -right-1.5 -top-1.5 rounded-full bg-charcoal p-0.5 text-cream">
+                      <X className="h-3 w-3" />
+                    </button>
+                  </span>
+                ))}
+              </div>
+            )}
+            <form onSubmit={(e) => { e.preventDefault(); send(input); }} className="flex items-center gap-2">
+              <label className={`inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-gray-200 text-clay transition hover:border-clay ${uploading || totalPhotos() >= MAX_PHOTOS ? "pointer-events-none opacity-40" : ""}`}>
+                <ImagePlus className="h-4 w-4" />
+                <input type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden"
+                  onChange={(e) => { addPhotos(e.target.files); e.target.value = ""; }} />
+              </label>
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={uploading ? "Uploading photos…" : "Type here — any language works…"}
+                maxLength={1500}
+                className="flex-1 rounded-xl border border-gray-200 px-4 py-2.5 text-sm"
+              />
+              <button type="submit" disabled={thinking || uploading || (!input.trim() && pendingImages.length === 0)}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-terracotta text-cream transition hover:bg-terracotta-deep disabled:opacity-40">
+                <Send className="h-4 w-4" />
+              </button>
+            </form>
+          </div>
         )}
       </Card>
 
@@ -183,6 +263,7 @@ export default function ConsultChat() {
               ["Budget", brief.budget_hint],
               ["Style", brief.style],
               ["Household", brief.household],
+              ["From your photos", brief.photo_notes],
             ].filter(([, v]) => v).map(([k, v]) => (
               <div key={k} className="flex gap-2 rounded-lg bg-gray-50 px-3 py-2">
                 <dt className="shrink-0 text-gray-400">{k}</dt>
