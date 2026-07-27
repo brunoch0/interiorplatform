@@ -32,8 +32,27 @@ const BATHROOM: Record<string, [number, number]> = {
   Standard: [15000, 30000],
   Premium: [35000, 70000],
 };
+// Whole-unit repaint (walls + ceilings, standard emulsion at Standard tier)
+const PAINT_BASE: Record<string, [number, number]> = {
+  "Studio": [2500, 5000],
+  "1 Bedroom": [3500, 7000],
+  "2 Bedroom": [5000, 10000],
+  "3 Bedroom": [7000, 14000],
+  "4 Bedroom+": [9000, 18000],
+  "Villa / Townhouse": [15000, 35000],
+};
 
-const SCOPES = ["Full renovation", "Kitchen + bathrooms", "Kitchen only", "Bathrooms only", "Cosmetic refresh (paint, flooring)"];
+// Ordered by depth — the price gap between gut and paint-only is ~20x, so the scope choice matters most
+const SCOPE_DEFS = [
+  { key: "gut", label: "Full gut renovation", desc: "Strip to shell: demolition, layout changes, new MEP, everything rebuilt" },
+  { key: "full", label: "Full renovation (keep layout)", desc: "New flooring, kitchen, bathrooms, paint, lighting — walls stay where they are" },
+  { key: "kb", label: "Kitchen + bathrooms", desc: "Wet areas only — the two most expensive rooms" },
+  { key: "kitchen", label: "Kitchen only", desc: "Cabinetry, counters, appliances hookup" },
+  { key: "bath", label: "Bathrooms only", desc: "Retile, refit, waterproofing" },
+  { key: "refresh", label: "Flooring + paint refresh", desc: "Cosmetic only — no tiles, no MEP, no demolition" },
+  { key: "paint", label: "Painting only", desc: "Whole unit repaint, walls and ceilings" },
+] as const;
+type ScopeKey = (typeof SCOPE_DEFS)[number]["key"];
 
 type Range = [number, number];
 const mul = (r: Range, f: number): Range => [Math.round(r[0] * f), Math.round(r[1] * f)];
@@ -42,7 +61,7 @@ const round500 = (r: Range): Range => [Math.round(r[0] / 500) * 500, Math.round(
 
 export default function CostCalculator() {
   const [unit, setUnit] = useState("2 Bedroom");
-  const [scope, setScope] = useState(SCOPES[0]);
+  const [scope, setScope] = useState<ScopeKey>("full");
   const [finish, setFinish] = useState("Standard");
   const [baths, setBaths] = useState(2);
   const [sqft, setSqft] = useState("");
@@ -51,29 +70,37 @@ export default function CostCalculator() {
   const result = useMemo(() => {
     const parts: { label: string; range: Range }[] = [];
     let total: Range = [0, 0];
+    const fin = finish.toLowerCase();
+    // Gut renovation: demolition, layout changes and full MEP re-do add ~30% over a keep-layout full reno
+    const GUT = 1.3;
 
-    if (scope === "Full renovation") {
+    if (scope === "full" || scope === "gut") {
       const area = Number(sqft);
+      const depth = scope === "gut" ? GUT : 1;
+      const depthLabel = scope === "gut" ? "Full gut renovation" : "Full renovation (keep layout)";
       if (area >= 200 && area <= 20000) {
         const rate = SQFT_RATE[finish];
-        total = [area * rate[0], area * rate[1]];
-        parts.push({ label: `Full renovation · ${fmt(area)} sqft × AED ${rate[0]}–${rate[1]}/sqft (${finish.toLowerCase()})`, range: total });
+        total = mul([area * rate[0], area * rate[1]], depth);
+        parts.push({ label: `${depthLabel} · ${fmt(area)} sqft × AED ${rate[0]}–${rate[1]}/sqft (${fin})${scope === "gut" ? " × 1.3 demolition & MEP" : ""}`, range: total });
       } else {
-        total = mul(UNIT_BASE[unit], FINISH_MULT[finish]);
-        parts.push({ label: `Full renovation · ${unit} · ${finish.toLowerCase()} finish`, range: total });
+        total = mul(UNIT_BASE[unit], FINISH_MULT[finish] * depth);
+        parts.push({ label: `${depthLabel} · ${unit} · ${fin} finish`, range: total });
       }
-    } else if (scope === "Cosmetic refresh (paint, flooring)") {
+    } else if (scope === "refresh") {
       total = mul(mul(UNIT_BASE[unit], FINISH_MULT[finish]), 0.35);
-      parts.push({ label: `Cosmetic refresh · ${unit} · ${finish.toLowerCase()} finish`, range: total });
+      parts.push({ label: `Flooring + paint refresh · ${unit} · ${fin} finish`, range: total });
+    } else if (scope === "paint") {
+      total = mul(PAINT_BASE[unit], FINISH_MULT[finish]);
+      parts.push({ label: `Whole-unit repaint · ${unit} · ${fin} paint grade`, range: total });
     } else {
-      if (scope === "Kitchen + bathrooms" || scope === "Kitchen only") {
+      if (scope === "kb" || scope === "kitchen") {
         const k = KITCHEN[finish];
-        parts.push({ label: `Kitchen · ${finish.toLowerCase()}`, range: k });
+        parts.push({ label: `Kitchen · ${fin}`, range: k });
         total = add(total, k);
       }
-      if (scope === "Kitchen + bathrooms" || scope === "Bathrooms only") {
+      if (scope === "kb" || scope === "bath") {
         const b = mul(BATHROOM[finish], baths);
-        parts.push({ label: `${baths} bathroom${baths > 1 ? "s" : ""} · ${finish.toLowerCase()}`, range: b });
+        parts.push({ label: `${baths} bathroom${baths > 1 ? "s" : ""} · ${fin}`, range: b });
         total = add(total, b);
       }
     }
@@ -88,24 +115,32 @@ export default function CostCalculator() {
     });
   };
 
-  const needsBaths = scope === "Kitchen + bathrooms" || scope === "Bathrooms only";
+  const needsBaths = scope === "kb" || scope === "bath";
+  const needsSqft = scope === "full" || scope === "gut";
 
   return (
     <div>
       <Card>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <label className="text-sm font-medium">How deep does the work go?</label>
+        <p className="mt-0.5 text-xs text-gray-400">This is the biggest price lever — a gut renovation and a repaint differ by 20×.</p>
+        <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
+          {SCOPE_DEFS.map((s) => (
+            <button key={s.key} type="button" onClick={() => { setScope(s.key); setShowResult(false); }}
+              className={`rounded-xl border px-4 py-2.5 text-left transition ${
+                scope === s.key ? "border-walnut bg-walnut text-cream" : "border-gray-200 hover:border-gray-400"
+              }`}>
+              <span className="block text-sm font-semibold">{s.label}</span>
+              <span className={`block text-[11px] leading-snug ${scope === s.key ? "text-cream/70" : "text-gray-400"}`}>{s.desc}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
             <label className="text-sm font-medium">Property type</label>
             <select value={unit} onChange={(e) => { setUnit(e.target.value); setShowResult(false); }}
               className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm">
               {Object.keys(UNIT_BASE).map((u) => <option key={u}>{u}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className="text-sm font-medium">What do you want done?</label>
-            <select value={scope} onChange={(e) => { setScope(e.target.value); setShowResult(false); }}
-              className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm">
-              {SCOPES.map((s) => <option key={s}>{s}</option>)}
             </select>
           </div>
           <div>
@@ -121,7 +156,7 @@ export default function CostCalculator() {
               ))}
             </div>
           </div>
-          {needsBaths ? (
+          {needsBaths && (
             <div>
               <label className="text-sm font-medium">How many bathrooms?</label>
               <select value={baths} onChange={(e) => { setBaths(Number(e.target.value)); setShowResult(false); }}
@@ -129,14 +164,15 @@ export default function CostCalculator() {
                 {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>{n}</option>)}
               </select>
             </div>
-          ) : scope === "Full renovation" ? (
+          )}
+          {needsSqft && (
             <div>
               <label className="text-sm font-medium">Area in sqft <span className="font-normal text-gray-400">(optional — sharpens the range)</span></label>
               <input value={sqft} onChange={(e) => { setSqft(e.target.value.replace(/[^0-9]/g, "")); setShowResult(false); }}
                 placeholder="e.g. 1200" inputMode="numeric"
                 className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm" />
             </div>
-          ) : null}
+          )}
         </div>
 
         <button onClick={calculate}
