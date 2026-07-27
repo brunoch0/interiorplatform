@@ -113,6 +113,17 @@ export default async function Home() {
         </div>
       </div>
 
+      {/* Cost calculator strip */}
+      <section className="border-b border-gray-200 bg-cream">
+        <Link href="/calculator" className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-5 transition hover:bg-sand">
+          <div>
+            <p className="font-serif text-lg font-semibold text-walnut">What would your renovation cost?</p>
+            <p className="text-xs text-gray-500">10-second planning range by property type, scope and finish — based on quoted Dubai projects.</p>
+          </div>
+          <span className="rounded-xl bg-terracotta px-6 py-2.5 text-sm font-bold text-cream">Try the calculator →</span>
+        </Link>
+      </section>
+
       {/* How it works — numbered editorial, no icon cards */}
       <section className="mx-auto max-w-6xl px-4 py-20">
         <div className="grid gap-10 md:grid-cols-[1fr_2fr]">

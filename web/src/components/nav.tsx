@@ -6,7 +6,7 @@ import AuthButton from "@/components/auth-button";
 
 const consumerLinks = [
   { href: "/companies", label: "Find Contractors" },
-  { href: "/projects", label: "Projects" },
+  { href: "/calculator", label: "Cost Calculator" },
   { href: "/guides", label: "Guides" },
   { href: "/consult", label: "Free Consult" },
   { href: "/quote", label: "Get Quotes" },
