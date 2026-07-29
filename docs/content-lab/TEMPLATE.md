@@ -76,6 +76,24 @@ Culture/Region: Dubai/UAE expats; Global: true; Demographics: homeowners and ren
 이번 주 제작 큐에 넣을 것 1개 (없으면 '없음')
 ```
 
+## 타 벤처 전파 (성과 검증 후)
+
+이 시스템은 벤처 종속이 아니다. 복제할 때 **바꿀 파라미터는 3개뿐**이고 나머지(스키마·해부 절차·제작 패키지 형식)는 그대로 쓴다.
+
+| # | 파라미터 | Dubai Interior 현재값 |
+|---|----------|----------------------|
+| 1 | 요일별 검색 쿼리 | 비용/레드플래그/B·A/두바이로컬/주방욕실/리스트/시리즈 |
+| 2 | audienceQuery | `Culture/Region: Dubai/UAE expats; Global: true; Demographics: homeowners and renters 28-50 planning apartment renovation, mid-to-high income;` |
+| 3 | our_adaptation 자산 매핑 | 계산기 · 가이드 21편 · 649 업체 DB · 오픈 브리프 보드 |
+
+전파 후보와 예상 자산 매핑:
+- **dubaitoday_eat** — 맛집 DB·방문 기록 (이미 Buffer 파이프라인 보유 → 발행까지 자동화 가능)
+- **OnePass Pet** — 펫 업체 DB·평점, 두바이 펫 규정
+- **Zellys** — 캐릭터 IP (아웃라이어 분석 대상이 우주/동기부여 니치로 바뀜)
+- **Why S.Korea** — 한국 소개 카드뉴스 (audienceQuery를 글로벌 K-컬처 관심층으로)
+
+**판단 기준(전파 전 확인)**: Dubai Interior 계정에서 4주간 매일 발행 → 저장률·팔로워 증가·사이트 유입(GA4) 중 하나라도 유의미하면 Scale, 아니면 포맷 Pivot 후 재검증. 검증 안 된 시스템을 복제하면 4개 계정이 동시에 실패한다.
+
 ## 주간 집계 (금요일 리포트에 추가)
 
 - 누적 시트에서 format_template별 평균 outlier_x 집계 → 상위 3개 포맷 갱신
