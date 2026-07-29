@@ -2,19 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ScrollText, SearchCheck, Scale, HardHat, TrendingUp, Inbox, Building2, Images, BadgeCheck } from "lucide-react";
+import { LayoutDashboard, Scale, Inbox, Building2, Images, BadgeCheck, Mail } from "lucide-react";
 
 const menu = [
   { href: "/admin", label: "Dashboard", Icon: LayoutDashboard },
-  { href: "/admin/leads", label: "Leads", Icon: Inbox },
+  { href: "/admin/leads", label: "Leads & Bids", Icon: Inbox },
   { href: "/admin/companies", label: "Companies", Icon: Building2 },
   { href: "/admin/projects", label: "Showcases", Icon: Images },
   { href: "/admin/claims", label: "Claims", Icon: BadgeCheck },
-  { href: "/admin/licenses", label: "License Review", Icon: ScrollText },
-  { href: "/admin/reviews", label: "Review Monitoring", Icon: SearchCheck },
-  { href: "/admin/disputes", label: "Dispute Mediation", Icon: Scale },
-  { href: "/admin/inspections", label: "QA Inspections", Icon: HardHat },
-  { href: "/admin/kpi", label: "KPI Analytics", Icon: TrendingUp },
+  { href: "/admin/disputes", label: "Disputes", Icon: Scale },
+  { href: "/admin/subscribers", label: "Subscribers", Icon: Mail },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
