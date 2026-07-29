@@ -95,22 +95,21 @@ export default function GuidesBrowser({ guides }: { guides: GuideCard[] }) {
               <span className="h-px flex-1 bg-gray-200" />
               <span className="text-xs text-gray-400">{items.length} guide{items.length > 1 ? "s" : ""}</span>
             </div>
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="space-y-3">
               {items.map((g) => (
-                <Link key={g.slug} href={`/guides/${g.slug}`} className="group">
-                  <Card className="h-full overflow-hidden p-0 transition hover:shadow-md">
+                <Link key={g.slug} href={`/guides/${g.slug}`} className="group block">
+                  <Card className="flex items-stretch overflow-hidden p-0 transition hover:shadow-md">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={guideImage(g.slug, g.category, 640)}
+                      src={guideImage(g.slug, g.category, 400)}
                       alt=""
                       loading="lazy"
-                      className="aspect-[16/9] w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                      className="w-28 shrink-0 self-stretch object-cover sm:w-44"
                     />
-                    <div className="p-5">
-                      <p className="text-xs text-gray-400">{g.readMinutes} min read · updated {g.updated}</p>
-                      <h3 className="mt-2 text-lg font-bold leading-snug">{g.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-gray-500">{g.description}</p>
-                      <p className="mt-3 text-sm font-semibold text-terracotta-deep">Read guide →</p>
+                    <div className="min-w-0 flex-1 px-4 py-3.5 sm:px-5">
+                      <p className="text-[11px] text-gray-400">{g.readMinutes} min read · updated {g.updated}</p>
+                      <h3 className="mt-1 text-base font-bold leading-snug group-hover:text-terracotta-deep sm:text-[17px]">{g.title}</h3>
+                      <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-gray-500">{g.description}</p>
                     </div>
                   </Card>
                 </Link>
