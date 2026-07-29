@@ -3,8 +3,7 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { captureAttribution } from "@/lib/attribution";
-
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
+import { GA_ID } from "@/lib/site";
 
 type GtagParams = Record<string, string | number | boolean | undefined>;
 

@@ -1,5 +1,6 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onepassinterior.com";
 export const SITE_NAME = "Dubai Interior";
+export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 // Shared with both server and client components — keep free of client-only imports
 export const companyPhotoUrl = (path: string) =>

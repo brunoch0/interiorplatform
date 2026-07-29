@@ -6,8 +6,8 @@ import "./globals.css";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import I18nProvider from "@/lib/i18n/provider";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
-import PageViewTracker, { GA_ID } from "@/components/analytics";
+import { GA_ID, SITE_NAME, SITE_URL } from "@/lib/site";
+import PageViewTracker from "@/components/analytics";
 import { Suspense } from "react";
 
 const plexSans = IBM_Plex_Sans({
