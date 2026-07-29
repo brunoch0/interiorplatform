@@ -14,7 +14,7 @@
 ```
 date, platform, handle, followers, views, outlier_x, niche, format_template,
 hook_text, hook_visual, hook_audio, audio_mix, pacing, effort,
-why_it_worked, our_adaptation, priority, content_id
+why_it_worked, our_adaptation, priority, content_id, url
 ```
 
 - `outlier_x`: 해당 크리에이터 중앙값 대비 배수
@@ -22,6 +22,9 @@ why_it_worked, our_adaptation, priority, content_id
 - `our_adaptation`: Dubai Interior 자산(계산기·가이드·649 DB·브리프 보드)으로 변환한 구체 아이디어
 - `priority`: High(우리가 이번 주 만들 것) / Mid(포맷 참고) / Low(기법만 참고)
 - `content_id`: 릴스 shortcode 또는 틱톡 video id — **중복 수집 방지 키**
+- `url`: 시청 가능한 전체 URL (IG: `https://www.instagram.com/reel/<shortcode>/`, TikTok: `https://www.tiktok.com/@<handle>/video/<id>`)
+
+**레퍼런스 URL 규칙: 시트·일일 리포트·아이디어 큐 모든 산출물에서 영상을 언급할 때 반드시 시청 링크를 함께 적는다.** 브루노가 직접 보면서 이해하는 것이 목적.
 
 ## 일일 실행 절차
 
@@ -29,9 +32,10 @@ why_it_worked, our_adaptation, priority, content_id
 2. ToolSearch로 `vidiq_instagram_tiktok_outlier_search` 로드 후 **요일별 로테이션 쿼리** 1회 호출
    (`resultsPerPlatform: 8`, audienceQuery는 아래 고정값)
 3. 결과 전체를 CSV 스키마로 해부해 append (이미 있는 content_id는 스킵)
-4. 일일 리포트 작성 (아래 형식)
-5. High priority 항목의 our_adaptation을 훅 카피 초안과 함께 idea-queue.md에 append
-6. git commit + push (메시지: `Content lab — YYYY-MM-DD (N new outliers)`)
+4. **정밀 시청 해부**: 오늘 새로 수집한 행 중 outlier_x 최고 1건을 `vidiq_watch_shortform_content`로 실제 시청 분석 (10크레딧, 비동기 — 반환된 mcpJobId를 `vidiq_job_poll`로 완료까지 폴링). 결과를 리포트의 "정밀 시청 해부" 섹션에 기록: 장면별 타임스탬프 표(비주얼/텍스트/오디오/컷), 루프 포인트, 리텐션 메커니즘, 사진+텍스트카드만으로 복제하는 법 3가지
+5. 일일 리포트 작성 (아래 형식)
+6. High priority 항목의 our_adaptation을 훅 카피 초안 + 레퍼런스 URL과 함께 idea-queue.md에 append
+7. git commit + push (메시지: `Content lab — YYYY-MM-DD (N new outliers)`)
 
 ### 고정 audienceQuery
 
@@ -59,8 +63,11 @@ Culture/Region: Dubai/UAE expats; Global: true; Demographics: homeowners and ren
 # Content Lab — YYYY-MM-DD (테마: ○○)
 
 ## 오늘의 Top 3 해부
-각 항목: 핸들·뷰·아웃라이어 배수 / 훅(첫 3초의 텍스트·비주얼·오디오) /
+각 항목: 핸들·뷰·아웃라이어 배수 · **시청 링크** / 훅(첫 3초의 텍스트·비주얼·오디오) /
 왜 터졌나 한 줄 / 우리 버전 (훅 카피 초안 포함)
+
+## 정밀 시청 해부 (오늘의 1위)
+장면별 타임스탬프 표 + 루프 포인트 + 리텐션 메커니즘 + 사진만으로 복제법 3가지 (시청 링크 포함)
 
 ## 패턴 노트
 누적 시트 대비 새로 보이는 패턴·반복 확인된 패턴 2-3줄
