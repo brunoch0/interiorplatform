@@ -9,7 +9,7 @@ import argparse, csv, json, math, os, subprocess, sys, time
 SUPABASE = "https://hpirwzpdqaxzsvlqvwod.supabase.co"
 ANON = "sb_publishable_c1vJb-6zmLs-y7mJ-UnWTQ_7Klye6EX"
 FROM = "Bruno from Dubai Interior <bruno@onepassinterior.com>"
-REPLY_TO = "chohj0228@gmail.com"
+REPLY_TO = "business@growtodayholdings.com"
 LOG = "data/outreach_email_log.csv"
 FREEMAIL = ("gmail.", "hotmail.", "yahoo.", "outlook.", "icloud.")
 
@@ -80,7 +80,11 @@ def compose(co, rank):
         "",
         'P.S. Not interested in emails from us? Just reply "unsubscribe" and I\'ll remove you — no hard feelings.',
     ]
-    return subject, "\n".join(lines)
+    text = "\n".join(lines)
+    import html as _h
+    html_body = "<div style=\'font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#222\'>" + \
+        "<br>".join(_h.escape(l) if l else "&nbsp;" for l in lines) + "</div>"
+    return subject, text, html_body
 
 def main():
     ap = argparse.ArgumentParser()
@@ -116,7 +120,7 @@ def main():
     if args.dry_run:
         for c in queue[:3]:
             rank = area_rank(c, cos)
-            subj, body = compose(c, rank)
+            subj, body, _ = compose(c, rank)
             print("\n" + "=" * 70 + f"\nTO: {c['email']}\nSUBJECT: {subj}\n\n{body}")
         return
 
@@ -133,10 +137,10 @@ def main():
             w.writerow(["email", "company_id", "name", "sent_at", "status"])
         for c in queue[: args.batch]:
             rank = area_rank(c, cos)
-            subj, body = compose(c, rank)
+            subj, body, html_body = compose(c, rank)
             payload = json.dumps({
                 "from": FROM, "to": [c["email"]], "reply_to": REPLY_TO,
-                "subject": subj, "text": body,
+                "subject": subj, "text": body, "html": html_body,
             })
             r = subprocess.run(
                 ["curl", "-s", "--max-time", "30", "-X", "POST", "https://api.resend.com/emails",
