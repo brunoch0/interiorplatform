@@ -26,6 +26,7 @@ export type Company = {
   googleRatingCount?: number | null;
   placeId?: string | null;
   photoPath?: string | null;
+  verifiedAt?: string | null;
 };
 
 const curatedCompanies: Company[] = [

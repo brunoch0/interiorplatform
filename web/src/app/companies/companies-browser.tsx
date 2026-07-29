@@ -43,6 +43,7 @@ export default function CompaniesBrowser({ companies }: { companies: Company[] }
   const [limit, setLimit] = useState(PAGE);
   const [allAreas, setAllAreas] = useState(false);
   const [allCats, setAllCats] = useState(false);
+  const [sort, setSort] = useState("featured");
 
   const areaOptions = useMemo(() => {
     const counts = new Map<string, number>();
@@ -61,28 +62,36 @@ export default function CompaniesBrowser({ companies }: { companies: Company[] }
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    let list = companies.filter((c) => {
+    const list = companies.filter((c) => {
       if (needle && !c.name.toLowerCase().includes(needle)) return false;
       if (space && !c.spaceTypes.includes(space)) return false;
       if (area && c.area !== area) return false;
       if (category && !c.categories.includes(category)) return false;
       return true;
     });
-    // Verification ladder ranking: claimed → portfolio ✓ → contact ✓ → rest
-    const score = (c: Company) =>
+    // Verification ladder: claimed → portfolio ✓ → contact ✓ → rest
+    const ladder = (c: Company) =>
       (c.verified ? 8 : 0) + (c.portfolioVerified ? 4 : 0) + (c.contactVerified ? 2 : 0) +
       (c.exposurePackage === "premium" ? 1 : 0);
-    // Within the same ladder tier, rank by Google rating weighted by review volume
+    // Google rating weighted by review volume
     const gScore = (c: Company) => (c.googleRating ?? 0) * Math.log1p(c.googleRatingCount ?? 0);
-    list = [...list].sort((a, b) => {
-      const d = score(b) - score(a);
-      if (d !== 0) return d;
-      const g = gScore(b) - gScore(a);
-      if (g !== 0) return g;
-      return (b.scheduleComplianceRate ?? -1) - (a.scheduleComplianceRate ?? -1);
-    });
-    return list;
-  }, [companies, q, space, area, category]);
+    // First-come member ranking: earliest verified_at floats highest
+    const memberRank = (c: Company) => (c.verified && c.verifiedAt ? new Date(c.verifiedAt).getTime() : Infinity);
+
+    const sorters: Record<string, (a: Company, b: Company) => number> = {
+      featured: (a, b) => {
+        if (a.verified !== b.verified) return a.verified ? -1 : 1;
+        if (a.verified && b.verified) return memberRank(a) - memberRank(b); // earlier members first
+        const d = ladder(b) - ladder(a);
+        if (d !== 0) return d;
+        return gScore(b) - gScore(a);
+      },
+      rating: (a, b) => gScore(b) - gScore(a),
+      reviews: (a, b) => (b.googleRatingCount ?? 0) - (a.googleRatingCount ?? 0),
+      name: (a, b) => a.name.localeCompare(b.name),
+    };
+    return [...list].sort(sorters[sort] ?? sorters.featured);
+  }, [companies, q, space, area, category, sort]);
 
   const toggleSelect = (id: string) =>
     setSelected((s) => (s.includes(id) ? s.filter((x) => x !== id) : s.length < 5 ? [...s, id] : s));
@@ -156,10 +165,25 @@ export default function CompaniesBrowser({ companies }: { companies: Company[] }
         </div>
       </Card>
 
-      <p className="mb-1 text-sm text-gray-500">
-        <b className="text-charcoal">{fmt(filtered.length)}</b> contractors found
-        {selected.length > 0 && <span className="ml-3 text-terracotta-deep">· {selected.length}/5 in quote basket</span>}
-      </p>
+      <div className="mb-1 flex flex-wrap items-center gap-3">
+        <p className="text-sm text-gray-500">
+          <b className="text-charcoal">{fmt(filtered.length)}</b> contractors found
+          {selected.length > 0 && <span className="ml-3 text-terracotta-deep">· {selected.length}/5 in quote basket</span>}
+        </p>
+        <div className="ml-auto flex items-center gap-2 text-xs">
+          <span className="text-gray-400">Sort</span>
+          <select
+            value={sort}
+            onChange={(e) => { setSort(e.target.value); setLimit(PAGE); }}
+            className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs"
+          >
+            <option value="featured">Members first (earliest joined)</option>
+            <option value="rating">Top rated on Google</option>
+            <option value="reviews">Most reviewed</option>
+            <option value="name">Name A–Z</option>
+          </select>
+        </div>
+      </div>
       <p className="mb-4 text-xs text-gray-400">Star ratings and review counts are from Google Maps, refreshed monthly.</p>
 
       {filtered.length === 0 && (
