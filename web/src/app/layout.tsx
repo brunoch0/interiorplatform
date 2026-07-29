@@ -47,7 +47,19 @@ export const metadata: Metadata = {
 
 const footerAreas = ["Business Bay", "Dubai Marina", "Downtown Dubai", "Al Quoz", "JLT", "Al Barsha", "Jumeirah", "Deira"];
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+async function fetchOpenCount(): Promise<number> {
+  try {
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+    const { data } = await supabase.rpc("public_open_requests");
+    return Array.isArray(data) ? data.length : 0;
+  } catch {
+    return 0;
+  }
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const openCount = await fetchOpenCount();
   return (
     <html lang="en" className={`${plexSans.variable} ${newsreader.variable} ${plexMono.variable}`}>
       <body className="min-h-screen bg-sand text-charcoal antialiased">
@@ -58,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('js', new Date());
             gtag('config', 'G-CV1WNNG7SM');`}
         </Script>
-        <Nav />
+        <Nav openCount={openCount} />
         <main>{children}</main>
         <footer className="mt-20 border-t border-gray-200 bg-cream py-12">
           <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-3">
