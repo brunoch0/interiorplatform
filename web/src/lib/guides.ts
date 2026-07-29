@@ -1542,5 +1542,504 @@ export const guides: Guide[] = [
         a: "Do not pay money that is not tied to a completed milestone as described in your contract. Review your contract for the rights of each party to suspend work and the notice requirements. If the contractor has stopped work without a contractual basis and without adequate notice, document this in writing immediately, noting the date and state of the site. If the stoppage is over a disputed variation, refer to your variation log and the written record of what was agreed. This situation may require formal dispute resolution - this guide provides general information only and you should seek appropriate advice for your specific circumstances."
       }
     ]
+  },
+  {
+    slug: "wall-removal-structural-changes-dubai",
+    title: "Removing Walls and Structural Changes in Dubai: What Needs a Permit (2026)",
+    description:
+      "Which walls you can remove freely in Dubai, which need engineering and a Dubai Municipality permit, how approval works in apartments and villas, and what it costs.",
+    updated: "2026-07-29",
+    readMinutes: 9,
+    category: "Permits & Rules",
+    intro: [
+      "Knocking through a wall to open the kitchen into the living room is the single most requested change in Dubai renovations, and also the one most likely to get an owner into trouble. The real question is never just whether you can remove a wall, but whether it is structural and who has to approve the change. Get that wrong and you expose yourself to fines, a DEWA disconnection, a headache at resale, and in the worst case a genuine safety problem.",
+      "This guide explains how to tell a load-bearing wall from a partition, which changes trigger Dubai Municipality approval, how the permit process runs differently in apartments and villas, and what the whole thing realistically costs and takes. It is general information for planning, not engineering or legal advice - only a licensed structural engineer can confirm what is safe to remove in your specific unit."
+    ],
+    sections: [
+      {
+        h2: "Structural walls vs partitions - how to tell",
+        paragraphs: [
+          "Most internal walls in a Dubai apartment are non-structural blockwork or lightweight partitions that exist only to divide rooms. These can usually be removed without touching the building's stability. Structural walls, by contrast, carry load from the floors above and are part of the frame, and removing or even cutting a large opening in one changes how the whole structure behaves.",
+          "You cannot reliably tell them apart by knocking or by thickness alone. In most Dubai towers the columns and shear walls do the load-bearing work and many internal walls are infill, but in some older buildings in Deira and Bur Dubai the internal walls are part of the load path. The only safe way to know is to have the building's structural drawings reviewed by a licensed engineer. Never rely on a contractor's on-site opinion for a wall you are not certain about."
+        ],
+        table: {
+          headers: ["Wall type", "Common indicator", "Can you remove it"],
+          rows: [
+            ["Lightweight partition (gypsum/block)", "Sounds hollow, thin, non-continuous between floors", "Usually yes, often with a simple management NOC"],
+            ["External or party wall", "Building perimeter or shared with neighbour", "No - never without engineering and formal approval"],
+            ["Shear wall / core wall", "Thick concrete, around lift shafts and stairs", "No - structural, part of the frame"],
+            ["Wall hiding MEP risers", "Contains pipes, ducts or the AC riser", "No - relocating services needs approval and coordination"]
+          ]
+        }
+      },
+      {
+        h2: "What triggers a Dubai Municipality permit",
+        paragraphs: [
+          "Cosmetic work - paint, flooring, replacing a kitchen in the same footprint - does not need a Dubai Municipality permit, only your building management's NOC. The moment you change the structure, alter the layout by moving walls, or touch mechanical, electrical or plumbing services, you move into permit territory. Under Dubai Law No. 7 of 2025, which unified the DM Contractor Register from January 2026, this work must be carried out by a properly classified contractor, and the permit is applied for in the contractor's name, not yours.",
+          "The practical rule of thumb: if the change affects anything behind the finishes - the frame, the waterproofing, the electrical load, the drainage or the AC ducting - assume you need approval and confirm it before demolition, not after. Retroactive approval is far harder and more expensive than doing it in the right order."
+        ],
+        list: [
+          "Removing or relocating any wall that might be load-bearing",
+          "Creating a new opening in a structural wall (door, pass-through, arch)",
+          "Combining two units or changing the approved unit layout",
+          "Relocating a kitchen or bathroom (moves plumbing and drainage)",
+          "Adding a mezzanine, extension or rooftop room in a villa",
+          "Any work that changes the electrical load or the AC system"
+        ]
+      },
+      {
+        h2: "How approval works - apartment vs villa",
+        paragraphs: [
+          "In an apartment, the chain starts with your building management. You submit the proposed drawings, the contractor's trade licence and insurance, and pay a refundable NOC deposit, typically AED 2,000 to 5,000. For structural or MEP changes, the management NOC is a precondition for the Dubai Municipality permit, which your licensed contractor then files with the engineering drawings and structural calculations prepared by a registered consultant.",
+          "In a villa, especially in master-planned communities run by Emaar, Nakheel or Damac, there is an extra layer: the master developer's own NOC and design review sit on top of the DM approval. Facade changes, extensions and boundary walls are scrutinised for compliance with community design rules, and unapproved external changes are a common reason villas fail handover inspections at resale. Villa structural work also more often needs foundation and soil checks, which add both cost and weeks to the programme."
+        ],
+        list: [
+          "Get a licensed structural engineer to confirm the wall is removable",
+          "Obtain building management or master-developer NOC first",
+          "Have the contractor file the DM permit with stamped drawings",
+          "Do not demolish anything until the permit is issued in writing",
+          "Keep the permit and approved drawings for resale and warranty"
+        ]
+      },
+      {
+        h2: "What it costs and how long it takes",
+        paragraphs: [
+          "Budget for the engineering and permit costs as a separate line from the building work itself, because contractors often quote the construction and leave approvals as an exclusion. Structural drawings and calculations from a registered consultant typically run AED 3,000 to 10,000 depending on complexity, and DM permit fees add several hundred to a few thousand dirhams. On a villa with a master-developer review, allow more.",
+          "Timeline is the part owners underestimate most. A straightforward apartment partition removal with a management NOC can be cleared in a week or two. A structural opening needing engineering and a DM permit realistically adds three to six weeks before demolition can even begin, and villa community approvals can push that to two months. Building this into the programme up front avoids the classic trap of a contractor sitting idle - and billing - while approvals catch up."
+        ],
+        table: {
+          headers: ["Item", "Typical cost", "Typical time to clear"],
+          rows: [
+            ["Building management NOC", "AED 2,000 - 5,000 (refundable deposit)", "3 - 10 days"],
+            ["Structural engineer drawings + calcs", "AED 3,000 - 10,000", "1 - 3 weeks"],
+            ["Dubai Municipality permit", "Several hundred to a few thousand AED", "1 - 3 weeks after NOC"],
+            ["Master-developer villa review", "Varies by community", "2 - 6 weeks"]
+          ]
+        }
+      },
+      {
+        h2: "The real risks of skipping approval",
+        paragraphs: [
+          "Unpermitted structural work is not a paperwork technicality in Dubai. Building management can order the work stopped and reinstated, Dubai Municipality can levy fines, and DEWA can disconnect utilities to a unit with unapproved changes. At resale, a buyer's due diligence or the developer's handover inspection frequently uncovers unapproved alterations, and the cost of regularising or reversing them lands on the seller at the worst possible moment.",
+          "The safety dimension is the one that should settle it. Cutting into a wall that turns out to be load-bearing can crack floors, jam doors and, in a genuinely bad case, compromise the structure for every unit above. No open-plan kitchen is worth that. If a contractor tells you a wall is fine to remove without an engineer's confirmation and a permit, treat it as a red flag about the contractor, not a green light on the wall. This guide is general information only, not a substitute for a structural engineer's assessment."
+        ],
+        list: [
+          "Stop-work orders and reinstatement at your own cost",
+          "Dubai Municipality fines for unpermitted structural work",
+          "DEWA disconnection risk for unapproved changes",
+          "Resale and mortgage-valuation problems from unapproved layouts",
+          "Voided contractor and building insurance if something fails"
+        ]
+      }
+    ],
+    faqs: [
+      {
+        q: "How do I know if a wall in my Dubai apartment is load-bearing?",
+        a: "You cannot tell reliably by knocking or measuring thickness. The only safe method is to have a licensed structural engineer review the building's structural drawings for your unit. In many Dubai towers the columns and core walls carry the load and internal walls are infill, but this varies building to building, and older stock in Deira and Bur Dubai can differ. Never rely on a contractor's on-site guess for a wall you are unsure about."
+      },
+      {
+        q: "Do I need a permit just to remove a small partition wall?",
+        a: "For a genuine lightweight, non-structural partition that does not hide any pipes, ducts or wiring, you usually need only your building management's NOC, not a Dubai Municipality permit. The permit requirement kicks in when the wall is structural, when you are changing the approved layout, or when the work touches MEP services. When in doubt, confirm with an engineer before demolition."
+      },
+      {
+        q: "Who applies for the Dubai Municipality permit - me or the contractor?",
+        a: "Your licensed contractor applies for the permit, not you. Under Dubai Law No. 7 of 2025 the work must be done by a contractor with the correct classification on the unified DM Contractor Register, and the permit is filed in their name with engineering drawings. This is one reason verifying a contractor's licence and classification before signing matters so much."
+      },
+      {
+        q: "What happens if I already removed a wall without approval?",
+        a: "Speak to a licensed engineer and a properly classified contractor about regularising the change as soon as possible. Depending on what was removed, you may be able to obtain retroactive approval, or you may need remedial structural work. Leaving it unaddressed risks fines, DEWA issues and a resale problem later. This is general information only - get professional advice for your specific situation."
+      }
+    ]
+  },
+  {
+    slug: "verify-contractor-license-dubai",
+    title: "How to Verify a Renovation Contractor's Licence in Dubai (2026)",
+    description:
+      "A step-by-step guide to checking a Dubai fit-out contractor is real and licensed: Invest in Dubai licence lookup, the DM Contractor Register under Law No. 7, and red flags.",
+    updated: "2026-07-29",
+    readMinutes: 9,
+    category: "Hiring & Contracts",
+    officialLinks: [
+      { label: "Verify a trade licence - Invest in Dubai", href: "https://invest.dubai.ae/", note: "Check any Dubai company's licence status, activities and validity before paying anything" },
+      { label: "Dubai Municipality - Contractor Register & classification", href: "https://www.dm.gov.ae/", note: "Under Law No. 7 of 2025, DM runs the unified Contractor Register in force since January 2026" },
+      { label: "Dubai Consumer (DET) - complaints & verification", href: "https://consumerrights.ae/", note: "Free consumer channel · hotline 600 545 555" },
+      { label: "Report fraud - Dubai Police eCrime", href: "https://www.dubaipolice.gov.ae/", note: "For deposit-taken-and-vanished cases · non-emergency 901" },
+    ],
+    intro: [
+      "The cheapest insurance in a Dubai renovation is fifteen minutes spent checking that your contractor actually exists as a licensed company before you hand over a single dirham. A shocking number of fit-out disputes trace back to the same root cause: the owner paid a deposit to a company that was either not licensed for construction and fit-out work at all, or not a registered legal entity in the first place. When that company disappears, there is nothing to chase.",
+      "This guide shows you exactly how to verify a contractor in 2026 - the trade licence check on Invest in Dubai, the new unified Dubai Municipality Contractor Register introduced by Dubai Law No. 7 of 2025, and the simple cross-checks that expose a shell operation. It takes minutes and it is free. It is general information, not legal advice, but doing these checks is the strongest single thing you can do to protect a deposit."
+    ],
+    sections: [
+      {
+        h2: "Why licence verification matters more than reviews",
+        paragraphs: [
+          "Online reviews and slick Instagram portfolios tell you nothing about whether a company is legally allowed to renovate your home or whether it will still exist next month. A trade licence, by contrast, is a matter of public record: it names the legal entity, its registered activities, its validity dates and its owners. If a contractor is not properly licensed for building and fit-out work, no contract you sign with them is worth much, and your recourse if things go wrong shrinks dramatically.",
+          "Since January 2026, Dubai Law No. 7 of 2025 has unified contractor registration and classification under Dubai Municipality. That means there is now a single, authoritative register that says whether a contractor is recognised to carry out construction work and at what classification level. Checking both the general trade licence and this register is the two-part verification every owner should do before shortlisting, let alone paying."
+        ],
+        list: [
+          "A licence proves the company is a real, registered legal entity",
+          "It confirms the company's activities include building/fit-out work",
+          "It shows validity dates - an expired licence is a serious red flag",
+          "It gives you a legal counterparty to hold to a contract",
+          "Reviews and portfolios prove none of these things"
+        ]
+      },
+      {
+        h2: "Step 1 - Check the trade licence on Invest in Dubai",
+        paragraphs: [
+          "Ask the contractor for their trade licence number and the exact legal name of the company - not the brand name on the van, the licensed entity name. Then verify it through the Invest in Dubai portal, which is the official channel for Dubai company information. You are checking three things: that the company exists, that the licence is currently valid, and that its listed activities actually include contracting, building or interior fit-out.",
+          "A common trap is a company licensed only for interior design or general trading trying to take on structural or MEP construction it is not licensed for. If the activities on the licence do not match the work you are commissioning, stop. Also confirm the name on the licence matches the name that will appear on your contract and, crucially, on the bank account you are asked to pay - a mismatch there is one of the clearest warning signs of trouble."
+        ],
+        list: [
+          "Get the trade licence number and exact legal entity name in writing",
+          "Verify validity and status on the Invest in Dubai portal",
+          "Confirm listed activities include contracting / building / fit-out",
+          "Check the licensed name matches the contract and the payee account",
+          "Note the owners/partners named on the licence for your records"
+        ]
+      },
+      {
+        h2: "Step 2 - Check the DM Contractor Register and classification",
+        paragraphs: [
+          "For anything beyond cosmetic work - structural changes, MEP, full renovations - the contractor also needs to be on the Dubai Municipality Contractor Register with a classification appropriate to the scale of your project. This is the register unified under Dubai Law No. 7 of 2025, and it is the authority that governs who can pull renovation and building permits in your contractor's name. A contractor who cannot demonstrate the right classification cannot legally file the permits your project needs.",
+          "Ask the contractor directly which classification they hold and for the project sizes it covers, and cross-check against Dubai Municipality's records. A contractor confident in their standing will share this without hesitation. Evasiveness, or an attempt to redirect you to sub-contract the permit through a third company, is a signal to walk away - it usually means the company you are actually dealing with is not the one that will be legally on the hook."
+        ],
+        table: {
+          headers: ["Check", "What good looks like", "Red flag"],
+          rows: [
+            ["Trade licence status", "Valid, activities include contracting/fit-out", "Expired, or design/trading only"],
+            ["DM register / classification", "Listed with class fitting your project size", "Not registered, or vague answers"],
+            ["Legal name consistency", "Same on licence, contract and bank account", "Payment to a personal or different-name account"],
+            ["Permit capability", "Can file DM permits in own name", "Wants to route permits via another company"]
+          ]
+        }
+      },
+      {
+        h2: "Cross-checks that expose a shell operation",
+        paragraphs: [
+          "Beyond the official registers, a few quick cross-checks catch most problem contractors. Ask for VAT-registered tax invoices and a company bank account in the licensed entity's name - a contractor who only takes cash or payment to a personal account is telling you something. Visit a current or recent site if you can, and ask to speak to that client. Confirm the company holds contractor all-risk and third-party liability insurance, and ask to see the policy, not just hear that it exists.",
+          "None of these on its own is proof of anything, but together they build a picture. Legitimate, established Dubai contractors clear all of them easily and are used to being asked. The operations you want to avoid start to resist, deflect or rush you toward a deposit the moment you ask for documentation. Treat pressure to pay before you have verified as the red flag it is."
+        ],
+        list: [
+          "Insist on tax invoices and a company (not personal) bank account",
+          "Ask to visit a live site and speak to that client directly",
+          "Confirm contractor all-risk and third-party liability insurance",
+          "Be wary of any pressure to pay a large deposit quickly",
+          "Keep copies of the licence, register entry and insurance on file"
+        ]
+      },
+      {
+        h2: "Turning verification into deposit protection",
+        paragraphs: [
+          "Verification only protects you if it feeds into how you contract and pay. Once you have confirmed a contractor is licensed and classified, lock the licensed legal name into the written contract, tie payments to completed milestones, and keep the upfront deposit to no more than 20 to 30 percent of the contract value. Pay only to the company's registered bank account, never to an individual, and keep a retention of 5 to 10 percent until snagging is cleared.",
+          "If, despite checks, a contractor takes a deposit and disappears, your verification file becomes your evidence. A licensed entity gives Dubai Consumer (DET) a real party to act against, and a deposit taken with no intention to perform can be reported to Dubai Police as a criminal matter. The stronger your paper trail - licence, register entry, contract, payment records - the faster any channel can help. This guide is general information only and not a substitute for legal advice."
+        ]
+      }
+    ],
+    faqs: [
+      {
+        q: "How do I check if a Dubai contractor is licensed?",
+        a: "Get the company's trade licence number and exact legal name, then verify it on the Invest in Dubai portal - confirm the licence is valid and that its activities include contracting or fit-out work. For structural or MEP work, also check the contractor is on the Dubai Municipality Contractor Register with a classification suited to your project size, as required under Dubai Law No. 7 of 2025."
+      },
+      {
+        q: "What is the Dubai Municipality Contractor Register?",
+        a: "It is the unified register of contractors that Dubai Municipality has run since January 2026 under Dubai Law No. 7 of 2025. It records which contractors are recognised to carry out construction work and at what classification level. A contractor must be appropriately registered and classified to legally pull renovation and building permits, so it is a key check for any project beyond cosmetic work."
+      },
+      {
+        q: "The contractor wants the deposit paid to a personal bank account. Is that normal?",
+        a: "No, and it is a significant red flag. A legitimate licensed company invoices with tax invoices and takes payment into a company bank account in the licensed entity's name. Payment to a personal account, or to a company name that differs from the licence, removes much of your protection if things go wrong. Insist on paying the registered company account only."
+      },
+      {
+        q: "How much deposit is safe to pay a Dubai contractor?",
+        a: "Keep any upfront deposit to a maximum of 20 to 30 percent of the contract value, tie all further payments to completed and inspected milestones, and hold back a retention of 5 to 10 percent until snagging is resolved. Verifying the licence first and paying only the registered company account are what make even that deposit reasonably safe."
+      }
+    ]
+  },
+  {
+    slug: "variation-order-guide-dubai",
+    title: "Variation Orders in a Dubai Renovation: How to Price and Approve Changes (2026)",
+    description:
+      "How to handle mid-project changes on a Dubai renovation without losing control of the budget: writing variation orders, pricing them fairly, and keeping a variation log.",
+    updated: "2026-07-29",
+    readMinutes: 9,
+    category: "During the Works",
+    intro: [
+      "Almost every renovation changes once it starts. You see the space opened up and decide to move a socket, upgrade the tiles, or add a niche in the shower. The contractor uncovers a corroded pipe that has to be replaced. These changes are normal - what is not normal, and what wrecks budgets and relationships, is handling them by verbal agreement and a vague promise to sort out the cost later. That is how a well-planned project quietly drifts thirty percent over budget.",
+      "A variation order is simply a written record of a change to the agreed scope, its price, and its effect on the timeline, signed off before the work is done. Used properly, it is the single most powerful tool for keeping a Dubai renovation under control. This guide explains what belongs in one, how to price variations fairly, how to keep a running log, and how to push back when they are used against you."
+    ],
+    sections: [
+      {
+        h2: "What a variation order actually is",
+        paragraphs: [
+          "A variation order (sometimes called a change order) documents any departure from the scope of work in your contract. That includes additions you request, deletions you decide against, substitutions of materials, and changes the contractor says are necessary because of something uncovered on site. The core principle is simple: no change gets done until it is written down, priced, and approved in writing by you. If it is not in a variation order, it is not agreed.",
+          "This matters because the scope of work and the contract price only mean something if changes to them are controlled. A contractor who does extra work on a verbal nod can later bill whatever they like for it, and you have no agreed figure to dispute. Equally, a change you casually mention can balloon in scope. The variation order pins both sides down at the moment of decision, when the facts are fresh and neither party is under pressure."
+        ],
+        list: [
+          "A clear description of the change and why it is needed",
+          "The itemised cost impact - materials and labour separately",
+          "The effect on the completion date, in days",
+          "A revised contract total after the change",
+          "A reference number and date, signed by both parties before work"
+        ]
+      },
+      {
+        h2: "Pricing variations fairly",
+        paragraphs: [
+          "The fairest way to price variations is to agree the basis up front, in the original contract. Ask for a schedule of rates - the contractor's price per square metre of tiling, per point of electrical work, per linear metre of joinery - so that when a change comes up, it is priced against rates you already accepted rather than a number invented on the spot. Without this, every variation becomes a fresh negotiation with all the leverage on the contractor's side, because the walls are already open and you cannot easily walk away.",
+          "For genuinely unforeseen work uncovered on site, such as failed waterproofing or corroded pipework, expect the contractor to show you the problem, photograph it, and quote before proceeding. Be wary of round-number variations with no breakdown, and of a pattern of small extras that individually look trivial but add up. A reasonable variation itemises materials and labour; a suspicious one is a single lump sum with a shrug."
+        ],
+        table: {
+          headers: ["Variation type", "How it should be priced", "Watch out for"],
+          rows: [
+            ["Owner-requested upgrade", "Against agreed schedule of rates", "Inflated rates not in the original quote"],
+            ["Material substitution", "Difference in supply cost, shown both ways", "Charging full price, not the difference"],
+            ["Unforeseen site condition", "Quoted after showing photo evidence", "Vague lump sums with no breakdown"],
+            ["Owner-requested deletion", "Credit back to you", "Deletions that never reduce the total"]
+          ]
+        }
+      },
+      {
+        h2: "Keeping a variation log",
+        paragraphs: [
+          "A variation log is a single running document - a shared spreadsheet works well - listing every variation with its number, date, description, cost impact, time impact and approval status. It gives you, at any moment, one number: the current contract total including all agreed changes. Owners who keep this log always know where they stand; owners who do not are the ones who get a shock at the final invoice.",
+          "The log also protects you against the most common billing surprise, where a contractor presents a stack of unagreed extras at handover. If a claimed extra is not in the log with your sign-off, it was not agreed, and your contract should say exactly that - that no variation is payable unless recorded and approved in advance. Review the log at each site visit and each milestone payment, so it never falls out of date."
+        ],
+        list: [
+          "Number every variation and keep them in one shared document",
+          "Record cost impact, time impact and approval date for each",
+          "Update the running contract total after every approved change",
+          "Reconcile the log at each milestone payment",
+          "Refuse to pay any extra that is not in the log with your sign-off"
+        ]
+      },
+      {
+        h2: "When variations are used against you",
+        paragraphs: [
+          "Variation orders can be abused. The classic pattern is the low-ball quote: a contractor wins the job with a suspiciously cheap price, then recovers margin through a steady stream of variations once you are committed and the demolition is done. Another is the manufactured surprise, where routine work is presented as an unforeseen extra. This is exactly why comparing quotes against one detailed written scope before you sign matters so much - a thin scope leaves room for endless extras.",
+          "Your defences are the schedule of rates, the requirement that all variations be written and pre-approved, and your willingness to say no. You are entitled to see evidence for any claimed unforeseen condition, to get a breakdown, and to decline a change or seek an alternative. If a contractor does extra work without an approved variation and then demands payment, your contract - stating no unrecorded variation is payable - is your protection. Document any dispute in writing as it happens."
+        ]
+      },
+      {
+        h2: "Building variation control into your contract",
+        paragraphs: [
+          "Everything above only works if it is in the contract from the start. Before signing, make sure the contract includes a schedule of rates, a clause that no variation is valid or payable unless recorded in a written, pre-approved variation order, and a clause that unforeseen conditions must be evidenced and quoted before work proceeds. Combine this with staged milestone payments and a 5 to 10 percent retention held until snagging, and variations lose most of their power to blow up your budget.",
+          "Handled this way, variations become what they should be - a normal, transparent mechanism for managing change - rather than a slow-motion overrun. The owners who stay in control are not the ones who refuse all changes; they are the ones who insist every change goes through the same simple written process, every time, from day one."
+        ]
+      }
+    ],
+    faqs: [
+      {
+        q: "What is a variation order in a renovation?",
+        a: "A variation order is a written record of any change to the agreed scope of work - an addition, deletion, material substitution or unforeseen extra - together with its cost, its effect on the timeline and a revised contract total, signed off by both parties before the work is done. The core rule is that no change should be carried out until it is written down, priced and approved in writing."
+      },
+      {
+        q: "How do I stop variation orders from blowing up my budget?",
+        a: "Agree a schedule of rates in the original contract so changes are priced against numbers you already accepted, require every variation to be written and pre-approved, keep a running variation log with a live contract total, and hold a 5 to 10 percent retention until snagging. Comparing quotes against one detailed scope before signing also removes the thin-scope gaps that invite endless extras."
+      },
+      {
+        q: "The contractor did extra work without asking and now wants to be paid. Do I have to pay?",
+        a: "If your contract states that no variation is payable unless recorded and approved in advance, work done without an approved variation order is on weak ground. Document the situation in writing, ask for a breakdown and evidence, and refer to your variation log. This is general information only - for a disputed sum, consider the escalation channels and, if needed, appropriate advice."
+      },
+      {
+        q: "How much should a variation cost?",
+        a: "A fair variation is priced against the contractor's agreed schedule of rates, with materials and labour itemised separately, and for material swaps you should pay only the difference in supply cost, not the full price again. Deletions should credit money back to you. Be cautious of round-number lump sums with no breakdown, which are where overcharging hides."
+      }
+    ]
+  },
+  {
+    slug: "renovation-handover-documents-dubai",
+    title: "Renovation Handover Documents in Dubai: The Complete Checklist (2026)",
+    description:
+      "Exactly which documents to collect at renovation handover in Dubai: completion sign-off, warranties, as-built drawings, DEWA and permit paperwork, and why each matters.",
+    updated: "2026-07-29",
+    readMinutes: 8,
+    category: "Handover & Quality",
+    intro: [
+      "The day the contractor packs up and hands back your keys feels like the finish line, and in the rush of moving back in most owners collect almost nothing in writing. That is a mistake you only notice months later - when a bathroom leaks and you cannot find the waterproofing warranty, when a buyer's surveyor asks for the DM permit, or when you need to know exactly where a pipe runs before drilling into a wall. Handover is not just getting your space back; it is getting the paper trail that makes it yours to maintain, insure and eventually sell.",
+      "This guide sets out the documents to collect at handover, why each one matters, and how to tie the final payment to receiving them. Assembling this pack is the difference between a renovation that is genuinely finished and one that leaves loose ends you will pay for later. It is general guidance for planning your handover, not legal advice."
+    ],
+    sections: [
+      {
+        h2: "The core handover pack",
+        paragraphs: [
+          "There is a standard set of documents every renovation should hand over, whether it was a single-bathroom refit or a full villa rebuild. At minimum you want the signed completion and snagging sign-off, the warranties for both workmanship and installed products, the as-built drawings showing what was actually built, and copies of all permits and NOCs. For anything touching services, add the DEWA and MEP paperwork covered below.",
+          "Ask for the full pack in digital form as well as any originals - a single labelled folder or shared drive you can find in two years. The best time to specify this is in the contract, listing the handover documents as a deliverable, so it is not an afterthought negotiated when the contractor is already halfway out the door."
+        ],
+        table: {
+          headers: ["Document", "Why you need it", "Who provides it"],
+          rows: [
+            ["Completion & snagging sign-off", "Proof the work is accepted and defects logged", "Contractor, signed by both"],
+            ["Workmanship warranty", "Basis for defects claims in the DLP", "Contractor"],
+            ["Product warranties & manuals", "Claims on appliances, sanitaryware, AC", "Contractor / suppliers"],
+            ["As-built drawings", "Shows what was actually built and where services run", "Contractor / consultant"],
+            ["Permits, NOCs & approvals", "Proof work was legal; needed at resale", "Contractor filed, you keep"]
+          ]
+        }
+      },
+      {
+        h2: "Completion sign-off and the defects liability period",
+        paragraphs: [
+          "The completion document records that the works are practically complete and, crucially, attaches the snagging list - the agreed record of minor defects still to be fixed. Do not sign a clean completion if snags remain; sign a completion that explicitly references the outstanding snag list and the dates by which items will be closed. This keeps the contractor on the hook and protects the retention you are holding.",
+          "Handover is also where the defects liability period (DLP) formally starts - typically twelve months during which the contractor must return to fix defects that emerge from their work at no cost. Get the DLP start date and terms in writing. Hold back your retention of 5 to 10 percent until the snagging is cleared, and keep the workmanship warranty and DLP terms filed, because they are exactly what you will point to if a defect appears in month eight."
+        ],
+        list: [
+          "Completion document referencing the outstanding snag list",
+          "Written DLP start date and duration (typically 12 months)",
+          "Confirmation of retention held until snagging is closed",
+          "Agreed dates for closing each open snag item",
+          "The workmanship warranty terms in writing"
+        ]
+      },
+      {
+        h2: "Warranties, manuals and as-built drawings",
+        paragraphs: [
+          "Two kinds of warranty come out of a renovation: the contractor's workmanship warranty on the labour, and the product warranties on the things installed - appliances, AC units, sanitaryware, water heaters, sometimes waterproofing systems and joinery. Collect both, along with the operating manuals, because a warranty you cannot produce is a warranty you effectively do not have. For waterproofing in particular, a documented warranty is worth chasing, since leaks are among the most expensive and disruptive failures.",
+          "As-built drawings are the unglamorous documents owners regret not having. They show the layout as actually constructed, including where pipes, cables and AC ducting run behind the finishes. The first time you want to hang a heavy mirror, add a light, or diagnose a leak, the as-builts save you from drilling blind into a live service. On any project that moved walls or services, insist on them."
+        ]
+      },
+      {
+        h2: "DEWA, MEP and permit paperwork",
+        paragraphs: [
+          "If your renovation touched electrical or plumbing systems, there is a services layer of paperwork to collect. That includes any DEWA-related documentation for electrical work, MEP test and commissioning records where applicable, and confirmation that services were reconnected and certified correctly. For structural or MEP work, you also want the Dubai Municipality permit and the approved drawings in your file - these are precisely what a buyer's due diligence or a mortgage valuation will ask for at resale.",
+          "Keep the building management NOC and the record of your refundable deposit too, since you will usually need the post-works inspection signed off to get that deposit back. Under the current framework, permits are filed in the licensed contractor's name, so it falls to you to make sure copies land in your hands at handover rather than staying with a contractor you may never deal with again."
+        ],
+        list: [
+          "DEWA documentation for any electrical works",
+          "MEP test / commissioning records where applicable",
+          "Dubai Municipality permit and approved drawings",
+          "Building management NOC and deposit-refund confirmation",
+          "Confirmation services were reconnected and certified"
+        ]
+      },
+      {
+        h2: "Tying final payment to the documents",
+        paragraphs: [
+          "The leverage to get all of this is your final payment and retention. The moment the last payment clears, your practical ability to make a contractor chase down a missing warranty or drawing drops sharply. So treat the handover pack as a condition of closing out the job: list the documents in the contract as deliverables, and make the release of the final instalment and the retention contingent on receiving them along with a cleared snag list.",
+          "Walk the property with the contractor at handover, close the snag list against the completion document, and only then release the balance. Owners who do this get a complete, organised handover pack; owners who pay in full on the promise of documents to follow are the ones still emailing for their waterproofing warranty a year later. A little firmness at the finish line pays off every time you own the home."
+        ]
+      }
+    ],
+    faqs: [
+      {
+        q: "What documents should I get when my Dubai renovation is finished?",
+        a: "At minimum: the signed completion and snagging sign-off, the contractor's workmanship warranty, product warranties and manuals for installed items, as-built drawings, and copies of all permits and NOCs. If the work touched services, add DEWA documentation, MEP test records, and confirmation that services were reconnected and certified. Collect everything digitally in one labelled folder."
+      },
+      {
+        q: "What are as-built drawings and do I really need them?",
+        a: "As-built drawings show your space as it was actually constructed, including where pipes, cables and AC ducting run behind the finishes. They are invaluable the first time you want to drill into a wall, add a fixture or diagnose a leak, and they are commonly requested at resale. On any project that moved walls or services, insist on them as part of the handover pack."
+      },
+      {
+        q: "When does the 12-month defects liability period start?",
+        a: "The defects liability period normally starts at practical completion / handover, so get the start date in writing on the completion document. During the DLP - typically twelve months - the contractor must fix defects arising from their work at no cost. Holding a 5 to 10 percent retention until snagging is cleared and keeping the warranty terms on file are what let you enforce it."
+      },
+      {
+        q: "How do I make sure the contractor actually hands over all the paperwork?",
+        a: "List the handover documents as contract deliverables and make release of the final payment and the retention conditional on receiving them, along with a cleared snag list. Your leverage drops sharply once the final payment clears, so collect and check the pack at handover, before you pay the balance."
+      }
+    ]
+  },
+  {
+    slug: "contractor-abandoned-project-dubai",
+    title: "Your Contractor Abandoned the Renovation in Dubai: What to Do Now (2026)",
+    description:
+      "A calm, step-by-step plan when a Dubai contractor walks off mid-project: securing the site, documenting the state, replacing the contractor, and claiming what you can.",
+    updated: "2026-07-29",
+    readMinutes: 11,
+    category: "Problems & Rights",
+    officialLinks: [
+      { label: "File a consumer complaint - Dubai Consumer (DET)", href: "https://consumerrights.ae/", note: "Free · hotline 600 545 555 · for licensed-company disputes" },
+      { label: "Report fraud - Dubai Police eCrime", href: "https://www.dubaipolice.gov.ae/", note: "If money was taken with no intent to perform · non-emergency 901" },
+      { label: "Ministry of Economy - consumer protection", href: "https://www.moec.gov.ae/", note: "National consumer protection line 8001222" },
+      { label: "Verify a trade licence - Invest in Dubai", href: "https://invest.dubai.ae/", note: "Confirm the contractor's licence status and legal entity" },
+    ],
+    intro: [
+      "Few things in a renovation are as stressful as the moment you realise the contractor is not coming back. The workers stop showing up, messages go unanswered, and your home sits half-finished with tools, materials and open services exposed. It feels like a disaster, and financially it can be a serious one - but panicking or acting rashly usually makes it worse. What you need in the first week is a calm, ordered sequence: secure, document, formalise, then replace and claim.",
+      "This guide walks through exactly that sequence for Dubai, in the order that protects your money and your legal position. The single biggest factor in how well owners recover is whether they had a written contract, staged payments and photo documentation before things went wrong - and, failing that, how carefully they document from the moment of abandonment onward. This is general information, not legal advice; for significant sums, take proper advice on your specific situation."
+    ],
+    sections: [
+      {
+        h2: "First: secure the site and stop the bleeding",
+        paragraphs: [
+          "Before anything else, protect your property. If the contractor has abandoned the site, change the locks or the access code so no one can remove materials or tools you have already paid for, and notify your building management in writing that the contractor is off site so their access permissions can be revoked. If services are exposed - open plumbing, disconnected electrics, an uncovered wet area - get them made safe, using a separate licensed tradesperson if necessary, and keep those invoices.",
+          "At the same time, freeze payments. Do not pay any further instalment, and certainly do not respond to a demand for more money to restart - a contractor who has abandoned a job and then asks for payment to return is not negotiating in good faith. If you keep the upfront deposit to 20 to 30 percent and pay only for completed milestones, this is the moment that discipline pays off, because your exposure is limited to work actually done plus whatever sits ahead of the payments you made."
+        ],
+        list: [
+          "Change locks or access codes to secure materials and tools",
+          "Notify building management in writing to revoke contractor access",
+          "Make exposed services safe via a licensed tradesperson if needed",
+          "Stop all further payments immediately",
+          "Do not pay a demand for more money to restart the job"
+        ]
+      },
+      {
+        h2: "Document the exact state of the work",
+        paragraphs: [
+          "Your recovery will rise or fall on evidence, so document the site thoroughly the moment you conclude it has been abandoned. Photograph and video every room, every unfinished element and every visible defect, with timestamps. Write down the date you last saw the contractor on site, the date of your last contact, and what was and was not complete against the scope of work and payment schedule in your contract. This snapshot is what tells everyone - a replacement contractor, DET, a court - what you actually received for what you paid.",
+          "Then reconcile the money. Lay your payment schedule next to what has genuinely been completed and calculate the gap: how much you have paid versus the value of work in place. That single figure is the heart of any claim. Pull together your written contract, all payment records, your variation log if you kept one, and every message showing the contractor going silent or refusing to return. Organised evidence is what turns a grievance into a claim someone can act on."
+        ],
+        list: [
+          "Photograph and video every room and unfinished element with dates",
+          "Record last-on-site and last-contact dates",
+          "Map completed work against the contract scope and milestones",
+          "Calculate paid-versus-value-in-place - your core claim figure",
+          "Gather contract, payment records, variation log and all messages"
+        ]
+      },
+      {
+        h2: "Send a formal notice - and know which channel fits",
+        paragraphs: [
+          "Even at this stage, send a formal written notice giving the contractor a short, reasonable deadline to return and complete, and stating that failing that you will treat the contract as terminated and pursue costs. Send it by WhatsApp and email for dual timestamps. Sometimes this alone brings a stalling contractor back; more often it becomes the document that shows every subsequent channel you attempted resolution first, which regulators and courts expect to see.",
+          "Which official channel fits depends on the facts. If the contractor is a licensed company that has genuinely underperformed or abandoned the job, this is a consumer and contractual dispute for Dubai Consumer (DET), the free channel on the hotline 600 545 555, with the Ministry of Economy's national line 8001222 as a further consumer route. If, however, money was taken with no genuine intention to perform - a deposit collected and the company vanished - that has a criminal dimension and can be reported to Dubai Police via eCrime or the non-emergency line 901. The two are not mutually exclusive."
+        ],
+        table: {
+          headers: ["Situation", "Primary channel", "Note"],
+          rows: [
+            ["Licensed company underperformed / abandoned", "Dubai Consumer (DET) 600 545 555", "Consumer and contractual dispute"],
+            ["Deposit taken, company vanished / not real", "Dubai Police eCrime / 901", "Possible criminal fraud dimension"],
+            ["National consumer escalation", "Ministry of Economy 8001222", "Additional consumer protection route"],
+            ["Large sums / complex claim", "Civil court with legal advice", "For recovering costs beyond mediation"]
+          ]
+        }
+      },
+      {
+        h2: "Replace the contractor without losing your position",
+        paragraphs: [
+          "You will usually need a new contractor to finish, but bring one in the right way so you do not weaken any claim. First, make sure the original contract is properly terminated in writing after your deadline passes, so there is no argument that you locked out a contractor who was entitled to return. Then have your replacement contractor prepare an independent, written assessment and quote for completing and correcting the work - this document both gets you finished and quantifies the cost of the abandonment for any claim.",
+          "Verify the new contractor's licence and classification before you engage them - do not compound the problem by rushing into another unverified relationship. Re-scope the remaining work clearly, and contract on the same disciplined terms: written scope, staged milestone payments, a 20 to 30 percent maximum deposit, written variation orders and a 5 to 10 percent retention. The completion quote from the new contractor, set against what you paid the original one, is often the cleanest evidence of your loss."
+        ],
+        list: [
+          "Terminate the original contract in writing after the deadline passes",
+          "Get a written completion-and-correction assessment from the new contractor",
+          "Verify the replacement contractor's licence before engaging",
+          "Re-contract on staged payments, retention and written variations",
+          "Keep the new quote as evidence of the cost of abandonment"
+        ]
+      },
+      {
+        h2: "What you can realistically recover",
+        paragraphs: [
+          "Be realistic about outcomes. Where the contractor is a licensed, solvent company, the DET consumer process and, if needed, a civil claim can pursue the gap between what you paid and the value of work delivered, plus reasonable additional costs of completing the work. Strong evidence - contract, payments, dated photos, the replacement quote - materially improves your position, which is exactly why the documentation step is not optional.",
+          "Where the operation was never a real licensed entity, or has genuinely disappeared, recovery is harder and the criminal route through Dubai Police becomes more relevant than a civil claim against a company that cannot be found. This is the scenario the house rules are designed to prevent in the first place: verifying the licence before paying, capping the deposit, and paying only for completed milestones limit how much any single bad actor can take. This guide is general information only - for a significant loss, seek advice suited to your specific circumstances before choosing a route."
+        ]
+      }
+    ],
+    faqs: [
+      {
+        q: "My contractor stopped coming to site in Dubai. What is the first thing I should do?",
+        a: "Secure the site and stop paying. Change the locks or access code so materials and tools you paid for cannot be removed, tell building management in writing to revoke the contractor's access, make any exposed services safe through a licensed tradesperson, and halt all further payments. Do not pay a demand for more money to restart. Then document the exact state of the work with dated photos before anything else changes."
+      },
+      {
+        q: "Can I get my money back if a contractor abandons the job?",
+        a: "It depends on whether the contractor is a real licensed company. If so, Dubai Consumer (DET) on 600 545 555 and, for larger sums, a civil claim can pursue the gap between what you paid and the value of completed work plus reasonable completion costs - strong evidence helps a lot. If the operation was never licensed or has vanished, recovery is harder and Dubai Police eCrime / 901 becomes the relevant route. This is general information, not legal advice."
+      },
+      {
+        q: "Should I report an abandoned renovation to Dubai Police or to consumer protection?",
+        a: "If a licensed company underperformed or walked off a job, it is primarily a consumer and contractual dispute for Dubai Consumer (DET) 600 545 555, with the Ministry of Economy line 8001222 as a further route. If money was taken with no genuine intention to perform - a deposit collected and the company disappeared - that has a criminal dimension you can report to Dubai Police via eCrime or 901. The two channels are not mutually exclusive."
+      },
+      {
+        q: "Can I just hire a new contractor to finish the work?",
+        a: "Yes, but do it carefully. Terminate the original contract in writing after your deadline passes so there is no dispute about locking out a contractor entitled to return, get a written completion-and-correction assessment from the new contractor (which also quantifies your loss), verify the new contractor's licence before engaging, and re-contract on staged payments, a capped deposit, written variations and a retention."
+      }
+    ]
   }
 ];
