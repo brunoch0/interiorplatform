@@ -24,6 +24,8 @@ export type Company = {
   // Public Google Maps rating (displayed with "Google" attribution, refreshed monthly)
   googleRating?: number | null;
   googleRatingCount?: number | null;
+  placeId?: string | null;
+  photoPath?: string | null;
 };
 
 const curatedCompanies: Company[] = [

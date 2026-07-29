@@ -5,7 +5,7 @@ import { fmt, getCompany, reviews } from "@/lib/data";
 import { fetchCompanyById } from "@/lib/db";
 import { SITE_URL } from "@/lib/site";
 import ShareButtons from "@/components/share-buttons";
-import { GoogleRating } from "@/app/companies/companies-browser";
+import { GoogleRating, companyPhotoUrl, mapsUrl } from "@/app/companies/companies-browser";
 import { Badge, BackLink, Card, MetricValue, Notice, Placeholder } from "@/components/ui";
 
 async function loadCompany(id: string) {
@@ -61,8 +61,13 @@ export default async function CompanyDetail({ params }: { params: Promise<{ id: 
       <Card className="mb-6">
         <div className="flex flex-wrap items-start justify-between gap-6">
           <div className="flex gap-5">
-            <div className="w-24 shrink-0">
-              <Placeholder label="" ratio="aspect-square" hue={200} />
+            <div className="w-24 shrink-0 overflow-hidden rounded-xl">
+              {c.photoPath ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={companyPhotoUrl(c.photoPath)} alt={c.name} className="aspect-square w-full object-cover" />
+              ) : (
+                <Placeholder label="" ratio="aspect-square" hue={200} />
+              )}
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2">
@@ -74,7 +79,10 @@ export default async function CompanyDetail({ params }: { params: Promise<{ id: 
               </div>
               <p className="mt-1 text-sm text-gray-400">{c.legalName} · {c.area} · Typical budget {c.priceRange}</p>
               {c.googleRating != null && c.googleRatingCount != null && (
-                <p className="mt-1.5"><GoogleRating rating={c.googleRating} count={c.googleRatingCount} size="lg" /></p>
+                <p className="mt-1.5">
+                  <GoogleRating rating={c.googleRating} count={c.googleRatingCount} size="lg"
+                    href={c.placeId ? mapsUrl(c.name, c.placeId) : undefined} />
+                </p>
               )}
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {c.categories.map((cat) => (

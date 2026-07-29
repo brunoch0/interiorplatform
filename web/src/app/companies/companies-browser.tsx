@@ -10,14 +10,28 @@ import { Badge, Card, MetricValue, PageHeader, Placeholder } from "@/components/
 const PAGE = 30;
 const spaceTypeOptions = ["Apartment", "Villa", "Commercial"];
 
-export function GoogleRating({ rating, count, size = "sm" }: { rating: number; count: number; size?: "sm" | "lg" }) {
-  return (
-    <span className={`inline-flex items-center gap-1.5 ${size === "lg" ? "text-sm" : "text-xs"}`}>
+export const companyPhotoUrl = (path: string) =>
+  `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/projects/${path}`;
+
+export const mapsUrl = (name: string, placeId: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}&query_place_id=${placeId}`;
+
+export function GoogleRating({ rating, count, size = "sm", href }: { rating: number; count: number; size?: "sm" | "lg"; href?: string }) {
+  const inner = (
+    <>
       <Star className={`${size === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"} fill-amber-400 text-amber-400`} strokeWidth={1.5} />
       <b className="font-mono text-charcoal">{rating.toFixed(1)}</b>
       <span className="text-gray-400">({fmt(count)} review{count === 1 ? "" : "s"} on Google)</span>
-    </span>
+    </>
   );
+  const cls = `inline-flex items-center gap-1.5 ${size === "lg" ? "text-sm" : "text-xs"}`;
+  if (href)
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={`${cls} hover:underline`} onClick={(e) => e.stopPropagation()}>
+        {inner}
+      </a>
+    );
+  return <span className={cls}>{inner}</span>;
 }
 
 export default function CompaniesBrowser({ companies }: { companies: Company[] }) {
@@ -159,8 +173,13 @@ export default function CompaniesBrowser({ companies }: { companies: Company[] }
         {visible.map((c, i) => (
           <Card key={c.id} className="relative">
             <div className="flex gap-4">
-              <div className="w-24 shrink-0">
-                <Placeholder label="" ratio="aspect-square" hue={i} />
+              <div className="w-24 shrink-0 overflow-hidden rounded-xl">
+                {c.photoPath ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={companyPhotoUrl(c.photoPath)} alt={c.name} loading="lazy" className="aspect-square w-full object-cover" />
+                ) : (
+                  <Placeholder label="" ratio="aspect-square" hue={i} />
+                )}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
@@ -171,7 +190,8 @@ export default function CompaniesBrowser({ companies }: { companies: Company[] }
                 </div>
                 <p className="mt-1 text-xs text-gray-400">
                   {c.googleRating != null && c.googleRatingCount != null ? (
-                    <GoogleRating rating={c.googleRating} count={c.googleRatingCount} />
+                    <GoogleRating rating={c.googleRating} count={c.googleRatingCount}
+                      href={c.placeId ? mapsUrl(c.name, c.placeId) : undefined} />
                   ) : (
                     <span>{c.area} · Licensed interior company</span>
                   )}

@@ -28,6 +28,8 @@ type Row = {
   portfolio_verified: boolean;
   google_rating: number | null;
   google_rating_count: number | null;
+  place_id: string | null;
+  photo_path: string | null;
 };
 
 function toCompany(r: Row): Company {
@@ -54,11 +56,13 @@ function toCompany(r: Row): Company {
     portfolioVerified: r.portfolio_verified,
     googleRating: r.google_rating,
     googleRatingCount: r.google_rating_count,
+    placeId: r.place_id,
+    photoPath: r.photo_path,
   };
 }
 
 const COLS =
-  "id,name,area,categories,space_types,website,verified,price_range,intro,schedule_compliance_rate,no_extra_charge_rate,verified_review_count,avg_approval_weeks,portfolio_count,exposure_package,license_expiry,contact_verified,portfolio_verified,google_rating,google_rating_count";
+  "id,name,area,categories,space_types,website,verified,price_range,intro,schedule_compliance_rate,no_extra_charge_rate,verified_review_count,avg_approval_weeks,portfolio_count,exposure_package,license_expiry,contact_verified,portfolio_verified,google_rating,google_rating_count,place_id,photo_path";
 
 export async function fetchCompanies(): Promise<Company[]> {
   const { data, error } = await supabase
