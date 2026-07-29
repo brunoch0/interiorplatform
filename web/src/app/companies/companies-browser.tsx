@@ -5,16 +5,11 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import type { Company } from "@/lib/data";
 import { fmt } from "@/lib/data";
+import { companyPhotoUrl, mapsUrl } from "@/lib/site";
 import { Badge, Card, MetricValue, PageHeader, Placeholder } from "@/components/ui";
 
 const PAGE = 30;
 const spaceTypeOptions = ["Apartment", "Villa", "Commercial"];
-
-export const companyPhotoUrl = (path: string) =>
-  `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/projects/${path}`;
-
-export const mapsUrl = (name: string, placeId: string) =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}&query_place_id=${placeId}`;
 
 export function GoogleRating({ rating, count, size = "sm", href }: { rating: number; count: number; size?: "sm" | "lg"; href?: string }) {
   const inner = (

@@ -1,5 +1,12 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://interiorplatform.vercel.app";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://onepassinterior.com";
 export const SITE_NAME = "Dubai Interior";
+
+// Shared with both server and client components — keep free of client-only imports
+export const companyPhotoUrl = (path: string) =>
+  `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/projects/${path}`;
+
+export const mapsUrl = (name: string, placeId: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}&query_place_id=${placeId}`;
 
 export function areaSlug(area: string) {
   return area.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");

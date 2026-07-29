@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { fmt, getCompany, reviews } from "@/lib/data";
 import { fetchCompanyById } from "@/lib/db";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, companyPhotoUrl, mapsUrl } from "@/lib/site";
 import ShareButtons from "@/components/share-buttons";
-import { GoogleRating, companyPhotoUrl, mapsUrl } from "@/app/companies/companies-browser";
+import { GoogleRating } from "@/app/companies/companies-browser";
 import { Badge, BackLink, Card, MetricValue, Notice, Placeholder } from "@/components/ui";
 
 async function loadCompany(id: string) {
