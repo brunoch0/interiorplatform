@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { LogOut, UserRound } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import { supabaseBrowser } from "@/lib/supabase-browser";
+import { grantAdminCookie } from "@/app/admin-grant";
 
 export default function AuthButton() {
   const [user, setUser] = useState<User | null>(null);
@@ -14,9 +15,12 @@ export default function AuthButton() {
     supabaseBrowser.auth.getSession().then(({ data }) => {
       setUser(data.session?.user ?? null);
       setReady(true);
+      // Super admins (ADMIN_EMAILS) get the ops_key cookie on sign-in — /admin just works
+      if (data.session?.access_token) void grantAdminCookie(data.session.access_token);
     });
     const { data: sub } = supabaseBrowser.auth.onAuthStateChange((_e, session) => {
       setUser(session?.user ?? null);
+      if (session?.access_token) void grantAdminCookie(session.access_token);
     });
     return () => sub.subscription.unsubscribe();
   }, []);
