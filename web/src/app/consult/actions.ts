@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { trySubscribe } from "@/lib/subscribe";
+import { parseAttribution } from "@/lib/attribution-server";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -24,6 +25,7 @@ export type Brief = {
 export type ConsultResult = { ok: true; ref: string } | { ok: false; error: string };
 
 export async function submitConsultation(payload: {
+  attribution?: string;
   name: string;
   phone: string;
   email: string;
@@ -58,6 +60,7 @@ export async function submitConsultation(payload: {
     : [];
 
   const { error } = await supabase.from("quote_requests").insert({
+    attribution: parseAttribution(payload.attribution),
     id,
     ref,
     type: "consultation",

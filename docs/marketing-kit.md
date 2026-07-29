@@ -55,14 +55,14 @@
 > Your company is already listed on our directory — we aggregate all 649 licensed fit-out companies in Dubai, and homeowners are now posting renovation briefs through the platform.
 >
 > Two things, both free right now:
-> 1) There are open project briefs you can quote on: https://onepassinterior.com/requests
-> 2) You can claim your profile (takes 5 min, needs your trade licence) — verified companies rank first and get leads passed directly: https://onepassinterior.com/supplier/license
+> 1) There are open project briefs you can quote on: https://onepassinterior.com/requests?utm_source=whatsapp&utm_medium=outreach&utm_campaign=contractor_outreach_2026q3&utm_content=open_board
+> 2) You can claim your profile (takes 5 min, needs your trade licence) — verified companies rank first and get leads passed directly: https://onepassinterior.com/supplier/license?utm_source=whatsapp&utm_medium=outreach&utm_campaign=contractor_outreach_2026q3&utm_content=claim_cta
 >
 > Worth a look? Happy to walk you through it on a quick call.
 
 ### B-2. 팔로업 (48시간 무응답 시)
 
-> Hi [Name], quick follow-up — we also give every listed company a free project showcase page (like a blog post of your best work, photos + story, ranks on Google under your company name): https://onepassinterior.com/supplier/showcase
+> Hi [Name], quick follow-up — we also give every listed company a free project showcase page (like a blog post of your best work, photos + story, ranks on Google under your company name): https://onepassinterior.com/supplier/showcase?utm_source=whatsapp&utm_medium=outreach&utm_campaign=contractor_outreach_2026q3&utm_content=showcase_cta
 >
 > No catch during early access. If renovation leads aren't a priority right now, just say so and I won't follow up again.
 
@@ -114,7 +114,7 @@
 
 > Thanks for your quote on [REF] — passed it to the homeowner along with 2 other quotes; they're comparing this week. I'll come back to you either way.
 >
-> Meanwhile — you're not verified yet, and verified companies' quotes get presented first. Takes 5 minutes with your trade licence: https://onepassinterior.com/supplier/license
+> Meanwhile — you're not verified yet, and verified companies' quotes get presented first. Takes 5 minutes with your trade licence: https://onepassinterior.com/supplier/license?utm_source=whatsapp&utm_medium=outreach&utm_campaign=contractor_outreach_2026q3&utm_content=claim_cta
 
 **3~4일 후 클로징 (어느 쪽이든 정직하게 종결):**
 

@@ -2,24 +2,31 @@
 
 import { useState } from "react";
 import { Check, Link2, MessageCircle, Share2 } from "lucide-react";
-import { SITE_URL } from "@/lib/site";
+import { withUtm } from "@/lib/site";
+import { track } from "@/components/analytics";
 
 export default function ShareButtons({ title, path, compact = false }: { title: string; path: string; compact?: boolean }) {
   const [copied, setCopied] = useState(false);
-  // SITE_URL on both server and client — window.origin here caused hydration mismatches
-  const shareUrl = `${SITE_URL}${path}?utm_source=share&utm_medium=whatsapp`;
-  const copyUrl = `${SITE_URL}${path}?utm_source=share&utm_medium=link`;
+  // withUtm keeps SITE_URL on both server and client — window.origin caused hydration mismatches
+  const surface = path.split("/").filter(Boolean)[0] ?? "home";
+  const shareUrl = withUtm(path, { source: "share", medium: "whatsapp", content: surface });
+  const copyUrl = withUtm(path, { source: "share", medium: "link", content: surface });
+  const nativeUrl = withUtm(path, { source: "share", medium: "native", content: surface });
   const message = `${title} — verified listing on Dubai Interior\n${shareUrl}`;
 
   const copy = async () => {
     await navigator.clipboard.writeText(copyUrl);
+    track("share", { method: "copy_link", content_type: surface, item_id: path });
     setCopied(true);
     setTimeout(() => setCopied(false), 1600);
   };
 
   const nativeShare = async () => {
     if (navigator.share) {
-      try { await navigator.share({ title, url: shareUrl }); } catch { /* dismissed */ }
+      try {
+        await navigator.share({ title, url: nativeUrl });
+        track("share", { method: "native", content_type: surface, item_id: path });
+      } catch { /* dismissed */ }
     } else copy();
   };
 
@@ -29,6 +36,7 @@ export default function ShareButtons({ title, path, compact = false }: { title: 
         href={`https://wa.me/?text=${encodeURIComponent(message)}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => track("share", { method: "whatsapp", content_type: surface, item_id: path })}
         className={`inline-flex items-center gap-2 rounded-xl bg-[#25D366] font-bold text-white transition hover:brightness-95 ${compact ? "px-3 py-2 text-xs" : "px-5 py-2.5 text-sm"}`}
       >
         <MessageCircle className={compact ? "h-3.5 w-3.5" : "h-4 w-4"} strokeWidth={2} />

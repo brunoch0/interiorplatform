@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { trySubscribe } from "@/lib/subscribe";
+import { parseAttribution } from "@/lib/attribution-server";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -11,6 +12,7 @@ const supabase = createClient(
 export type ClaimResult = { ok: true } | { ok: false; error: string };
 
 export async function submitClaim(payload: {
+  attribution?: string;
   companyId: string | null;
   companyName: string;
   contactName: string;
@@ -27,6 +29,7 @@ export async function submitClaim(payload: {
   if (!payload.tradeLicensePath) return { ok: false, error: "Trade license upload is required." };
 
   const { error } = await supabase.from("claims").insert({
+    attribution: parseAttribution(payload.attribution),
     company_id: payload.companyId,
     company_name_submitted: payload.companyName || null,
     contact_name: payload.contactName.trim().slice(0, 120),

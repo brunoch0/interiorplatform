@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { captureAttribution } from "@/lib/attribution";
 
 export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
@@ -22,6 +23,7 @@ export default function PageViewTracker() {
   const search = useSearchParams();
 
   useEffect(() => {
+    captureAttribution(); // must run even when GA is disabled (dev/preview)
     if (!GA_ID) return;
     const qs = search.toString();
     track("page_view", {

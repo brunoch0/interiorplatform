@@ -6,6 +6,7 @@ import { CheckCircle2, FileUp, X } from "lucide-react";
 import { supabaseBrowser } from "@/lib/supabase-browser";
 import { Badge, Card, Notice, PageHeader, Steps } from "@/components/ui";
 import { submitClaim } from "./actions";
+import { readAttribution } from "@/lib/attribution";
 
 type CompanyOpt = { id: string; name: string; area: string; verified: boolean };
 
@@ -77,6 +78,7 @@ export default function ClaimForm({ companies }: { companies: CompanyOpt[] }) {
           licenseNumber,
           licenseExpiry: licenseExpiry || null,
           newsletter,
+          attribution: readAttribution() ?? undefined,
         });
         if (res.ok) {
           track("licence_claim_submitted");

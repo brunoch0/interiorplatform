@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { trySubscribe } from "@/lib/subscribe";
+import { parseAttribution } from "@/lib/attribution-server";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -11,6 +12,7 @@ const supabase = createClient(
 export type BidResult = { ok: true } | { ok: false; error: string };
 
 export async function submitBid(payload: {
+  attribution?: string;
   requestId: string;
   companyId: string | null;
   companyName: string;
@@ -29,6 +31,7 @@ export async function submitBid(payload: {
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.email)) return { ok: false, error: "A valid email is required — the homeowner's reply comes through us to this address." };
 
   const { error } = await supabase.from("quote_bids").insert({
+    attribution: parseAttribution(payload.attribution),
     request_id: payload.requestId,
     company_id: payload.companyId && /^[0-9a-f-]{36}$/.test(payload.companyId) ? payload.companyId : null,
     company_name: payload.companyName.trim().slice(0, 120),

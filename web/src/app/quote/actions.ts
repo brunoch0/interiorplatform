@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { trySubscribe } from "@/lib/subscribe";
+import { parseAttribution } from "@/lib/attribution-server";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -58,6 +59,7 @@ export async function submitQuoteRequest(formData: FormData, accessToken?: strin
     details: details || null,
     is_public: formData.get("isPublic") != null,
     user_id: userId,
+    attribution: parseAttribution(String(formData.get("attribution") ?? "")),
   });
 
   if (error) {

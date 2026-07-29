@@ -42,7 +42,7 @@ Painting and flooring only need your building's NOC. But the moment a wall moves
 
 Here's the part that catches people out: you cannot apply for the permit yourself. Only a contractor whose trade licence covers the work can file it. A firm without the right licence either works without a permit or borrows someone else's — and both leave you holding the risk.
 
-Full breakdown, including the NOC process and what a completion certificate is for → onepassinterior.com/guides/dubai-renovation-permits-dm-approval-noc
+Full breakdown, including the NOC process and what a completion certificate is for → onepassinterior.com/guides/dubai-renovation-permits-dm-approval-noc?utm_source=instagram&utm_medium=social&utm_campaign=content_lab&utm_content=permits_reel
 
 #dubaiinterior #dubairenovation #dubaihomes #dxbhomes #dubaiapartment #dubaifitout #dubairealestate #interiordesigndubai #dubailife #dubaiexpats #renovationdubai #dubaimarina #jvcdubai #businessbaydubai #mydubai
 ```

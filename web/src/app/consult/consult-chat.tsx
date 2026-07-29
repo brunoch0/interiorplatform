@@ -7,6 +7,7 @@ import { CheckCircle2, ImagePlus, MessageCircle, Send, Sparkles, X } from "lucid
 import { supabaseBrowser } from "@/lib/supabase-browser";
 import { Card, Notice } from "@/components/ui";
 import { submitConsultation, type Brief } from "./actions";
+import { readAttribution } from "@/lib/attribution";
 
 type Msg = { role: "user" | "assistant"; content: string; images?: string[] };
 
@@ -123,6 +124,7 @@ export default function ConsultChat() {
         newsletter: formData.get("newsletter") != null,
         brief,
         transcript: messages,
+        attribution: readAttribution() ?? undefined,
       });
       if (res.ok) {
         if (res.ref !== "CR-OK") track("generate_lead", { form: "ai_consult" });

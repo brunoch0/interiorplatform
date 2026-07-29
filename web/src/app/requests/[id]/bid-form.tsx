@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CheckCircle2, X } from "lucide-react";
 import { Card, Notice } from "@/components/ui";
 import { submitBid } from "./actions";
+import { readAttribution } from "@/lib/attribution";
 
 type CompanyOpt = { id: string; name: string; area: string };
 
@@ -39,6 +40,7 @@ export default function BidForm({ requestId, companies }: { requestId: string; c
         message: String(formData.get("message") ?? ""),
         newsletter: formData.get("newsletter") != null,
         honeypot: String(formData.get("company_website") ?? ""),
+        attribution: readAttribution() ?? undefined,
       });
       if (res.ok) {
         track("bid_submitted");

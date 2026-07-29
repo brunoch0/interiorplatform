@@ -12,6 +12,23 @@ export function areaSlug(area: string) {
   return area.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+/**
+ * Tag an internal path for attribution. Every outbound/shared link should go
+ * through this so GA4 never reports a viral click as (direct)/(none).
+ */
+export function withUtm(
+  path: string,
+  { source, medium, campaign = "viral_share", content }: { source: string; medium: string; campaign?: string; content?: string },
+) {
+  const [base, existing] = path.split("?");
+  const qs = new URLSearchParams(existing);
+  qs.set("utm_source", source);
+  qs.set("utm_medium", medium);
+  qs.set("utm_campaign", campaign);
+  if (content) qs.set("utm_content", content);
+  return `${SITE_URL}${base}?${qs.toString()}`;
+}
+
 export function whatsappShareUrl(text: string) {
   return `https://wa.me/?text=${encodeURIComponent(text)}`;
 }

@@ -8,6 +8,7 @@ import type { Company } from "@/lib/data";
 import { Card, Notice, PageHeader } from "@/components/ui";
 import { supabaseBrowser } from "@/lib/supabase-browser";
 import { submitQuoteRequest } from "./actions";
+import { readAttribution } from "@/lib/attribution";
 
 const spaceTypes = ["Apartment", "Villa", "Commercial", "Not sure yet"];
 const budgets = ["Under AED 50K", "AED 50K–100K", "AED 100K–200K", "AED 200K–500K", "AED 500K+"];
@@ -34,6 +35,7 @@ export default function QuoteForm({ companies, preselected }: { companies: Compa
 
   const submit = (formData: FormData) => {
     formData.set("companyIds", targets.join(","));
+    formData.set("attribution", readAttribution() ?? "");
     setError(null);
     startTransition(async () => {
       const { data: sess } = await supabaseBrowser.auth.getSession();
