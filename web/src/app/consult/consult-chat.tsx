@@ -110,7 +110,9 @@ export default function ConsultChat() {
   const submit = (formData: FormData) => {
     setError(null);
     startTransition(async () => {
+      const { data: sess } = await supabaseBrowser.auth.getSession();
       const res = await submitConsultation({
+        accessToken: sess.session?.access_token,
         name: String(formData.get("name") ?? ""),
         phone: String(formData.get("phone") ?? ""),
         email: String(formData.get("email") ?? ""),

@@ -10,7 +10,7 @@ const supabase = createClient(
 
 export type SubmitResult = { ok: true; ref: string } | { ok: false; error: string };
 
-export async function submitQuoteRequest(formData: FormData): Promise<SubmitResult> {
+export async function submitQuoteRequest(formData: FormData, accessToken?: string): Promise<SubmitResult> {
   const name = String(formData.get("name") ?? "").trim();
   const phone = String(formData.get("phone") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
@@ -34,6 +34,13 @@ export async function submitQuoteRequest(formData: FormData): Promise<SubmitResu
   if (!name) return { ok: false, error: "Please enter your name." };
   if (!phone && !email) return { ok: false, error: "Please provide a phone number or email so contractors can reach you." };
 
+  // Verify the token server-side — the uid is derived, never trusted from the client
+  let userId: string | null = null;
+  if (accessToken) {
+    const { data } = await supabase.auth.getUser(accessToken);
+    userId = data.user?.id ?? null;
+  }
+
   // Pre-generate id/ref so no SELECT-after-INSERT is needed (anon has insert-only access)
   const id = crypto.randomUUID();
   const ref = `QR-${new Date().toISOString().slice(2, 10).replace(/-/g, "")}-${id.slice(0, 4).toUpperCase()}`;
@@ -50,6 +57,7 @@ export async function submitQuoteRequest(formData: FormData): Promise<SubmitResu
     timeline: String(formData.get("timeline") ?? "") || null,
     details: details || null,
     is_public: formData.get("isPublic") != null,
+    user_id: userId,
   });
 
   if (error) {

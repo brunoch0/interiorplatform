@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LogOut } from "lucide-react";
+import { LogOut, UserRound } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import { supabaseBrowser } from "@/lib/supabase-browser";
 
@@ -67,6 +67,9 @@ export default function AuthButton() {
       {menuOpen && (
         <div className="absolute right-0 top-11 z-50 w-56 rounded-xl border border-gray-200 bg-cream p-2 shadow-md">
           <p className="truncate px-3 py-2 text-xs text-gray-400">{user.email}</p>
+          <a href="/account" className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-semibold text-charcoal hover:bg-gray-100">
+            <UserRound className="h-4 w-4" /> My page
+          </a>
           <button
             onClick={signOut}
             className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-gray-600 hover:bg-gray-100"

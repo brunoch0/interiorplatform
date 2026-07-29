@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MailCheck, Search } from "lucide-react";
 import type { Company } from "@/lib/data";
 import { Card, Notice, PageHeader } from "@/components/ui";
+import { supabaseBrowser } from "@/lib/supabase-browser";
 import { submitQuoteRequest } from "./actions";
 
 const spaceTypes = ["Apartment", "Villa", "Commercial", "Not sure yet"];
@@ -34,7 +35,8 @@ export default function QuoteForm({ companies, preselected }: { companies: Compa
     formData.set("companyIds", targets.join(","));
     setError(null);
     startTransition(async () => {
-      const res = await submitQuoteRequest(formData);
+      const { data: sess } = await supabaseBrowser.auth.getSession();
+      const res = await submitQuoteRequest(formData, sess.session?.access_token);
       if (res.ok) setRef(res.ref);
       else setError(res.error);
     });

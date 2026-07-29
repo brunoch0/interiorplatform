@@ -30,6 +30,7 @@ export async function submitConsultation(payload: {
   honeypot: string;
   isPublic: boolean;
   newsletter: boolean;
+  accessToken?: string;
   brief: Brief | null;
   transcript: { role: string; content: string; images?: string[] }[];
 }): Promise<ConsultResult> {
@@ -40,6 +41,13 @@ export async function submitConsultation(payload: {
   const email = payload.email.trim();
   if (!name) return { ok: false, error: "Please enter your name." };
   if (!phone && !email) return { ok: false, error: "Please add a WhatsApp number or email so we can reach you." };
+
+  // Verify the token server-side — the uid is derived, never trusted from the client
+  let userId: string | null = null;
+  if (payload.accessToken) {
+    const { data } = await supabase.auth.getUser(payload.accessToken);
+    userId = data.user?.id ?? null;
+  }
 
   const id = crypto.randomUUID();
   const ref = `CR-${new Date().toISOString().slice(2, 10).replace(/-/g, "")}-${id.slice(0, 4).toUpperCase()}`;
@@ -61,6 +69,7 @@ export async function submitConsultation(payload: {
     timeline: b?.timeline || null,
     details: detailsParts.filter(Boolean).join("\n") || null,
     is_public: payload.isPublic,
+    user_id: userId,
     brief: b ?? null,
     transcript: payload.transcript.slice(0, 24).map((m) => ({
       role: m.role,
