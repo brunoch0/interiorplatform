@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { guides } from "@/lib/guides";
+import { guideImage } from "@/lib/guide-images";
 import { SITE_URL } from "@/lib/site";
 import ShareButtons from "@/components/share-buttons";
 import EmailCapture from "@/components/email-capture";
@@ -19,7 +20,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: g.title,
     description: g.description,
     alternates: { canonical: `${SITE_URL}/guides/${g.slug}` },
-    openGraph: { title: g.title, description: g.description, url: `${SITE_URL}/guides/${g.slug}`, type: "article" },
+    openGraph: {
+      title: g.title,
+      description: g.description,
+      url: `${SITE_URL}/guides/${g.slug}`,
+      type: "article",
+      images: [{ url: guideImage(g.slug, g.category, 1200), width: 1200, height: 675 }],
+    },
   };
 }
 
@@ -60,6 +67,13 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         <span>{g.readMinutes} min read</span>·<span>Updated {g.updated}</span>
         <span className="ml-auto"><ShareButtons title={g.title} path={`/guides/${g.slug}`} compact /></span>
       </div>
+
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={guideImage(g.slug, g.category, 1400)}
+        alt={g.title}
+        className="mt-6 aspect-[21/9] w-full rounded-2xl object-cover"
+      />
 
       <div className="mt-8 space-y-4 border-t border-gray-300 pt-8">
         {g.intro.map((p, i) => (

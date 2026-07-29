@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { Check, Link2, MessageCircle, Share2 } from "lucide-react";
+import { SITE_URL } from "@/lib/site";
 
 export default function ShareButtons({ title, path, compact = false }: { title: string; path: string; compact?: boolean }) {
   const [copied, setCopied] = useState(false);
-  const base = typeof window !== "undefined" ? window.location.origin : "";
-  const shareUrl = `${base}${path}?utm_source=share&utm_medium=whatsapp`;
-  const copyUrl = `${base}${path}?utm_source=share&utm_medium=link`;
+  // SITE_URL on both server and client — window.origin here caused hydration mismatches
+  const shareUrl = `${SITE_URL}${path}?utm_source=share&utm_medium=whatsapp`;
+  const copyUrl = `${SITE_URL}${path}?utm_source=share&utm_medium=link`;
   const message = `${title} — verified listing on Dubai Interior\n${shareUrl}`;
 
   const copy = async () => {

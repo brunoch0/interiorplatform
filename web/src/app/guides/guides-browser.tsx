@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import type { Guide } from "@/lib/guides";
+import { guideImage } from "@/lib/guide-images";
 import { Card } from "@/components/ui";
 
 // Renovation-journey order — mirrors the stages a homeowner moves through
@@ -96,12 +97,21 @@ export default function GuidesBrowser({ guides }: { guides: GuideCard[] }) {
             </div>
             <div className="grid gap-5 md:grid-cols-2">
               {items.map((g) => (
-                <Link key={g.slug} href={`/guides/${g.slug}`}>
-                  <Card className="h-full transition hover:shadow-md">
-                    <p className="text-xs text-gray-400">{g.readMinutes} min read · updated {g.updated}</p>
-                    <h3 className="mt-2 text-lg font-bold leading-snug">{g.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-gray-500">{g.description}</p>
-                    <p className="mt-3 text-sm font-semibold text-terracotta-deep">Read guide →</p>
+                <Link key={g.slug} href={`/guides/${g.slug}`} className="group">
+                  <Card className="h-full overflow-hidden p-0 transition hover:shadow-md">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={guideImage(g.slug, g.category, 640)}
+                      alt=""
+                      loading="lazy"
+                      className="aspect-[16/9] w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                    />
+                    <div className="p-5">
+                      <p className="text-xs text-gray-400">{g.readMinutes} min read · updated {g.updated}</p>
+                      <h3 className="mt-2 text-lg font-bold leading-snug">{g.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-gray-500">{g.description}</p>
+                      <p className="mt-3 text-sm font-semibold text-terracotta-deep">Read guide →</p>
+                    </div>
                   </Card>
                 </Link>
               ))}
