@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { Notice, PageHeader } from "@/components/ui";
 import CompaniesAdmin, { type AdminCompany } from "./companies-admin";
+import ClaimsReview, { type AdminClaim } from "../claims/claims-review";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +28,10 @@ export default async function AdminCompanies({ searchParams }: { searchParams: P
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
-  const { data, error } = await supabase.rpc("admin_list_companies", { p_key: provided });
+  const [{ data, error }, { data: claims }] = await Promise.all([
+    supabase.rpc("admin_list_companies", { p_key: provided }),
+    supabase.rpc("admin_list_claims", { p_key: provided }),
+  ]);
   if (error || !data)
     return (
       <div>
@@ -36,5 +40,16 @@ export default async function AdminCompanies({ searchParams }: { searchParams: P
       </div>
     );
 
-  return <CompaniesAdmin companies={data as AdminCompany[]} adminKey={provided!} />;
+  const claimList = (claims as AdminClaim[] | null) ?? [];
+
+  return (
+    <div>
+      {claimList.length > 0 && (
+        <div className="mb-10">
+          <ClaimsReview claims={claimList} adminKey={provided!} embedded />
+        </div>
+      )}
+      <CompaniesAdmin companies={data as AdminCompany[]} adminKey={provided!} />
+    </div>
+  );
 }

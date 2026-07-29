@@ -22,7 +22,7 @@ export type AdminClaim = {
   created_at: string;
 };
 
-export default function ClaimsReview({ claims: initial, adminKey }: { claims: AdminClaim[]; adminKey: string }) {
+export default function ClaimsReview({ claims: initial, adminKey, embedded = false }: { claims: AdminClaim[]; adminKey: string; embedded?: boolean }) {
   const [claims, setClaims] = useState(initial);
   const [reason, setReason] = useState("");
   const [, startTransition] = useTransition();
@@ -45,11 +45,20 @@ export default function ClaimsReview({ claims: initial, adminKey }: { claims: Ad
 
   return (
     <div>
-      <PageHeader title="Claims" desc={`${pending.length} awaiting verification · approving sets the Verified badge + top ranking`} />
-      <Notice tone="blue">
-        Verify against the official register: National Economic Register (economy.gov.ae) or Invest in Dubai — match
-        legal name, Active status, expiry, and an interior-related activity.
-      </Notice>
+      {embedded ? (
+        <div className="mb-1 flex items-baseline gap-3">
+          <h2 className="text-lg font-bold">Claims{pending.length > 0 && <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 font-mono text-xs text-amber-700">{pending.length} pending</span>}</h2>
+          <span className="text-xs text-gray-400">approve = Verified badge + top ranking · check against Invest in Dubai / NER</span>
+        </div>
+      ) : (
+        <>
+          <PageHeader title="Claims" desc={`${pending.length} awaiting verification · approving sets the Verified badge + top ranking`} />
+          <Notice tone="blue">
+            Verify against the official register: National Economic Register (economy.gov.ae) or Invest in Dubai — match
+            legal name, Active status, expiry, and an interior-related activity.
+          </Notice>
+        </>
+      )}
 
       <div className="mt-6 space-y-4">
         {claims.map((c) => (

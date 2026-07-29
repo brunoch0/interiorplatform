@@ -42,7 +42,7 @@ export default async function AdminHome({ searchParams }: { searchParams: Promis
   const actions = [
     { label: "New leads to follow up", n: d.leads_new, href: "/admin/leads", tone: "bg-terracotta-tint text-terracotta-deep" },
     { label: "Contractor bids to relay", n: d.bids_new, href: "/admin/leads", tone: "bg-sky-50 text-sky-700" },
-    { label: "Claims awaiting verification", n: d.claims_pending, href: "/admin/claims", tone: "bg-amber-50 text-amber-700" },
+    { label: "Claims awaiting verification", n: d.claims_pending, href: "/admin/companies", tone: "bg-amber-50 text-amber-700" },
     { label: "Showcases to moderate", n: d.showcases_pending, href: "/admin/projects", tone: "bg-violet-50 text-violet-700" },
     { label: "Open disputes (48h clock)", n: d.disputes_open, href: "/admin/disputes", tone: "bg-red-50 text-red-600" },
   ].filter((a) => a.n > 0);
@@ -85,7 +85,6 @@ export default async function AdminHome({ searchParams }: { searchParams: Promis
         <div className="flex flex-wrap gap-2 text-sm">
           <Link href="/admin/leads" className="rounded-lg border border-gray-200 px-4 py-2 hover:border-gray-400">Leads & bids</Link>
           <Link href="/admin/companies" className="rounded-lg border border-gray-200 px-4 py-2 hover:border-gray-400">Companies & verification</Link>
-          <Link href="/admin/claims" className="rounded-lg border border-gray-200 px-4 py-2 hover:border-gray-400">Claims</Link>
           <Link href="/admin/projects" className="rounded-lg border border-gray-200 px-4 py-2 hover:border-gray-400">Showcases</Link>
           <Link href="/admin/disputes" className="rounded-lg border border-gray-200 px-4 py-2 hover:border-gray-400">Disputes</Link>
           <Link href="/admin/subscribers" className="rounded-lg border border-gray-200 px-4 py-2 hover:border-gray-400">Subscribers</Link>

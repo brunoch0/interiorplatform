@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Scale, Inbox, Building2, Images, BadgeCheck, Mail } from "lucide-react";
+import { LayoutDashboard, Scale, Inbox, Building2, Images, Mail } from "lucide-react";
 
 const menu = [
   { href: "/admin", label: "Dashboard", Icon: LayoutDashboard },
   { href: "/admin/leads", label: "Leads & Bids", Icon: Inbox },
   { href: "/admin/companies", label: "Companies", Icon: Building2 },
   { href: "/admin/projects", label: "Showcases", Icon: Images },
-  { href: "/admin/claims", label: "Claims", Icon: BadgeCheck },
   { href: "/admin/disputes", label: "Disputes", Icon: Scale },
   { href: "/admin/subscribers", label: "Subscribers", Icon: Mail },
 ];

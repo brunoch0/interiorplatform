@@ -53,22 +53,31 @@ def main():
     companies = [c for c in companies if c.get("website")]
     print(f"probing {len(companies)} websites...", flush=True)
 
-    results, done = [], 0
+    import os
+    done_ids = set()
+    exists = os.path.exists("data/company_emails.csv")
+    if exists:
+        done_ids = {r["id"] for r in csv.DictReader(open("data/company_emails.csv"))}
+        companies = [c for c in companies if c["id"] not in done_ids]
+        print(f"resume: {len(done_ids)} already collected, {len(companies)} to probe", flush=True)
+
+    n_found, done = len(done_ids), 0
+    fh = open("data/company_emails.csv", "a", newline="")
+    w = csv.writer(fh)
+    if not exists:
+        w.writerow(["id", "email", "source_url"])
+        fh.flush()
     with ThreadPoolExecutor(max_workers=16) as ex:
         futs = {ex.submit(probe, c): c for c in companies}
         for f in as_completed(futs):
             done += 1
             r = f.result()
             if r:
-                results.append(r)
+                w.writerow(r); fh.flush(); n_found += 1
             if done % 50 == 0:
-                print(f"  {done}/{len(companies)} probed, {len(results)} emails", flush=True)
-
-    with open("data/company_emails.csv", "w", newline="") as fh:
-        w = csv.writer(fh)
-        w.writerow(["id", "email", "source_url"])
-        w.writerows(results)
-    print(f"DONE: {len(results)} emails from {len(companies)} sites -> data/company_emails.csv", flush=True)
+                print(f"  {done}/{len(companies)} probed, {n_found} emails", flush=True)
+    fh.close()
+    print(f"DONE: {n_found} emails total -> data/company_emails.csv", flush=True)
 
 if __name__ == "__main__":
     main()
