@@ -27,14 +27,22 @@ type OpenRequest = {
   bid_count: number;
 };
 
-async function fetchOpenRequests(): Promise<OpenRequest[]> {
+type MatchedRequest = {
+  ref: string; area: string | null; space_type: string | null; budget: string | null;
+  created_at: string; scope: string;
+};
+
+async function fetchBoard(): Promise<{ open: OpenRequest[]; matched: MatchedRequest[] }> {
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
-  const { data } = await supabase.rpc("public_open_requests");
-  return (data as OpenRequest[] | null) ?? [];
+  const [{ data: open }, { data: matched }] = await Promise.all([
+    supabase.rpc("public_open_requests"),
+    supabase.rpc("public_recent_matched"),
+  ]);
+  return { open: (open as OpenRequest[] | null) ?? [], matched: (matched as MatchedRequest[] | null) ?? [] };
 }
 
 export default async function RequestsBoard() {
-  const requests = await fetchOpenRequests();
+  const { open: requests, matched } = await fetchBoard();
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
@@ -88,6 +96,27 @@ export default async function RequestsBoard() {
           </Card>
         ))}
       </div>
+
+      {matched.length > 0 && (
+        <section className="mt-10">
+          <div className="mb-4 flex items-baseline gap-3">
+            <h2 className="font-serif text-lg font-semibold text-walnut">Recently matched</h2>
+            <span className="h-px flex-1 bg-gray-200" />
+            <span className="text-xs text-gray-400">no longer accepting quotes</span>
+          </div>
+          <div className="space-y-2">
+            {matched.map((m) => (
+              <div key={m.ref} className="flex flex-wrap items-center gap-2 rounded-xl border border-gray-100 bg-cream/60 px-4 py-3 opacity-75">
+                <span className="font-mono text-xs font-bold text-gray-400">{m.ref}</span>
+                {m.space_type && <Badge tone="gray">{m.space_type}</Badge>}
+                {m.budget && <Badge tone="gray">{m.budget}</Badge>}
+                <span className="min-w-0 flex-1 truncate text-xs text-gray-500">{m.area && `${m.area} — `}{m.scope}</span>
+                <Badge tone="green">Matched</Badge>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <p className="mt-8 text-center text-xs text-gray-400">
         Are you a homeowner? <Link href="/consult" className="font-semibold text-terracotta-deep underline">Post your project in 2 minutes →</Link>

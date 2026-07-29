@@ -103,3 +103,21 @@
 | 10 | Desert Rise Contracting & Renovations | Business Bay | 5.0 | 143 | https://wa.me/971581848328 |
 
 참고: 2·5·6·10번이 풀 핏아웃 성격이 강해서 우선 발송 추천. 1·7번은 전화 채널.
+
+---
+
+## D. 시드 브리프 입찰 응대 플레이북 (2026-07-29)
+
+보드에 시드 브리프 8건 게재 (오픈 5 · 매칭완료 3). 내부 식별: quote_requests.email = seed@onepassinterior.com (일괄 삭제 가능).
+
+**업체가 시드 브리프에 입찰하면 (24시간 내 응대 — 필수):**
+
+> Thanks for your quote on [REF] — passed it to the homeowner along with 2 other quotes; they're comparing this week. I'll come back to you either way.
+>
+> Meanwhile — you're not verified yet, and verified companies' quotes get presented first. Takes 5 minutes with your trade licence: https://onepassinterior.com/supplier/license
+
+**3~4일 후 클로징 (어느 쪽이든 정직하게 종결):**
+
+> Update on [REF]: the homeowner decided to [hold the project for now / go with another direction]. Your quote was solid — I'd like to send you the next [area] brief directly. Claim your profile and briefs matching your trade land in your dashboard: https://onepassinterior.com/supplier/dashboard
+
+원칙: 입찰 = 웜리드. 목표는 그 건의 성사가 아니라 **클레임 전환**. 무응답 방치 금지.
