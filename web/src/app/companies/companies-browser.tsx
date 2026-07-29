@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { track } from "@/components/analytics";
 import Link from "next/link";
 import { Star } from "lucide-react";
 import type { Company } from "@/lib/data";
@@ -22,7 +23,8 @@ export function GoogleRating({ rating, count, size = "sm", href }: { rating: num
   const cls = `inline-flex items-center gap-1.5 ${size === "lg" ? "text-sm" : "text-xs"}`;
   if (href)
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={`${cls} hover:underline`} onClick={(e) => e.stopPropagation()}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={`${cls} hover:underline`}
+        onClick={(e) => { e.stopPropagation(); track("outbound_maps_click", { rating }); }}>
         {inner}
       </a>
     );

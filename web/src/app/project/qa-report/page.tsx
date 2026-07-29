@@ -1,6 +1,8 @@
 import { qaChecklist } from "@/lib/data";
 import { BackLink, Badge, Card, Notice, PageHeader } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function QAReport() {
   const passed = qaChecklist.filter((q) => q.result === "Pass").length;
   const failed = qaChecklist.filter((q) => q.result === "Fail");

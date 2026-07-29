@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Home, Hammer } from "lucide-react";
 import { Card } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function Onboarding() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16">

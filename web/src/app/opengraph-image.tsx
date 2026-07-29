@@ -31,7 +31,7 @@ export default function OgImage() {
             649 licensed fit-out companies · free quotes · escrow-ready
           </div>
         </div>
-        <div style={{ color: "#B9A88F", fontSize: 22 }}>interiorplatform.vercel.app</div>
+        <div style={{ color: "#B9A88F", fontSize: 22 }}>onepassinterior.com</div>
       </div>
     ),
     size,

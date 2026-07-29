@@ -3,6 +3,8 @@ import Link from "next/link";
 import { fmt } from "@/lib/data";
 import { BackLink, Card, Notice, Steps } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function QuoteConfirm() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">

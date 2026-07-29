@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
+import { track } from "@/components/analytics";
 import { CheckCircle2, FileUp, X } from "lucide-react";
 import { supabaseBrowser } from "@/lib/supabase-browser";
 import { Badge, Card, Notice, PageHeader, Steps } from "@/components/ui";
@@ -77,8 +78,10 @@ export default function ClaimForm({ companies }: { companies: CompanyOpt[] }) {
           licenseExpiry: licenseExpiry || null,
           newsletter,
         });
-        if (res.ok) setDone(true);
-        else setError(res.error);
+        if (res.ok) {
+          track("licence_claim_submitted");
+          setDone(true);
+        } else setError(res.error);
       } catch (e) {
         setError(e instanceof Error ? e.message : "Something went wrong.");
       }

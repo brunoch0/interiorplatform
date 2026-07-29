@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
+import { track } from "@/components/analytics";
 import Link from "next/link";
 import { CheckCircle2, X } from "lucide-react";
 import { Card, Notice } from "@/components/ui";
@@ -39,8 +40,10 @@ export default function BidForm({ requestId, companies }: { requestId: string; c
         newsletter: formData.get("newsletter") != null,
         honeypot: String(formData.get("company_website") ?? ""),
       });
-      if (res.ok) setDone(true);
-      else setError(res.error);
+      if (res.ok) {
+        track("bid_submitted");
+        setDone(true);
+      } else setError(res.error);
     });
   };
 

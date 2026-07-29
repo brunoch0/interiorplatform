@@ -65,9 +65,11 @@ export default function Nav({ openCount = 0 }: { openCount?: number }) {
           <Link href="/supplier/dashboard" className={`text-xs ${isSupplier ? "font-bold text-sky-700" : "font-semibold text-gray-500 hover:text-charcoal"}`}>
             {t.forContractors}
           </Link>
-          <Link href="/admin" className={`text-xs ${isAdmin ? "font-bold text-charcoal" : "text-gray-400 hover:text-charcoal"}`}>
-            {t.admin}
-          </Link>
+          {isAdmin && (
+            <Link href="/admin" className="text-xs font-bold text-charcoal">
+              {t.admin}
+            </Link>
+          )}
           <AuthButton />
         </div>
       </div>

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { BackLink, Card, Notice, Steps } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function ConsumerSignup() {
   return (
     <div className="mx-auto max-w-xl px-4 py-12">

@@ -1,5 +1,7 @@
 import { BackLink, Badge, Card, Notice, PageHeader } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function InspectionSchedule() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">

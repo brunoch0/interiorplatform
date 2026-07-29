@@ -4,6 +4,8 @@ import { Images, ScrollText, Inbox, Rocket } from "lucide-react";
 import { fmt, supplierLeads } from "@/lib/data";
 import { Badge, Card, PageHeader, Stat } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function SupplierDashboard() {
   const newLeads = supplierLeads.filter((l) => l.status === "New").length;
   return (

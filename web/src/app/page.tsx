@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import { fetchCompanies, fetchPipelineAed } from "@/lib/db";
+import { SITE_URL } from "@/lib/site";
 import HomeClient from "./home-client";
 
 export const revalidate = 300;
+
+export const metadata: Metadata = {
+  title: "Dubai Renovation Contractors, Compared by Real Data",
+  description:
+    "Compare licensed Dubai fit-out contractors by evidence: schedule compliance, extra-charge history, approval speed. Free quotes from verified companies.",
+  alternates: { canonical: SITE_URL },
+};
 
 export default async function Home() {
   const [companies, pipelineAed] = await Promise.all([fetchCompanies(), fetchPipelineAed()]);

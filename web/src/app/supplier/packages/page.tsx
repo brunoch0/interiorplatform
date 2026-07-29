@@ -2,6 +2,8 @@ import DemoBanner from "@/components/demo-banner";
 import { exposurePackages } from "@/lib/data";
 import { Badge, Card, Notice, PageHeader } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function Packages() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">

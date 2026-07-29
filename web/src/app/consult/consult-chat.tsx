@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useTransition } from "react";
+import { track } from "@/components/analytics";
 import Link from "next/link";
 import { CheckCircle2, ImagePlus, MessageCircle, Send, Sparkles, X } from "lucide-react";
 import { supabaseBrowser } from "@/lib/supabase-browser";
@@ -71,6 +72,7 @@ export default function ConsultChat() {
   const send = async (text: string) => {
     const content = text.trim();
     if ((!content && pendingImages.length === 0) || thinking || brief) return;
+    if (messages.length <= 1) track("consult_started");
     const next: Msg[] = [
       ...messages,
       { role: "user", content: content || "Here are some photos of the space.", images: pendingImages.length ? pendingImages : undefined },
@@ -122,8 +124,10 @@ export default function ConsultChat() {
         brief,
         transcript: messages,
       });
-      if (res.ok) setRef(res.ref);
-      else setError(res.error);
+      if (res.ok) {
+        if (res.ref !== "CR-OK") track("generate_lead", { form: "ai_consult" });
+        setRef(res.ref);
+      } else setError(res.error);
     });
   };
 

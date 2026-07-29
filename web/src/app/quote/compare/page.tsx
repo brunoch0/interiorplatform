@@ -3,6 +3,8 @@ import Link from "next/link";
 import { fmt, getCompany, quoteRequests } from "@/lib/data";
 import { Badge, Card, PageHeader } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function QuoteCompare() {
   const received = quoteRequests.filter((q) => q.status === "Received");
   const pending = quoteRequests.filter((q) => q.status !== "Received");

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { track } from "@/components/analytics";
 import { subscribeEmail } from "@/app/guides/subscribe-action";
 
 export default function EmailCapture({ source }: { source: string }) {
@@ -22,8 +23,10 @@ export default function EmailCapture({ source }: { source: string }) {
         setError(null);
         startTransition(async () => {
           const res = await subscribeEmail(fd);
-          if (res.ok) setDone(true);
-          else setError(res.error);
+          if (res.ok) {
+            track("newsletter_signup", { source });
+            setDone(true);
+          } else setError(res.error);
         });
       }}
       className="rounded-2xl border border-gray-200 bg-cream p-6"

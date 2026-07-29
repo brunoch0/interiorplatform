@@ -1,6 +1,8 @@
 import DemoBanner from "@/components/demo-banner";
 import { Badge, Card, FileDrop, Notice, PageHeader, Placeholder } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function SupplierProfile() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">

@@ -7,6 +7,8 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import I18nProvider from "@/lib/i18n/provider";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
+import PageViewTracker, { GA_ID } from "@/components/analytics";
+import { Suspense } from "react";
 
 const plexSans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
@@ -29,11 +31,11 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Dubai Interior — Compare 649 Licensed Fit-Out Companies by Real Data",
-    template: "%s | Dubai Interior",
+    default: "Onepass Interior — Dubai Contractors, Compared by Data",
+    template: "%s · Onepass",
   },
   description:
-    "Find interior fit-out contractors in Dubai by evidence, not star ratings — schedule compliance, extra-charge history, approval speed. Free quotes from up to 5 licensed companies.",
+    "Find Dubai interior fit-out contractors by evidence, not star ratings: schedule compliance, extra-charge history, approval speed. Free quotes from licensed firms.",
   openGraph: {
     siteName: SITE_NAME,
     type: "website",
@@ -62,13 +64,50 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" className={`${plexSans.variable} ${newsreader.variable} ${plexMono.variable}`}>
       <body className="min-h-screen bg-sand text-charcoal antialiased">
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-CV1WNNG7SM" strategy="afterInteractive" />
-        <Script id="ga4" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-CV1WNNG7SM');`}
-        </Script>
+        {GA_ID && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+            <Script id="ga4" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', { send_page_view: false });`}
+            </Script>
+            <Suspense fallback={null}>
+              <PageViewTracker />
+            </Suspense>
+          </>
+        )}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: SITE_NAME,
+                alternateName: "Onepass Interior",
+                url: SITE_URL,
+                logo: `${SITE_URL}/icon.svg`,
+                areaServed: { "@type": "City", name: "Dubai" },
+                address: { "@type": "PostalAddress", addressLocality: "Dubai", addressCountry: "AE" },
+                parentOrganization: { "@type": "Organization", name: "Growtoday Holdings FZE" },
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: SITE_NAME,
+                url: SITE_URL,
+                inLanguage: "en",
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/companies?q={search_term_string}` },
+                  "query-input": "required name=search_term_string",
+                },
+              },
+            ]),
+          }}
+        />
         <I18nProvider>
           <Nav openCount={openCount} />
           <main>{children}</main>

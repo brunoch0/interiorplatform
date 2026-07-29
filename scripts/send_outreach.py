@@ -11,6 +11,7 @@ ANON = "sb_publishable_c1vJb-6zmLs-y7mJ-UnWTQ_7Klye6EX"
 FROM = "Bruno from Dubai Interior <bruno@onepassinterior.com>"
 REPLY_TO = "business@growtodayholdings.com"
 LOG = "data/outreach_email_log.csv"
+UTM = "utm_source=resend&utm_medium=email&utm_campaign=contractor_outreach_2026q3"
 FREEMAIL = ("gmail.", "hotmail.", "yahoo.", "outlook.", "icloud.")
 
 def curl_json(url):
@@ -59,18 +60,18 @@ def compose(co, rank):
         "",
         "I'm Bruno, founder of Dubai Interior (onepassinterior.com) — Dubai's renovation comparison platform. All 649 licensed fit-out companies are listed, including yours:",
         "",
-        f"Your live profile: https://onepassinterior.com/companies/{co['id']}",
+        f"Your live profile: https://onepassinterior.com/companies/{co['id']}?{UTM}&utm_content=profile_link",
         rating_line,
     ]
     if cat_line:
         lines.append(cat_line)
     lines += [
         "",
-        f"Homeowners now post renovation briefs through the platform — the open board currently has live briefs from Marina, JVC, Business Bay and Arabian Ranches you can quote on: https://onepassinterior.com/requests",
+        f"Homeowners now post renovation briefs through the platform — the open board currently has live briefs from Marina, JVC, Business Bay and Arabian Ranches you can quote on: https://onepassinterior.com/requests?" + UTM + "&utm_content=open_board",
         "",
         "Two free things while we're in early access:",
         "1) Quote on any open brief — we pass it straight to the homeowner",
-        f"2) Claim your profile (5 minutes, trade licence needed) — verified companies rank first in {area} and homeowner contacts come to your dashboard directly: https://onepassinterior.com/supplier/license",
+        f"2) Claim your profile (5 minutes, trade licence needed) — verified companies rank first in {area} and homeowner contacts come to your dashboard directly: https://onepassinterior.com/supplier/license?" + UTM + "&utm_content=claim_cta",
         "",
         "No catch during early access. We're building the trust layer for Dubai renovation, and companies with your track record are exactly who should be at the top.",
         "",

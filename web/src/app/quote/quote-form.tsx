@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
+import { track } from "@/components/analytics";
 import Link from "next/link";
 import { MailCheck, Search } from "lucide-react";
 import type { Company } from "@/lib/data";
@@ -37,8 +38,10 @@ export default function QuoteForm({ companies, preselected }: { companies: Compa
     startTransition(async () => {
       const { data: sess } = await supabaseBrowser.auth.getSession();
       const res = await submitQuoteRequest(formData, sess.session?.access_token);
-      if (res.ok) setRef(res.ref);
-      else setError(res.error);
+      if (res.ok) {
+        if (res.ref !== "QR-OK") track("generate_lead", { form: "quote_request", companies: targets.length });
+        setRef(res.ref);
+      } else setError(res.error);
     });
   };
 

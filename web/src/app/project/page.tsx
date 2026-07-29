@@ -2,6 +2,8 @@ import Link from "next/link";
 import { contract, fmt } from "@/lib/data";
 import { Badge, Card, PageHeader, Stat } from "@/components/ui";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 const statusTone: Record<string, "green" | "blue" | "gray" | "amber" | "red"> = {
   Completed: "green", "In Progress": "blue", Pending: "gray", "Awaiting QA": "amber", Disputed: "red",
 };
