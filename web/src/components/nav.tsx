@@ -44,7 +44,7 @@ export default function Nav() {
           {isAdmin && <span className="rounded-full bg-walnut px-3 py-1 text-xs font-semibold text-cream">Operator Admin</span>}
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/supplier/license" className={`text-xs ${isSupplier ? "font-bold text-sky-700" : "text-gray-400 hover:text-charcoal"}`}>
+          <Link href="/supplier/dashboard" className={`text-xs ${isSupplier ? "font-bold text-sky-700" : "text-gray-400 hover:text-charcoal"}`}>
             For Contractors
           </Link>
           <Link href="/admin" className={`text-xs ${isAdmin ? "font-bold text-charcoal" : "text-gray-400 hover:text-charcoal"}`}>
