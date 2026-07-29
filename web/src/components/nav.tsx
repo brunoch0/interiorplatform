@@ -3,22 +3,25 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthButton from "@/components/auth-button";
+import { useI18n } from "@/lib/i18n/provider";
 
 export default function Nav({ openCount = 0 }: { openCount?: number }) {
   const pathname = usePathname();
+  const { dict } = useI18n();
+  const t = dict.nav;
   const isAdmin = pathname.startsWith("/admin");
   const isSupplier = pathname.startsWith("/supplier");
 
   const consumerLinks = [
-    { href: "/companies", label: "Find Contractors" },
-    { href: "/requests", label: "Open Projects", count: openCount },
-    { href: "/calculator", label: "Cost Calculator" },
-    { href: "/guides", label: "Guides" },
+    { href: "/companies", label: t.findContractors },
+    { href: "/requests", label: t.openProjects, count: openCount },
+    { href: "/calculator", label: t.costCalculator },
+    { href: "/guides", label: t.guides },
   ];
   const supplierLinks = [
-    { href: "/supplier/dashboard", label: "Dashboard" },
-    { href: "/requests", label: "Open Projects", count: openCount },
-    { href: "/supplier/showcase", label: "Publish a Project" },
+    { href: "/supplier/dashboard", label: t.dashboard },
+    { href: "/requests", label: t.openProjects, count: openCount },
+    { href: "/supplier/showcase", label: t.publishProject },
   ];
   const links = isSupplier ? supplierLinks : consumerLinks;
 
@@ -50,20 +53,20 @@ export default function Nav({ openCount = 0 }: { openCount?: number }) {
               ))}
             </nav>
           )}
-          {isSupplier && <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">Contractor Center</span>}
-          {isAdmin && <span className="rounded-full bg-walnut px-3 py-1 text-xs font-semibold text-cream">Operator Admin</span>}
+          {isSupplier && <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">{t.contractorCenter}</span>}
+          {isAdmin && <span className="rounded-full bg-walnut px-3 py-1 text-xs font-semibold text-cream">{t.operatorAdmin}</span>}
         </div>
         <div className="flex items-center gap-3">
           {!isSupplier && !isAdmin && (
             <Link href="/consult" className="hidden rounded-xl bg-terracotta px-4 py-2 text-sm font-bold text-cream transition hover:bg-terracotta-deep sm:inline-block">
-              Free Consult
+              {t.freeConsult}
             </Link>
           )}
           <Link href="/supplier/dashboard" className={`text-xs ${isSupplier ? "font-bold text-sky-700" : "font-semibold text-gray-500 hover:text-charcoal"}`}>
-            For Contractors
+            {t.forContractors}
           </Link>
           <Link href="/admin" className={`text-xs ${isAdmin ? "font-bold text-charcoal" : "text-gray-400 hover:text-charcoal"}`}>
-            Admin
+            {t.admin}
           </Link>
           <AuthButton />
         </div>

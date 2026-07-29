@@ -6,6 +6,7 @@ import { Calculator as CalcIcon, MessageCircle } from "lucide-react";
 import { fmt } from "@/lib/data";
 import { Card } from "@/components/ui";
 import EmailCapture from "@/components/email-capture";
+import { useI18n } from "@/lib/i18n/provider";
 
 // Ranges mirror the published cost guides (apartment/villa/kitchen-bathroom) — keep in sync
 const UNIT_BASE: Record<string, [number, number]> = {
@@ -60,6 +61,18 @@ const add = (a: Range, b: Range): Range => [a[0] + b[0], a[1] + b[1]];
 const round500 = (r: Range): Range => [Math.round(r[0] / 500) * 500, Math.round(r[1] / 500) * 500];
 
 export default function CostCalculator() {
+  const { dict } = useI18n();
+  const tc = dict.calculator;
+  const scopeDefs = [
+    { key: "gut" as const, label: tc.scopeGut, desc: tc.scopeGutDesc },
+    { key: "full" as const, label: tc.scopeFull, desc: tc.scopeFullDesc },
+    { key: "kb" as const, label: tc.scopeKb, desc: tc.scopeKbDesc },
+    { key: "kitchen" as const, label: tc.scopeKitchen, desc: tc.scopeKitchenDesc },
+    { key: "bath" as const, label: tc.scopeBath, desc: tc.scopeBathDesc },
+    { key: "refresh" as const, label: tc.scopeRefresh, desc: tc.scopeRefreshDesc },
+    { key: "paint" as const, label: tc.scopePaint, desc: tc.scopePaintDesc },
+  ];
+  const finishLabels: Record<string, string> = { Budget: tc.finishBudget, Standard: tc.finishStandard, Premium: tc.finishPremium };
   const [unit, setUnit] = useState("2 Bedroom");
   const [scope, setScope] = useState<ScopeKey>("full");
   const [finish, setFinish] = useState("Standard");
@@ -121,10 +134,10 @@ export default function CostCalculator() {
   return (
     <div>
       <Card>
-        <label className="text-sm font-medium">How deep does the work go?</label>
-        <p className="mt-0.5 text-xs text-gray-400">This is the biggest price lever — a gut renovation and a repaint differ by 20×.</p>
+        <label className="text-sm font-medium">{tc.depthQ}</label>
+        <p className="mt-0.5 text-xs text-gray-400">{tc.depthHint}</p>
         <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
-          {SCOPE_DEFS.map((s) => (
+          {scopeDefs.map((s) => (
             <button key={s.key} type="button" onClick={() => { setScope(s.key); setShowResult(false); }}
               className={`rounded-xl border px-4 py-2.5 text-left transition ${
                 scope === s.key ? "border-walnut bg-walnut text-cream" : "border-gray-200 hover:border-gray-400"
@@ -137,28 +150,28 @@ export default function CostCalculator() {
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="text-sm font-medium">Property type</label>
+            <label className="text-sm font-medium">{tc.property}</label>
             <select value={unit} onChange={(e) => { setUnit(e.target.value); setShowResult(false); }}
               className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm">
               {Object.keys(UNIT_BASE).map((u) => <option key={u}>{u}</option>)}
             </select>
           </div>
           <div>
-            <label className="text-sm font-medium">Finish level</label>
+            <label className="text-sm font-medium">{tc.finish}</label>
             <div className="mt-1.5 grid grid-cols-3 gap-1.5">
               {Object.keys(FINISH_MULT).map((f) => (
                 <button key={f} type="button" onClick={() => { setFinish(f); setShowResult(false); }}
                   className={`rounded-xl border px-3 py-3 text-sm transition ${
                     finish === f ? "border-walnut bg-walnut font-semibold text-cream" : "border-gray-200 text-gray-600 hover:border-gray-400"
                   }`}>
-                  {f}
+                  {finishLabels[f] ?? f}
                 </button>
               ))}
             </div>
           </div>
           {needsBaths && (
             <div>
-              <label className="text-sm font-medium">How many bathrooms?</label>
+              <label className="text-sm font-medium">{tc.baths}</label>
               <select value={baths} onChange={(e) => { setBaths(Number(e.target.value)); setShowResult(false); }}
                 className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm">
                 {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>{n}</option>)}
@@ -167,7 +180,7 @@ export default function CostCalculator() {
           )}
           {needsSqft && (
             <div>
-              <label className="text-sm font-medium">Area in sqft <span className="font-normal text-gray-400">(optional — sharpens the range)</span></label>
+              <label className="text-sm font-medium">{tc.sqft} <span className="font-normal text-gray-400">{tc.sqftOpt}</span></label>
               <input value={sqft} onChange={(e) => { setSqft(e.target.value.replace(/[^0-9]/g, "")); setShowResult(false); }}
                 placeholder="e.g. 1200" inputMode="numeric"
                 className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm" />
@@ -177,14 +190,14 @@ export default function CostCalculator() {
 
         <button onClick={calculate}
           className="mt-5 w-full rounded-xl bg-terracotta py-3.5 text-sm font-bold text-cream transition hover:bg-terracotta-deep">
-          <CalcIcon className="mr-2 inline h-4 w-4" strokeWidth={2} /> Calculate my range
+          <CalcIcon className="mr-2 inline h-4 w-4" strokeWidth={2} /> {tc.calcBtn}
         </button>
       </Card>
 
       {showResult && (
         <>
           <Card className="mt-5 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta-deep">Your planning range</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta-deep">{tc.resultKicker}</p>
             <p className="mt-3 font-mono text-3xl font-bold tracking-tight text-charcoal md:text-4xl">
               AED {fmt(result.total[0])} – {fmt(result.total[1])}
             </p>
@@ -197,17 +210,16 @@ export default function CostCalculator() {
               ))}
             </div>
             <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-gray-400">
-              Planning range from quoted Dubai projects, not a quote. Wet work (kitchens, bathrooms), layout changes
-              and imported materials push you toward the top of the range. Quotes far below it usually exclude scope.
+              {tc.disclaimer}
             </p>
           </Card>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <Link href="/quote" className="rounded-xl bg-walnut px-6 py-4 text-center text-sm font-bold text-cream transition hover:bg-walnut-deep">
-              Get real quotes for this scope — free
+              {tc.ctaQuotes}
             </Link>
             <Link href="/consult" className="flex items-center justify-center gap-2 rounded-xl border border-gray-300 px-6 py-4 text-center text-sm font-semibold text-charcoal transition hover:border-clay">
-              <MessageCircle className="h-4 w-4 text-terracotta-deep" /> Not sure about scope? Free consult
+              <MessageCircle className="h-4 w-4 text-terracotta-deep" /> {tc.ctaConsult}
             </Link>
           </div>
 

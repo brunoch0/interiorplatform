@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Script from "next/script";
 import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import Nav from "@/components/nav";
-import { SITE_NAME, SITE_URL, areaSlug } from "@/lib/site";
+import Footer from "@/components/footer";
+import I18nProvider from "@/lib/i18n/provider";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 const plexSans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
@@ -45,8 +46,6 @@ export const metadata: Metadata = {
   ],
 };
 
-const footerAreas = ["Business Bay", "Dubai Marina", "Downtown Dubai", "Al Quoz", "JLT", "Al Barsha", "Jumeirah", "Deira"];
-
 async function fetchOpenCount(): Promise<number> {
   try {
     const { createClient } = await import("@supabase/supabase-js");
@@ -70,48 +69,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             gtag('js', new Date());
             gtag('config', 'G-CV1WNNG7SM');`}
         </Script>
-        <Nav openCount={openCount} />
-        <main>{children}</main>
-        <footer className="mt-20 border-t border-gray-200 bg-cream py-12">
-          <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-3">
-            <div>
-              <p className="font-serif text-lg font-semibold text-walnut">Dubai Interior<span className="text-terracotta">.</span></p>
-              <p className="mt-3 text-xs leading-relaxed text-gray-400">
-                All contractor metrics are quantitative figures derived from verified reviews — no subjective ratings.
-                We comply with UAE federal law including defamation regulations. Escrow payments arrive in phases
-                following CBUAE regulatory review.
-              </p>
-              <p className="mt-3 text-xs text-gray-500">Growtoday Holdings FZE · Dubai, UAE</p>
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">Contractors by area</p>
-              <ul className="mt-3 grid grid-cols-2 gap-1.5 text-sm">
-                {footerAreas.map((a) => (
-                  <li key={a}>
-                    <Link href={`/areas/${areaSlug(a)}`} className="text-gray-500 hover:text-terracotta-deep">
-                      {a}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">Get started</p>
-              <ul className="mt-3 space-y-1.5 text-sm">
-                <li><Link href="/companies" className="text-gray-500 hover:text-terracotta-deep">Browse all contractors</Link></li>
-                <li><Link href="/consult" className="text-gray-500 hover:text-terracotta-deep">Free consultation</Link></li>
-                <li><Link href="/calculator" className="text-gray-500 hover:text-terracotta-deep">Cost calculator</Link></li>
-                <li><Link href="/quote" className="text-gray-500 hover:text-terracotta-deep">Request free quotes</Link></li>
-                <li><Link href="/protection" className="text-gray-500 hover:text-terracotta-deep">How you&apos;re protected</Link></li>
-                <li><Link href="/report" className="text-gray-500 hover:text-terracotta-deep">Report a contractor issue</Link></li>
-                <li><Link href="/guides" className="text-gray-500 hover:text-terracotta-deep">Renovation guides</Link></li>
-                <li><Link href="/requests" className="text-gray-500 hover:text-terracotta-deep">Open project briefs</Link></li>
-                <li><Link href="/supplier/license" className="text-gray-500 hover:text-terracotta-deep">Claim your company profile</Link></li>
-                <li><Link href="/supplier/showcase" className="text-gray-500 hover:text-terracotta-deep">Publish your project (free)</Link></li>
-              </ul>
-            </div>
-          </div>
-        </footer>
+        <I18nProvider>
+          <Nav openCount={openCount} />
+          <main>{children}</main>
+          <Footer />
+        </I18nProvider>
         <Analytics />
       </body>
     </html>
