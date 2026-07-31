@@ -104,4 +104,10 @@ export const ru: Dict = {
     ctaConsult: "Не уверены в объёме? Консультация",
     guidesNote: "Хотите понять, откуда эти цифры? Читайте гайды:",
   },
+  share: {
+    whatsapp: "Поделиться в WhatsApp",
+    copy: "Скопировать ссылку",
+    copied: "Скопировано",
+    verifiedListing: "проверенная страница на Dubai Interior",
+  },
 };

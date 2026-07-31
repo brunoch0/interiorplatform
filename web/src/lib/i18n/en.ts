@@ -103,4 +103,10 @@ export const en = {
     ctaConsult: "Not sure about scope? Free consult",
     guidesNote: "Want the detail behind these numbers? Read the full guides:",
   },
+  share: {
+    whatsapp: "Share on WhatsApp",
+    copy: "Copy link",
+    copied: "Copied",
+    verifiedListing: "verified listing on Dubai Interior",
+  },
 };

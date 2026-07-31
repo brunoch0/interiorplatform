@@ -104,4 +104,10 @@ export const ko: Dict = {
     ctaConsult: "범위를 모르겠다면? 무료 상담",
     guidesNote: "이 숫자의 근거가 궁금하다면 가이드를 읽어보세요:",
   },
+  share: {
+    whatsapp: "WhatsApp으로 공유",
+    copy: "링크 복사",
+    copied: "복사됨",
+    verifiedListing: "Dubai Interior 검증 페이지",
+  },
 };

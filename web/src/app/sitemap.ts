@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { fetchCompanies } from "@/lib/db";
 import { guides } from "@/lib/guides";
 import { SITE_URL, areaSlug } from "@/lib/site";
+import { GUIDE_LOCALES, localizedSlugs } from "@/lib/guide-i18n";
 
 export const revalidate = 3600;
 
@@ -14,6 +15,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly",
     priority: p === "" ? 1 : 0.8,
   }));
+
+  const localizedGuidePages: MetadataRoute.Sitemap = GUIDE_LOCALES.flatMap((locale) => {
+    const slugs = localizedSlugs(locale);
+    if (slugs.length === 0) return [];
+    return [
+      { url: `${SITE_URL}/${locale}/guides`, changeFrequency: "weekly" as const, priority: 0.7 },
+      ...slugs.map((slug) => ({
+        url: `${SITE_URL}/${locale}/guides/${slug}`,
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      })),
+    ];
+  });
 
   const guidePages: MetadataRoute.Sitemap = guides.map((g) => ({
     url: `${SITE_URL}/guides/${g.slug}`,
@@ -33,5 +47,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...statics, ...guidePages, ...areaPages, ...companyPages];
+  return [...statics, ...guidePages, ...localizedGuidePages, ...areaPages, ...companyPages];
 }

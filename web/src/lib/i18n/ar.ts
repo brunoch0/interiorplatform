@@ -104,4 +104,10 @@ export const ar: Dict = {
     ctaConsult: "غير متأكد من النطاق؟ استشارة مجانية",
     guidesNote: "تريد تفاصيل هذه الأرقام؟ اقرأ الأدلة الكاملة:",
   },
+  share: {
+    whatsapp: "شارك على واتساب",
+    copy: "انسخ الرابط",
+    copied: "تم النسخ",
+    verifiedListing: "صفحة موثّقة على Dubai Interior",
+  },
 };
