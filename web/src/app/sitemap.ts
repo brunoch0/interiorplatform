@@ -2,13 +2,16 @@ import type { MetadataRoute } from "next";
 import { fetchCompanies } from "@/lib/db";
 import { guides } from "@/lib/guides";
 import { SITE_URL, areaSlug } from "@/lib/site";
+import { allAreas } from "@/lib/area-stats";
 import { GUIDE_LOCALES, localizedSlugs } from "@/lib/guide-i18n";
 
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const companies = await fetchCompanies();
-  const areas = [...new Set(companies.map((c) => c.area))].filter((a) => a !== "Dubai");
+  // An area with a handful of companies is noindex — submitting it would only
+  // ask Google to judge a page we already know is thin.
+  const areas = allAreas(companies).filter((a) => a.indexable);
 
   const statics: MetadataRoute.Sitemap = ["", "/companies", "/quote", "/consult", "/requests", "/calculator", "/protection", "/report", "/supplier/license", "/guides", "/projects", "/supplier/showcase"].map((p) => ({
     url: `${SITE_URL}${p}`,
@@ -36,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const areaPages: MetadataRoute.Sitemap = areas.map((a) => ({
-    url: `${SITE_URL}/areas/${areaSlug(a)}`,
+    url: `${SITE_URL}/areas/${areaSlug(a.area)}`,
     changeFrequency: "weekly",
     priority: 0.9, // programmatic SEO money pages
   }));
