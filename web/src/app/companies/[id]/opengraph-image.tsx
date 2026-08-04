@@ -9,7 +9,7 @@ export const contentType = "image/png";
 export default async function OgImage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const c = /^[0-9a-f-]{36}$/.test(id) ? await fetchCompanyById(id) : getCompany(id);
-  const name = c?.name ?? "Dubai Interior";
+  const name = c?.name ?? "OnePass Interior";
   const area = c?.area ?? "Dubai";
   const cats = c?.categories.slice(0, 3).join(" · ") ?? "";
 
@@ -28,7 +28,7 @@ export default async function OgImage({ params }: { params: Promise<{ id: string
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ color: "#FFFDF9", fontSize: 34, fontWeight: 600 }}>Dubai Interior</div>
+          <div style={{ color: "#FFFDF9", fontSize: 34, fontWeight: 600 }}>OnePass Interior</div>
           <div style={{ color: "#C06A45", fontSize: 34 }}>.</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>

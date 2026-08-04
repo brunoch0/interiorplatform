@@ -3,6 +3,7 @@ import type { Dict } from "./index";
 export const ru: Dict = {
   nav: {
     findContractors: "Подрядчики",
+    rankings: "Рейтинг",
     openProjects: "Открытые проекты",
     costCalculator: "Калькулятор",
     guides: "Гайды",
@@ -44,7 +45,7 @@ export const ru: Dict = {
     ctaConsult: "Не знаете, с чего начать? Консультация",
     ctaBrowse: "Смотреть подрядчиков",
     claimLink: "Я подрядчик — подтвердить профиль",
-    pipelineLine: "— сумма запрошенных смет на ремонт через Dubai Interior ·",
+    pipelineLine: "— сумма запрошенных смет на ремонт через OnePass Interior ·",
     companiesWord: "компаний",
     areasWord: "района",
     detVerified: "Проверено DET ✓",
@@ -108,6 +109,6 @@ export const ru: Dict = {
     whatsapp: "Поделиться в WhatsApp",
     copy: "Скопировать ссылку",
     copied: "Скопировано",
-    verifiedListing: "проверенная страница на Dubai Interior",
+    verifiedListing: "проверенная страница на OnePass Interior",
   },
 };

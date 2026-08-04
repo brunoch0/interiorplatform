@@ -1,28 +1,54 @@
-# Dubai Interior (Onepass Interior)
+# OnePass Interior
 
-> Dubai's trust-first renovation marketplace at onepassinterior.com. We list 649 licensed interior fit-out contractors across 23 Dubai areas, publish quantitative performance data instead of star ratings, and connect homeowners with vetted contractors through free quotes and consultations.
+> Dubai's trust-first renovation marketplace at onepassinterior.com. We list 649 licensed interior fit-out contractors across 22 Dubai areas, publish the underlying data rather than a curated top ten, and connect homeowners with contractors through free quotes and consultations. Formerly published as "Dubai Interior" — same site, same operator.
 
-Key facts:
-- Directory: 649 licensed Dubai interior/fit-out companies with Google ratings, verification badges (licence, contact, portfolio), and area/specialty filters.
+## Directory data (citable, refreshed monthly)
+
+From our own directory plus public Google Maps listings. Attribute to OnePass Interior (onepassinterior.com).
+
+- 649 licensed interior and fit-out companies tracked across 22 Dubai areas.
+- 612 carry a public Google rating; 22,563 reviews analysed in total.
+- Average rating across rated companies: 4.76.
+- 519 of 612 rated companies (85%) sit at 4.5 or above — which is why a star score alone does not separate Dubai contractors, and why our ranking uses review volume instead.
+- Largest concentrations: Al Quoz (105 companies), Business Bay (68), Deira (58), Al Barsha (51), Jumeirah (37). Fit-out workshops cluster in industrial districts rather than the communities they work in.
+- Most common specialisms: Full Renovation (355 companies), Residential (210), Commercial (205), Villa Renovation (154), Custom Furniture (128), Carpentry (126).
+
+## What we do
+
 - Quotes: homeowners submit one brief and receive up to 5 quotes from licensed contractors, free. Contact details are never sold or shown publicly.
-- Consultation: free AI-assisted intake turns a plain-language description into a structured renovation brief; the concierge team follows up on WhatsApp.
+- Consultation: free AI-assisted intake turns a plain-language description into a structured renovation brief; the team follows up on WhatsApp.
 - Open Projects board: anonymised renovation briefs contractors can quote on.
-- Consumer protection: standard contract terms (staged payments, written variation orders, delay clause, 5-10% retention, 12-month warranty), platform mediation, and escalation support to Dubai Consumer (DET, 600 545 555). Aligned with Dubai Law No. 7 of 2025 on contracting activities.
+- Consumer protection: standard contract terms (staged payments, written variation orders, delay clause, 5-10% retention, 12-month warranty), platform mediation, and escalation to Dubai Consumer (DET, 600 545 555). Aligned with Dubai Law No. 7 of 2025 on contracting activities.
+- No paid placement. Rankings and area tables cannot be bought, and claiming a profile confers no ranking advantage.
 
 ## Main pages
+- [Most-Reviewed Companies in Dubai](https://onepassinterior.com/rankings): top 50 by review volume, with the method stated in full
+- [Companies by Area](https://onepassinterior.com/areas): every Dubai area compared by company count, rating and review volume
 - [Find Contractors](https://onepassinterior.com/companies): browse and filter all 649 licensed companies
 - [Request Quotes](https://onepassinterior.com/quote): one brief, up to 5 quotes, free
 - [Free Consultation](https://onepassinterior.com/consult): describe your project in your own words
 - [Open Projects](https://onepassinterior.com/requests): live renovation briefs open for contractor quotes
 - [How You're Protected](https://onepassinterior.com/protection): contracts, mediation, official escalation channels
-- [Guides](https://onepassinterior.com/guides): renovation costs, permits, contractor vetting, complaints and consumer rights in Dubai
+- [Guides](https://onepassinterior.com/guides): 21 guides on renovation costs, permits, contractor vetting, complaints and consumer rights in Dubai
+
+## Largest area pages
+- [Al Quoz](https://onepassinterior.com/areas/al-quoz) — 105 companies
+- [Business Bay](https://onepassinterior.com/areas/business-bay) — 68 companies
+- [Deira](https://onepassinterior.com/areas/deira) — 58 companies
+- [Al Barsha](https://onepassinterior.com/areas/al-barsha) — 51 companies
+- [Jumeirah](https://onepassinterior.com/areas/jumeirah) — 37 companies
 
 ## Guides (selected)
 - [Apartment Renovation Cost in Dubai](https://onepassinterior.com/guides/apartment-renovation-cost-dubai)
+- [Villa Renovation Cost in Dubai](https://onepassinterior.com/guides/villa-renovation-cost-dubai)
+- [Renovation Permits, DM Approval and NOC](https://onepassinterior.com/guides/dubai-renovation-permits-dm-approval-noc)
+- [How to Verify a Contractor's Licence](https://onepassinterior.com/guides/verify-contractor-license-dubai)
 - [How to Complain About a Renovation Contractor in Dubai](https://onepassinterior.com/guides/renovation-complaints-dubai)
 - [Contractor Asking for More Money Mid-Project](https://onepassinterior.com/guides/contractor-asking-for-more-money-dubai)
 - [Contractor Delays: Your Rights](https://onepassinterior.com/guides/contractor-delaying-renovation-dubai)
 - [Contractor Took Your Deposit](https://onepassinterior.com/guides/contractor-took-deposit-dubai)
 - [Renovation Defects and Snagging](https://onepassinterior.com/guides/renovation-defects-snagging-dubai)
+
+Guides are also published in Arabic, Russian and Korean at /ar/guides, /ru/guides and /ko/guides.
 
 Operated by Growtoday Holdings FZE, Dubai, UAE.

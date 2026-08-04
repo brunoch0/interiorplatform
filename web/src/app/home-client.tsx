@@ -186,7 +186,7 @@ export default function HomeClient({ total, areas, pipelineAed, featured, topAre
               started keeping one.&rdquo;
             </blockquote>
             <p className="mt-6 text-sm leading-relaxed text-gray-500">
-              Dubai Interior lists every licensed fit-out company we can verify, publishes only what documents can prove,
+              OnePass Interior lists every licensed fit-out company we can verify, publishes only what documents can prove,
               and holds your money in escrow until an independent inspector says the work passed. That&apos;s it. No stars,
               no sponsored reviews.
             </p>

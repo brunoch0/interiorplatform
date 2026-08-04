@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/ui";
 import ReportForm from "./report-form";
 
 export const metadata: Metadata = {
-  title: "Report an Issue With a Contractor — Dubai Interior Resolution",
+  title: "Report an Issue With a Contractor — OnePass Interior Resolution",
   description:
     "Problem with a renovation contractor in Dubai? File a confidential report. We mediate first; unresolved issues affect the contractor's verification and ranking.",
   alternates: { canonical: `${SITE_URL}/report` },

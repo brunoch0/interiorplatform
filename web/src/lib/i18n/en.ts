@@ -2,6 +2,7 @@
 export const en = {
   nav: {
     findContractors: "Find Contractors",
+    rankings: "Rankings",
     openProjects: "Open Projects",
     costCalculator: "Cost Calculator",
     guides: "Guides",
@@ -43,7 +44,7 @@ export const en = {
     ctaConsult: "Not sure where to start? Free consult",
     ctaBrowse: "Browse contractors",
     claimLink: "I'm a contractor — claim my profile",
-    pipelineLine: "in renovation quotes requested through Dubai Interior ·",
+    pipelineLine: "in renovation quotes requested through OnePass Interior ·",
     companiesWord: "companies",
     areasWord: "areas",
     detVerified: "DET Verified ✓",
@@ -107,6 +108,6 @@ export const en = {
     whatsapp: "Share on WhatsApp",
     copy: "Copy link",
     copied: "Copied",
-    verifiedListing: "verified listing on Dubai Interior",
+    verifiedListing: "verified listing on OnePass Interior",
   },
 };

@@ -3,6 +3,7 @@ import type { Dict } from "./index";
 export const ar: Dict = {
   nav: {
     findContractors: "ابحث عن مقاول",
+    rankings: "التصنيفات",
     openProjects: "مشاريع مفتوحة",
     costCalculator: "حاسبة التكلفة",
     guides: "أدلة",
@@ -44,7 +45,7 @@ export const ar: Dict = {
     ctaConsult: "لا تعرف من أين تبدأ؟ استشارة مجانية",
     ctaBrowse: "تصفّح المقاولين",
     claimLink: "أنا مقاول — أريد توثيق ملفي",
-    pipelineLine: "قيمة طلبات عروض أسعار التجديد عبر Dubai Interior ·",
+    pipelineLine: "قيمة طلبات عروض أسعار التجديد عبر OnePass Interior ·",
     companiesWord: "شركة",
     areasWord: "منطقة",
     detVerified: "موثّق DET ✓",
@@ -108,6 +109,6 @@ export const ar: Dict = {
     whatsapp: "شارك على واتساب",
     copy: "انسخ الرابط",
     copied: "تم النسخ",
-    verifiedListing: "صفحة موثّقة على Dubai Interior",
+    verifiedListing: "صفحة موثّقة على OnePass Interior",
   },
 };

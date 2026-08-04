@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
-  Dubai Interior — brand tokens
+  OnePass Interior — brand tokens
   Source: claude.ai design system ec472a33 (warm-neutral premium, Home Centre-inspired)
   Strategy: brand utilities (walnut/terracotta/…) + palette remap of the neutral/semantic
   families the codebase already uses (slate→walnut neutrals, gray→warm greys,

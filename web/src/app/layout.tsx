@@ -31,8 +31,8 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Onepass Interior — Dubai Contractors, Compared by Data",
-    template: "%s · Onepass",
+    default: "OnePass Interior — Dubai Renovation Contractors, Compared by Data",
+    template: "%s · OnePass Interior",
   },
   description:
     "Find Dubai interior fit-out contractors by evidence, not star ratings: schedule compliance, extra-charge history, approval speed. Free quotes from licensed firms.",
@@ -86,7 +86,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 name: SITE_NAME,
-                alternateName: "Onepass Interior",
+                alternateName: "Dubai Interior",
                 url: SITE_URL,
                 logo: `${SITE_URL}/icon.svg`,
                 areaServed: { "@type": "City", name: "Dubai" },

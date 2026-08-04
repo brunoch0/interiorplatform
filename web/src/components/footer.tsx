@@ -27,7 +27,7 @@ export default function Footer() {
     <footer className="mt-20 border-t border-gray-200 bg-cream py-12">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-3">
         <div>
-          <p className="font-serif text-lg font-semibold text-walnut">Dubai Interior<span className="text-terracotta">.</span></p>
+          <p className="font-serif text-lg font-semibold text-walnut">OnePass Interior<span className="text-terracotta">.</span></p>
           <p className="mt-3 text-xs leading-relaxed text-gray-400">{t.legal}</p>
           <p className="mt-3 text-xs text-gray-500">{t.company}</p>
           <div className="mt-4"><LanguageSwitcher /></div>

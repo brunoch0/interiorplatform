@@ -3,6 +3,7 @@ import type { Dict } from "./index";
 export const ko: Dict = {
   nav: {
     findContractors: "업체 찾기",
+    rankings: "랭킹",
     openProjects: "공개 프로젝트",
     costCalculator: "비용 계산기",
     guides: "가이드",
@@ -44,7 +45,7 @@ export const ko: Dict = {
     ctaConsult: "뭐부터 할지 막막하다면? 무료 상담",
     ctaBrowse: "업체 둘러보기",
     claimLink: "시공사이신가요? 프로필 인증받기",
-    pipelineLine: "Dubai Interior를 통해 요청된 리노베이션 견적 총액 ·",
+    pipelineLine: "OnePass Interior를 통해 요청된 리노베이션 견적 총액 ·",
     companiesWord: "개 업체",
     areasWord: "개 지역",
     detVerified: "DET 인증 ✓",
@@ -108,6 +109,6 @@ export const ko: Dict = {
     whatsapp: "WhatsApp으로 공유",
     copy: "링크 복사",
     copied: "복사됨",
-    verifiedListing: "Dubai Interior 검증 페이지",
+    verifiedListing: "OnePass Interior 검증 페이지",
   },
 };

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const c = await loadCompany(id);
   if (!c) return {};
   const title = `${c.name} — Interior Contractor in ${c.area}, Dubai`;
-  const description = `${c.name} (${c.area}, Dubai) on Dubai Interior: ${c.categories.slice(0, 3).join(", ") || "interior fit-out"}. ${
+  const description = `${c.name} (${c.area}, Dubai) on OnePass Interior: ${c.categories.slice(0, 3).join(", ") || "interior fit-out"}. ${
     c.verified ? "DET-verified contractor with quantitative trust metrics." : "Listed from the public register — request quotes or claim this profile."
   }`;
   return {

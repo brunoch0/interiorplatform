@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // ask Google to judge a page we already know is thin.
   const areas = allAreas(companies).filter((a) => a.indexable);
 
-  const statics: MetadataRoute.Sitemap = ["", "/companies", "/quote", "/consult", "/requests", "/calculator", "/protection", "/report", "/supplier/license", "/guides", "/projects", "/supplier/showcase"].map((p) => ({
+  const statics: MetadataRoute.Sitemap = ["", "/companies", "/areas", "/rankings", "/quote", "/consult", "/requests", "/calculator", "/protection", "/report", "/supplier/license", "/guides", "/projects", "/supplier/showcase"].map((p) => ({
     url: `${SITE_URL}${p}`,
     changeFrequency: "weekly",
     priority: p === "" ? 1 : 0.8,

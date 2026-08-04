@@ -20,7 +20,7 @@ export default function OgImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ color: "#FFFDF9", fontSize: 34, fontWeight: 600 }}>Dubai Interior</div>
+          <div style={{ color: "#FFFDF9", fontSize: 34, fontWeight: 600 }}>OnePass Interior</div>
           <div style={{ color: "#C06A45", fontSize: 34 }}>.</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>

@@ -65,6 +65,30 @@ export function areaStats(area: string, companies: Company[]): AreaStats {
   };
 }
 
+export type DirectoryStats = {
+  total: number;
+  ratedCount: number;
+  avgRating: number | null;
+  totalReviews: number;
+  topRated: Company[];
+  categories: CategoryMix[];
+  areaCount: number;
+};
+
+/** Site-wide totals — the numbers an answer engine can cite us for. */
+export function directoryStats(companies: Company[]): DirectoryStats {
+  const rated = companies.filter((c) => c.googleRating != null);
+  return {
+    total: companies.length,
+    ratedCount: rated.length,
+    avgRating: mean(rated.map((c) => c.googleRating!)),
+    totalReviews: companies.reduce((n, c) => n + (c.googleRatingCount ?? 0), 0),
+    topRated: rated.filter((c) => c.googleRating! >= TOP_RATED_MIN).sort(byReviews),
+    categories: categoryMix(companies),
+    areaCount: new Set(companies.filter((c) => c.area !== "Dubai").map((c) => c.area)).size,
+  };
+}
+
 /** Every real area, largest first. "Dubai" is the unassigned bucket, not a place. */
 export function allAreas(companies: Company[]): AreaStats[] {
   const byArea = new Map<string, Company[]>();

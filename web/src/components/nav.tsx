@@ -14,6 +14,7 @@ export default function Nav({ openCount = 0 }: { openCount?: number }) {
 
   const consumerLinks = [
     { href: "/companies", label: t.findContractors },
+    { href: "/rankings", label: t.rankings },
     { href: "/requests", label: t.openProjects, count: openCount },
     { href: "/calculator", label: t.costCalculator },
     { href: "/guides", label: t.guides },
@@ -31,7 +32,7 @@ export default function Nav({ openCount = 0 }: { openCount?: number }) {
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-baseline gap-1">
             <span className="font-serif text-xl font-semibold tracking-tight text-walnut">
-              Dubai&nbsp;Interior
+              OnePass&nbsp;Interior
             </span>
             <span className="text-xl leading-none text-terracotta">.</span>
           </Link>

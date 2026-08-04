@@ -7,7 +7,7 @@ import { Card, PageHeader } from "@/components/ui";
 export const metadata: Metadata = {
   title: "How You're Protected — Renovation Consumer Protection in Dubai",
   description:
-    "Dubai Interior's protection framework: standard contract terms, milestone documentation, mediation with real consequences for contractors, and DET escalation support.",
+    "OnePass Interior's protection framework: standard contract terms, milestone documentation, mediation with real consequences for contractors, and DET escalation support.",
   alternates: { canonical: `${SITE_URL}/protection` },
 };
 
