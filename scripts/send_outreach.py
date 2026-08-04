@@ -8,7 +8,7 @@ import argparse, csv, json, math, os, subprocess, sys, time
 
 SUPABASE = "https://hpirwzpdqaxzsvlqvwod.supabase.co"
 ANON = "sb_publishable_c1vJb-6zmLs-y7mJ-UnWTQ_7Klye6EX"
-FROM = "Bruno from Dubai Interior <bruno@onepassinterior.com>"
+FROM = "Bruno from OnePass Interior <bruno@onepassinterior.com>"
 REPLY_TO = "business@growtodayholdings.com"
 LOG = "data/outreach_email_log.csv"
 UTM = "utm_source=resend&utm_medium=email&utm_campaign=contractor_outreach_2026q3"
@@ -18,6 +18,20 @@ def curl_json(url):
     r = subprocess.run(["curl", "-sL", "--max-time", "30", url + ("&" if "?" in url else "?") + "apikey=" + ANON],
                        capture_output=True, text=True)
     return json.loads(r.stdout)
+
+
+def open_brief_count():
+    """Never claim a number of live briefs we can't back — fall back to vague."""
+    try:
+        r = subprocess.run(
+            ["curl", "-s", "--max-time", "30", "-X", "POST",
+             f"{SUPABASE}/rest/v1/rpc/public_open_requests",
+             "-H", f"apikey: {ANON}", "-H", "Content-Type: application/json", "-d", "{}"],
+            capture_output=True, text=True)
+        n = len(json.loads(r.stdout))
+        return f"{n} of them" if n else None
+    except Exception:
+        return None
 
 def load_env_key():
     for line in open("web/.env.local"):
@@ -30,6 +44,30 @@ def sent_emails():
         return set()
     return {row["email"] for row in csv.DictReader(open(LOG))}
 
+TOP_RATED_MIN = 4.5
+RANKINGS_SHOWN = 50  # the public page lists this many — never imply a company is on it when it isn't
+
+
+def dubai_rank(co, all_cos):
+    """Position on the public /rankings table, or None if they don't qualify.
+
+    Must mirror the page exactly (rated 4.5+, ordered by review count) — the
+    whole point of the email is that they can go and verify it.
+    """
+    if not co.get("google_rating") or float(co["google_rating"]) < TOP_RATED_MIN:
+        return None
+    # Tie-break must match byReviews() in web/src/lib/area-stats.ts exactly:
+    # reviews desc, rating desc, name asc. Reviews tie often at low counts.
+    ranked = sorted(
+        (c for c in all_cos if c.get("google_rating") and float(c["google_rating"]) >= TOP_RATED_MIN),
+        key=lambda c: (-int(c.get("google_rating_count") or 0), -float(c.get("google_rating") or 0), c["name"]),
+    )
+    for i, c in enumerate(ranked, 1):
+        if c["id"] == co["id"]:
+            return i
+    return None
+
+
 def area_rank(co, all_cos):
     peers = [c for c in all_cos if c.get("area") == co.get("area") and c.get("google_rating")]
     if not co.get("google_rating") or len(peers) < 5:
@@ -40,43 +78,59 @@ def area_rank(co, all_cos):
     if pct <= 25: return "top 25%"
     return None
 
-def compose(co, rank):
+def compose(co, rank, dubai_pos, open_briefs):
     name = co["name"]
     area = co.get("area") or "Dubai"
     rating = co.get("google_rating")
     n = co.get("google_rating_count")
     cats = (co.get("categories") or [])[:2]
+    rankings_url = f"https://onepassinterior.com/rankings?{UTM}&utm_content=rankings"
 
-    if rating and n:
-        subject = f"{name} — your {float(rating):.1f}★ Google rating is live on Dubai Interior"
-        rating_line = f"- Google rating shown: {float(rating):.1f}★ ({n} reviews)" + (f" — {rank} in {area}" if rank else "")
+    # The strongest opener we have is a fact they can check in one click.
+    if dubai_pos and dubai_pos <= RANKINGS_SHOWN:
+        subject = f"{name} is #{dubai_pos} in Dubai by review volume — see the table"
+        proof = [
+            f"We published the ranking today: {rankings_url}",
+            f"You are #{dubai_pos} of 649 companies, with {n} Google reviews at {float(rating):.1f}.",
+        ]
+    elif rating and n:
+        subject = f"{name} — your {float(rating):.1f} rating is live on OnePass Interior"
+        proof = [
+            f"Your profile: https://onepassinterior.com/companies/{co['id']}?{UTM}&utm_content=profile_link",
+            f"Showing {float(rating):.1f} from {n} Google reviews" + (f", {rank} in {area}." if rank else "."),
+        ]
     else:
-        subject = f"{name} is listed on Dubai Interior — 2 things to check"
-        rating_line = "- Licence-based listing from Dubai's public register"
+        subject = f"{name} is listed on OnePass Interior — two things to check"
+        proof = [
+            f"Your profile: https://onepassinterior.com/companies/{co['id']}?{UTM}&utm_content=profile_link",
+            "Listed from Dubai's public licence register. No rating is showing yet.",
+        ]
 
-    cat_line = f"- Listed under: {', '.join(cats)}" if cats else ""
     lines = [
         f"Hi {name} team,",
         "",
-        "I'm Bruno, founder of Dubai Interior (onepassinterior.com) — Dubai's renovation comparison platform. All 649 licensed fit-out companies are listed, including yours:",
+        "I'm Bruno, founder of OnePass Interior (onepassinterior.com). We track all 649 licensed interior and fit-out companies in Dubai and this week we published what 22,563 Google reviews across them actually show.",
         "",
-        f"Your live profile: https://onepassinterior.com/companies/{co['id']}?{UTM}&utm_content=profile_link",
-        rating_line,
+        *proof,
+        "",
+        "Two things worth knowing about how that table works:",
+        "- It ranks by review volume, not star score. 85% of rated companies in Dubai sit at 4.5 or above, so the score separates nobody.",
+        "- Placement cannot be bought, and claiming a profile gives no ranking advantage. The method is published on the page.",
     ]
-    if cat_line:
-        lines.append(cat_line)
+    if cats:
+        lines.append(f"- You are listed under: {', '.join(cats)}")
     lines += [
         "",
-        f"Homeowners now post renovation briefs through the platform — the open board currently has live briefs from Marina, JVC, Business Bay and Arabian Ranches you can quote on: https://onepassinterior.com/requests?" + UTM + "&utm_content=open_board",
+        f"Separately, homeowners post renovation briefs on the platform. {open_briefs or 'Some'} are open for quotes right now: https://onepassinterior.com/requests?{UTM}&utm_content=open_board",
         "",
         "Two free things while we're in early access:",
-        "1) Quote on any open brief — we pass it straight to the homeowner",
-        f"2) Claim your profile (5 minutes, trade licence needed) — verified companies rank first in {area} and homeowner contacts come to your dashboard directly: https://onepassinterior.com/supplier/license?" + UTM + "&utm_content=claim_cta",
+        "1) Quote on any open brief — it goes straight to the homeowner",
+        f"2) Claim your profile (5 minutes, trade licence needed) so enquiries reach your dashboard instead of a form we forward: https://onepassinterior.com/supplier/license?{UTM}&utm_content=claim_cta",
         "",
-        "No catch during early access. We're building the trust layer for Dubai renovation, and companies with your track record are exactly who should be at the top.",
+        "If the data on your listing is wrong, reply and I'll fix it the same day.",
         "",
         "Bruno",
-        "Dubai Interior · onepassinterior.com",
+        "OnePass Interior · onepassinterior.com",
         "Growtoday Holdings FZE, Dubai, UAE",
         "",
         'P.S. Not interested in emails from us? Just reply "unsubscribe" and I\'ll remove you — no hard feelings.',
@@ -97,8 +151,10 @@ def main():
     for row in csv.DictReader(open("data/company_emails.csv")):
         emails[row["id"]] = row["email"].lower()
 
-    cos = curl_json(f"{SUPABASE}/rest/v1/companies?select=id,name,area,categories,google_rating,google_rating_count&limit=1000")
-    cos = [c for c in cos if c["id"] in emails]
+    # Rank against the whole directory, not just the companies we can email —
+    # the number in the subject line has to match the public page they'll open.
+    all_cos = curl_json(f"{SUPABASE}/rest/v1/companies?select=id,name,area,categories,google_rating,google_rating_count&limit=1000")
+    cos = [c for c in all_cos if c["id"] in emails]
     for c in cos:
         c["email"] = emails[c["id"]]
 
@@ -118,10 +174,11 @@ def main():
     queue = [c for c in deduped if c["email"] not in already]
     print(f"list: {len(deduped)} unique emails · already sent: {len(already)} · queue: {len(queue)}")
 
+    open_briefs = open_brief_count()
+
     if args.dry_run:
         for c in queue[:3]:
-            rank = area_rank(c, cos)
-            subj, body, _ = compose(c, rank)
+            subj, body, _ = compose(c, area_rank(c, all_cos), dubai_rank(c, all_cos), open_briefs)
             print("\n" + "=" * 70 + f"\nTO: {c['email']}\nSUBJECT: {subj}\n\n{body}")
         return
 
@@ -137,8 +194,7 @@ def main():
         if new_log:
             w.writerow(["email", "company_id", "name", "sent_at", "status"])
         for c in queue[: args.batch]:
-            rank = area_rank(c, cos)
-            subj, body, html_body = compose(c, rank)
+            subj, body, html_body = compose(c, area_rank(c, all_cos), dubai_rank(c, all_cos), open_briefs)
             payload = json.dumps({
                 "from": FROM, "to": [c["email"]], "reply_to": REPLY_TO,
                 "subject": subj, "text": body, "html": html_body,

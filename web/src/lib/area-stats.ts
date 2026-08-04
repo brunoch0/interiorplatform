@@ -30,8 +30,17 @@ function mean(xs: number[]) {
   return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null;
 }
 
+/**
+ * Review count, then rating, then name. The tie-break has to be deterministic
+ * and reproducible outside this file — outreach emails quote a company's exact
+ * position and tell them to go and check it.
+ */
 export function byReviews(a: Company, b: Company) {
-  return (b.googleRatingCount ?? 0) - (a.googleRatingCount ?? 0);
+  return (
+    (b.googleRatingCount ?? 0) - (a.googleRatingCount ?? 0) ||
+    (b.googleRating ?? 0) - (a.googleRating ?? 0) ||
+    a.name.localeCompare(b.name)
+  );
 }
 
 export function categoryMix(companies: Company[]): CategoryMix[] {
