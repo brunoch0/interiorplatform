@@ -27,8 +27,16 @@ export default function GuideArticle({
     otherSlugs ??
     guides.filter((x) => x.slug !== g.slug).map((x) => ({ slug: x.slug, title: x.title }));
 
+  // lang/dir live here rather than on <html>: only the root layout renders
+  // <html>, and making it locale-aware would force every page to render
+  // dynamically. Both attributes are valid on any element, so Arabic reads
+  // right-to-left and search engines see the article's real language.
   return (
-    <article className="mx-auto max-w-3xl px-4 py-10">
+    <article
+      lang={locale}
+      dir={LOCALE_META[locale].dir}
+      className="mx-auto max-w-3xl px-4 py-10"
+    >
       <BackLink href={`${prefix}/guides`} label={t.allGuides} />
 
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta-deep">{t.kicker}</p>

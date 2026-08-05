@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LOCALE_META } from "@/lib/i18n";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE_URL } from "@/lib/site";
@@ -39,7 +40,7 @@ export default async function LocalizedGuidesIndex({ params }: Params) {
   if (slugs.length === 0) notFound();
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12">
+    <div lang={locale} dir={LOCALE_META[locale].dir} className="mx-auto max-w-5xl px-4 py-12">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta-deep">{t.kicker}</p>
       <h1 className="mt-3 text-3xl md:text-4xl">{t.indexTitle}</h1>
       <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-gray-500">{t.indexBody}</p>

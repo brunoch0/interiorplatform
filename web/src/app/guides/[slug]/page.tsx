@@ -21,6 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       canonical: `${SITE_URL}/guides/${g.slug}`,
       languages: Object.fromEntries([
         ["en", `${SITE_URL}/guides/${g.slug}`],
+        // Fallback for searchers whose language matches none of ours
+        ["x-default", `${SITE_URL}/guides/${g.slug}`],
         ...translatedLocalesFor(g.slug).map((l) => [l, `${SITE_URL}/${l}/guides/${g.slug}`]),
       ]),
     },

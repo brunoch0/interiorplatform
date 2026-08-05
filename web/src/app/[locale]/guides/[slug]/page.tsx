@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       canonical: url,
       languages: Object.fromEntries([
         ["en", `${SITE_URL}/guides/${slug}`],
+        ["x-default", `${SITE_URL}/guides/${slug}`],
         ...translatedLocalesFor(slug).map((l) => [l, `${SITE_URL}/${l}/guides/${slug}`]),
       ]),
     },
