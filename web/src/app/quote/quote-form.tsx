@@ -16,7 +16,7 @@ const timelines = ["As soon as possible", "Within 1–2 months", "Within 3–6 m
 const styles = ["No preference", "Modern / Minimal", "Contemporary luxury", "Arabic / Majlis", "Scandinavian", "Industrial", "Bohemian / Exotic", "Classic European", "Japandi"];
 const householdOptions = ["Pets at home", "Young children", "Elderly family members", "Accessibility needs"];
 
-export default function QuoteForm({ companies, preselected }: { companies: Company[]; preselected: string[] }) {
+export default function QuoteForm({ companies, preselected, src }: { companies: Company[]; preselected: string[]; src?: string }) {
   const [targets, setTargets] = useState<string[]>(preselected);
   const [search, setSearch] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +35,11 @@ export default function QuoteForm({ companies, preselected }: { companies: Compa
 
   const submit = (formData: FormData) => {
     formData.set("companyIds", targets.join(","));
-    formData.set("attribution", readAttribution() ?? "");
+    // First touch stays whatever brought them to the site; quote_src records
+    // which internal page produced this click. Internal links must not carry
+    // UTMs — that would start a new GA4 session and erase the real source.
+    const attr = { ...(JSON.parse(readAttribution() || "{}") as Record<string, string>), ...(src ? { quote_src: src } : {}) };
+    formData.set("attribution", JSON.stringify(attr));
     setError(null);
     startTransition(async () => {
       const { data: sess } = await supabaseBrowser.auth.getSession();

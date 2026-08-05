@@ -4,7 +4,7 @@ export function parseAttribution(raw?: string | null): Record<string, string> | 
   try {
     const obj = JSON.parse(raw) as unknown;
     if (!obj || typeof obj !== "object" || Array.isArray(obj)) return null;
-    const allowed = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "referrer", "landing_path", "first_seen"];
+    const allowed = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "referrer", "landing_path", "first_seen", "quote_src"];
     const out: Record<string, string> = {};
     for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
       if (allowed.includes(k) && typeof v === "string") out[k] = v.slice(0, 200);

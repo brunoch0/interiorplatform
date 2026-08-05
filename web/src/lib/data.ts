@@ -27,6 +27,8 @@ export type Company = {
   placeId?: string | null;
   photoPath?: string | null;
   verifiedAt?: string | null;
+  /** Public website. Absent for ~13% of the directory — a real signal, not a gap. */
+  website?: string | null;
 };
 
 const curatedCompanies: Company[] = [

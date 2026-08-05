@@ -60,6 +60,7 @@ function toCompany(r: Row): Company {
     placeId: r.place_id,
     photoPath: r.photo_path,
     verifiedAt: r.verified_at,
+    website: r.website,
   };
 }
 

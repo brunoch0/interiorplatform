@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { fetchCompanies } from "@/lib/db";
 import { guides } from "@/lib/guides";
 import { SITE_URL, areaSlug } from "@/lib/site";
-import { allAreas } from "@/lib/area-stats";
+import { allAreas, areaCategories, categorySlug } from "@/lib/area-stats";
 import { GUIDE_LOCALES, localizedSlugs } from "@/lib/guide-i18n";
 
 export const revalidate = 3600;
@@ -44,11 +44,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9, // programmatic SEO money pages
   }));
 
+  // "carpenter dubai al quoz" and friends — the search intent with the most
+  // impressions and no page of its own until now. Same thin-page gate as areas.
+  const areaCategoryPages: MetadataRoute.Sitemap = areaCategories(companies)
+    .filter((x) => x.indexable)
+    .map((x) => ({
+      url: `${SITE_URL}/areas/${areaSlug(x.area)}/${categorySlug(x.category)}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    }));
+
   const companyPages: MetadataRoute.Sitemap = companies.map((c) => ({
     url: `${SITE_URL}/companies/${c.id}`,
     changeFrequency: "weekly",
     priority: 0.6,
   }));
 
-  return [...statics, ...guidePages, ...localizedGuidePages, ...areaPages, ...companyPages];
+  return [...statics, ...guidePages, ...localizedGuidePages, ...areaPages, ...areaCategoryPages, ...companyPages];
 }

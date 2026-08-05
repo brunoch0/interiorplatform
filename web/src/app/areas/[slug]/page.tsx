@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { fmt } from "@/lib/data";
 import { fetchCompanies } from "@/lib/db";
 import { SITE_URL, SITE_NAME, areaSlug, mapsUrl } from "@/lib/site";
-import { allAreas, TOP_RATED_MIN, type AreaStats } from "@/lib/area-stats";
+import { allAreas, categorySlug, MIN_INDEXABLE, TOP_RATED_MIN, type AreaStats } from "@/lib/area-stats";
 import ShareButtons from "@/components/share-buttons";
 import { Badge, Card, PageHeader, Stat } from "@/components/ui";
 
@@ -163,7 +163,15 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
               <tbody className="divide-y divide-gray-100">
                 {s.categories.map((c) => (
                   <tr key={c.name}>
-                    <td className="px-4 py-2.5 text-gray-700">{c.name}</td>
+                    <td className="px-4 py-2.5 text-gray-700">
+                      {c.count >= MIN_INDEXABLE ? (
+                        <Link href={`/areas/${slug}/${categorySlug(c.name)}`} className="font-semibold text-charcoal hover:underline">
+                          {c.name}
+                        </Link>
+                      ) : (
+                        c.name
+                      )}
+                    </td>
                     <td className="px-4 py-2.5 font-mono text-gray-600">{fmt(c.count)}</td>
                     <td className="px-4 py-2.5 font-mono text-gray-600">{rating(c.avgRating)}</td>
                   </tr>

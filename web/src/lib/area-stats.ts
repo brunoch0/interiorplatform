@@ -1,4 +1,5 @@
 import type { Company } from "./data";
+import { areaSlug } from "./site";
 
 /**
  * Aggregates over the directory. These numbers are the only thing on an area
@@ -72,6 +73,41 @@ export function areaStats(area: string, companies: Company[]): AreaStats {
     categories: categoryMix(companies),
     indexable: companies.length >= MIN_INDEXABLE,
   };
+}
+
+/** Category slugs are URL-facing, so they get the same treatment as areas. */
+export function categorySlug(cat: string) {
+  return cat.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+export type AreaCategory = {
+  area: string;
+  category: string;
+  companies: Company[];
+  indexable: boolean;
+};
+
+/**
+ * Every area × category pair worth its own page. The same MIN_INDEXABLE gate as
+ * areas — combinations are where a directory site most easily generates
+ * hundreds of near-empty pages.
+ */
+export function areaCategories(companies: Company[]): AreaCategory[] {
+  // Keyed by the slug pair, but area and category ride in the value: both
+  // contain spaces ("Al Quoz", "Full Renovation"), so a key cannot be split back.
+  const acc = new Map<string, AreaCategory>();
+  for (const c of companies) {
+    if (c.area === "Dubai") continue;
+    for (const category of c.categories) {
+      const key = `${areaSlug(c.area)}/${categorySlug(category)}`;
+      const e = acc.get(key) ?? { area: c.area, category, companies: [], indexable: false };
+      e.companies.push(c);
+      acc.set(key, e);
+    }
+  }
+  return [...acc.values()]
+    .map((e) => ({ ...e, indexable: e.companies.length >= MIN_INDEXABLE }))
+    .sort((a, b) => b.companies.length - a.companies.length);
 }
 
 export type DirectoryStats = {
