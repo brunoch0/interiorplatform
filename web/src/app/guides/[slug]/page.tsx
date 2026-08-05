@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { guides } from "@/lib/guides";
 import { guideImage } from "@/lib/guide-images";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
 import GuideArticle from "@/components/guide-article";
 import { translatedLocalesFor } from "@/lib/guide-i18n";
 
@@ -45,9 +45,13 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     headline: g.title,
     description: g.description,
     dateModified: g.updated,
-    author: { "@type": "Organization", name: "Onepass Interior" },
-    publisher: { "@type": "Organization", name: "Onepass Interior", url: SITE_URL },
+    inLanguage: "en",
+    image: guideImage(g.slug, g.category, 1200),
+    author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
     mainEntityOfPage: `${SITE_URL}/guides/${g.slug}`,
+    isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+    about: { "@type": "Thing", name: g.category },
   };
   const faqLd = {
     "@context": "https://schema.org",

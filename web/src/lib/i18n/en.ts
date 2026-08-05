@@ -18,6 +18,9 @@ export const en = {
     operatorAdmin: "Operator Admin",
   },
   footer: {
+    rankings: "Rankings",
+    areas: "Companies by area",
+    feedback: "Report a problem with this site",
     legal:
       "All contractor metrics are quantitative figures derived from verified reviews — no subjective ratings. We comply with UAE federal law including defamation regulations. Escrow payments arrive in phases following CBUAE regulatory review.",
     company: "Growtoday Holdings FZE · Dubai, UAE",

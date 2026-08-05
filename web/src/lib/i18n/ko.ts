@@ -19,6 +19,9 @@ export const ko: Dict = {
     operatorAdmin: "운영자 관리",
   },
   footer: {
+    rankings: "랭킹",
+    areas: "지역별 업체",
+    feedback: "사이트 오류·건의",
     legal:
       "모든 업체 지표는 검증된 리뷰에서 산출된 정량 수치이며 주관적 별점을 사용하지 않습니다. UAE 연방법(명예훼손 규정 포함)을 준수합니다. 에스크로 결제는 CBUAE 규제 검토에 따라 단계적으로 제공됩니다.",
     company: "Growtoday Holdings FZE · 두바이, UAE",

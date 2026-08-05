@@ -70,8 +70,15 @@ export default function GuideArticle({
         </p>
       )}
 
-      <div className="mt-8 space-y-4 border-t border-gray-300 pt-8">
-        {g.intro.map((p, i) => (
+      {/* The first paragraph already answers the query. Lifting it out gives
+          search and answer engines one self-contained block to quote. */}
+      <div className="mt-8 rounded-2xl border-l-4 border-terracotta bg-sand px-5 py-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-terracotta-deep">{t.shortAnswer}</p>
+        <p className="mt-2 leading-relaxed text-charcoal">{g.intro[0]}</p>
+      </div>
+
+      <div className="mt-6 space-y-4 border-t border-gray-300 pt-6">
+        {g.intro.slice(1).map((p, i) => (
           <p key={i} className="leading-relaxed text-gray-600">{p}</p>
         ))}
       </div>

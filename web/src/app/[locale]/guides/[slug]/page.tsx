@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
 import { guideImage } from "@/lib/guide-images";
 import {
   GUIDE_LOCALES,
@@ -64,9 +64,10 @@ export default async function LocalizedGuidePage({ params }: Params) {
     description: g.description,
     inLanguage: locale,
     dateModified: g.updated,
-    author: { "@type": "Organization", name: "Onepass Interior" },
-    publisher: { "@type": "Organization", name: "Onepass Interior", url: SITE_URL },
+    author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
     translationOfWork: { "@type": "Article", "@id": `${SITE_URL}/guides/${slug}` },
   };
   const faqLd = {

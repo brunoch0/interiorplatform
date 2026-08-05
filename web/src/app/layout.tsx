@@ -4,6 +4,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import Nav from "@/components/nav";
+import BetaBar from "@/components/beta-bar";
 import Footer from "@/components/footer";
 import I18nProvider from "@/lib/i18n/provider";
 import { GA_ID, SITE_NAME, SITE_URL } from "@/lib/site";
@@ -109,6 +110,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
         <I18nProvider>
+          <BetaBar />
           <Nav openCount={openCount} />
           <main>{children}</main>
           <Footer />

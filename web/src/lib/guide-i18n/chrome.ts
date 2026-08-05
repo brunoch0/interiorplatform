@@ -3,6 +3,7 @@ import type { GuideLocale } from "./index";
 /** Template chrome around a translated guide. Article text itself comes from the bundles. */
 export type GuideChrome = {
   allGuides: string;
+  shortAnswer: string;
   kicker: string;
   minRead: string;
   updated: string;
@@ -22,6 +23,7 @@ export type GuideChrome = {
 export const GUIDE_CHROME: Record<GuideLocale | "en", GuideChrome> = {
   en: {
     allGuides: "All guides",
+    shortAnswer: "Short answer",
     kicker: "Dubai renovation guide",
     minRead: "min read",
     updated: "Updated",
@@ -39,6 +41,7 @@ export const GUIDE_CHROME: Record<GuideLocale | "en", GuideChrome> = {
   },
   ar: {
     allGuides: "كل الأدلة",
+    shortAnswer: "الإجابة المختصرة",
     kicker: "دليل التجديد في دبي",
     minRead: "دقيقة قراءة",
     updated: "آخر تحديث",
@@ -56,6 +59,7 @@ export const GUIDE_CHROME: Record<GuideLocale | "en", GuideChrome> = {
   },
   ru: {
     allGuides: "Все гайды",
+    shortAnswer: "Кратко",
     kicker: "Гайд по ремонту в Дубае",
     minRead: "мин чтения",
     updated: "Обновлено",
@@ -73,6 +77,7 @@ export const GUIDE_CHROME: Record<GuideLocale | "en", GuideChrome> = {
   },
   ko: {
     allGuides: "전체 가이드",
+    shortAnswer: "짧은 답",
     kicker: "두바이 인테리어 가이드",
     minRead: "분 소요",
     updated: "업데이트",

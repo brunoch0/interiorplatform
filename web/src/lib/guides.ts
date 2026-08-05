@@ -28,6 +28,12 @@ export const guides: Guide[] = [
     updated: "2026-07-25",
     readMinutes: 8,
     category: "Planning & Costs",
+    officialLinks: [
+      { label: "Dubai Municipality — building permits & fees", href: "https://www.dm.gov.ae/", note: "Permit fees apply to structural, electrical and plumbing changes. Only a licensed contractor can file" },
+      { label: "DEWA — connection and modification services", href: "https://www.dewa.gov.ae/", note: "Any change to electrical load or water connections is charged separately from the contractor's quote" },
+      { label: "Verify a trade licence — Invest in Dubai", href: "https://invest.dubai.ae/", note: "Confirm the company's licence and fit-out activity before paying a deposit" },
+      { label: "Dubai Consumer (DET) — pricing disputes", href: "https://consumerrights.ae/", note: "Free · hotline 600 545 555 · for charges added after a contract is signed" },
+    ],
     intro: [
       "Renovating an apartment in Dubai typically costs between AED 25,000 for a light studio refresh and AED 250,000 or more for a full three-bedroom overhaul. The spread is wide because the word renovation covers everything from repainting and new flooring to stripping a unit back to concrete and rebuilding the kitchen, bathrooms and MEP services.",
       "This guide sets out realistic 2026 price ranges by apartment size and per square foot, explains what pushes a project from one band to the next, and lists the costs that quotes often leave out. The figures come from quoted projects across Dubai communities and are intended as planning ranges, not fixed prices."
@@ -145,6 +151,12 @@ export const guides: Guide[] = [
     updated: "2026-07-25",
     readMinutes: 8,
     category: "Planning & Costs",
+    officialLinks: [
+      { label: "Dubai Municipality — building permits & fees", href: "https://www.dm.gov.ae/", note: "Villa extensions, external works and structural change all need DM approval before starting" },
+      { label: "DEWA — connection and modification services", href: "https://www.dewa.gov.ae/", note: "Load increases for villas are common in renovations and are billed separately" },
+      { label: "Dubai Land Department / Dubai REST", href: "https://dubailand.gov.ae/", note: "Ownership and title checks — community developers ask for these before issuing an NOC" },
+      { label: "Verify a trade licence — Invest in Dubai", href: "https://invest.dubai.ae/", note: "Villa projects are larger contracts — check the entity before any payment" },
+    ],
     intro: [
       "Villa renovation in Dubai starts around AED 150,000 for a light refresh and rises to AED 2 million or more for a full luxury transformation. Villas carry costs apartments do not: structural work, external facades, gardens and pools, and approvals from master developers such as Emaar and Nakheel in addition to the usual authority permits.",
       "This guide breaks down 2026 cost tiers, explains why villa projects behave differently from apartment projects, covers landscaping and pool budgets, and sets out approval timelines so you can plan the programme realistically before committing to a contractor."
@@ -242,6 +254,11 @@ export const guides: Guide[] = [
     updated: "2026-07-25",
     readMinutes: 7,
     category: "Planning & Costs",
+    officialLinks: [
+      { label: "Dubai Municipality — building permits & fees", href: "https://www.dm.gov.ae/", note: "Moving plumbing or waterproofing a wet area is permitted work, not cosmetic" },
+      { label: "DEWA — connection and modification services", href: "https://www.dewa.gov.ae/", note: "Relocating water points or adding a water heater circuit is chargeable" },
+      { label: "Dubai Consumer (DET) — pricing disputes", href: "https://consumerrights.ae/", note: "Free · hotline 600 545 555" },
+    ],
     intro: [
       "Kitchens and bathrooms are the most expensive rooms in any Dubai renovation because they concentrate plumbing, electrical, waterproofing, tiling and joinery into small spaces. A kitchen runs from AED 15,000 for a basic refit to well over AED 100,000 for a luxury build; a bathroom runs from AED 8,000 to AED 50,000 or more per room.",
       "This guide itemises where the money goes in each room, explains the quality checks that matter for wet work, particularly waterproofing, and sets out realistic timelines so you can hold a contractor to a sensible programme."
@@ -341,6 +358,13 @@ export const guides: Guide[] = [
     updated: "2026-07-25",
     readMinutes: 8,
     category: "Permits & Rules",
+    officialLinks: [
+      { label: "Dubai Municipality — building permits", href: "https://www.dm.gov.ae/", note: "The permit authority for structural, electrical and plumbing work. Applications are filed by the contractor, not the owner" },
+      { label: "DEWA — connection and modification services", href: "https://www.dewa.gov.ae/", note: "Required whenever electrical load or water connections change" },
+      { label: "Trakhees (Ports, Customs & Free Zone Corporation)", href: "https://trakhees.ae/", note: "The approving authority instead of DM in Palm Jumeirah, Jebel Ali and other free-zone communities" },
+      { label: "Dubai Development Authority (DDA)", href: "https://www.dda.gov.ae/", note: "The authority for TECOM communities including Dubai Design District and Barsha Heights" },
+      { label: "Verify a trade licence — Invest in Dubai", href: "https://invest.dubai.ae/", note: "Only a company with the right fit-out activity can file a permit for you" },
+    ],
     intro: [
       "Almost every renovation in Dubai needs at least one approval before work starts, and larger projects need three or four. The sequence matters: building management NOC first, then the relevant authority permit, Dubai Municipality for most of the city, Trakhees for Palm Jumeirah and ports zones, DDA for certain districts, and a completion certificate at the end.",
       "This guide maps which approvals apply to which work, walks through the NOC and DM processes step by step, and explains why only licensed contractors can apply, a detail that quietly filters out a large share of unqualified firms."
