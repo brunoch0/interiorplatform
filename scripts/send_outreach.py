@@ -82,67 +82,76 @@ def area_rank(co, all_cos):
     return None
 
 def compose(co, rank, dubai_pos, open_briefs):
+    """Short, plain, one link.
+
+    The long HTML version landed in Gmail's Promotions tab, where a contractor
+    never sees it — tracking pixel, rewritten links, HTML body and three CTAs
+    are each a bulk-mail signal. Deliverability beats measurement here: clicks
+    still show up in GA4 through the UTM.
+    """
     name = co["name"]
-    area = co.get("area") or "Dubai"
     rating = co.get("google_rating")
     n = co.get("google_rating_count")
-    cats = (co.get("categories") or [])[:2]
-    rankings_url = f"https://onepassinterior.com/rankings?{UTM}&utm_content=rankings"
+    profile = f"https://onepassinterior.com/companies/{co['id']}?{UTM}&utm_content=profile"
 
-    # The strongest opener we have is a fact they can check in one click.
+    # Only point at the ranking table when they are actually on it. Sending a
+    # company to a list it does not appear in undoes the whole premise.
+    # State the method, not a verdict. This is our ordering by one metric, not
+    # a standing we are in a position to assign to somebody else's business.
     if dubai_pos and dubai_pos <= RANKINGS_SHOWN:
-        subject = f"{name} is #{dubai_pos} in Dubai by review volume — see the table"
-        proof = [
-            f"We published the ranking today: {rankings_url}",
-            f"You are #{dubai_pos} of 649 companies, with {n} Google reviews at {float(rating):.1f}.",
-        ]
+        subject = f"{name} — where your listing sits among 649 Dubai companies"
+        claim = (f"We track all 649 licensed fit-out companies in Dubai and ordered them by "
+                 f"Google review volume. On that measure your listing lands in the top {RANKINGS_SHOWN} "
+                 f"— {n} reviews at {float(rating):.1f}.")
+        cta, link = "The table", f"https://onepassinterior.com/rankings?{UTM}&utm_content=rankings"
     elif rating and n:
-        subject = f"{name} — your {float(rating):.1f} rating is live on OnePass Interior"
-        proof = [
-            f"Your profile: https://onepassinterior.com/companies/{co['id']}?{UTM}&utm_content=profile_link",
-            f"Showing {float(rating):.1f} from {n} Google reviews" + (f", {rank} in {area}." if rank else "."),
-        ]
+        subject = f"{name} is listed on OnePass Interior"
+        claim = (f"We track all 649 licensed fit-out companies in Dubai. Yours shows "
+                 f"{float(rating):.1f} from {n} Google reviews.")
+        cta, link = "Your page", profile
     else:
-        subject = f"{name} is listed on OnePass Interior — two things to check"
-        proof = [
-            f"Your profile: https://onepassinterior.com/companies/{co['id']}?{UTM}&utm_content=profile_link",
-            "Listed from Dubai's public licence register. No rating is showing yet.",
-        ]
+        subject = f"{name} is listed on OnePass Interior"
+        claim = ("We track all 649 licensed fit-out companies in Dubai from the public "
+                 "licence register. Yours has no rating showing yet.")
+        cta, link = "Your page", profile
 
     lines = [
         f"Hi {name} team,",
         "",
-        "I'm Bruno, founder of OnePass Interior (onepassinterior.com). We track all 649 licensed interior and fit-out companies in Dubai and this week we published what 22,563 Google reviews across them actually show.",
+        f"I run OnePass Interior. {claim}",
         "",
-        *proof,
+        f"{cta}: {link}",
         "",
-        "Two things worth knowing about how that table works:",
-        "- It ranks by review volume, not star score. 85% of rated companies in Dubai sit at 4.5 or above, so the score separates nobody.",
-        "- Placement cannot be bought, and claiming a profile gives no ranking advantage. The method is published on the page.",
-    ]
-    if cats:
-        lines.append(f"- You are listed under: {', '.join(cats)}")
-    lines += [
-        "",
-        f"Separately, homeowners post renovation briefs on the platform. {open_briefs or 'Some'} are open for quotes right now: https://onepassinterior.com/requests?{UTM}&utm_content=open_board",
-        "",
-        "Two free things while we're in early access:",
-        "1) Quote on any open brief — it goes straight to the homeowner",
-        f"2) Claim your profile (5 minutes, trade licence needed) so enquiries reach your dashboard instead of a form we forward: https://onepassinterior.com/supplier/license?{UTM}&utm_content=claim_cta",
-        "",
-        "If the data on your listing is wrong, reply and I'll fix it the same day.",
+        "Placement can't be bought. If anything on your listing is wrong, reply and I'll fix it today.",
         "",
         "Bruno",
         "OnePass Interior · onepassinterior.com",
-        "Growtoday Holdings FZE, Dubai, UAE",
-        "",
-        'P.S. Not interested in emails from us? Just reply "unsubscribe" and I\'ll remove you — no hard feelings.',
     ]
     text = "\n".join(lines)
+
+    # Minimal HTML: <strong> and one link, nothing else. No images, no CSS, no
+    # buttons, no tables — those are what make Gmail read a message as bulk.
+    # Bold only the figures the reader is being asked to check.
     import html as _h
-    html_body = "<div style=\'font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#222\'>" + \
-        "<br>".join(_h.escape(l) if l else "&nbsp;" for l in lines) + "</div>"
+    body = _h.escape(claim)
+    if dubai_pos and dubai_pos <= RANKINGS_SHOWN:
+        body = body.replace(f"top {RANKINGS_SHOWN}", f"<strong>top {RANKINGS_SHOWN}</strong>")
+        body = body.replace(f"{n} reviews at {float(rating):.1f}",
+                            f"<strong>{n} reviews at {float(rating):.1f}</strong>")
+    elif rating and n:
+        body = body.replace(f"{float(rating):.1f} from {n} Google reviews",
+                            f"<strong>{float(rating):.1f} from {n} Google reviews</strong>")
+
+    html_body = (
+        f"<p>Hi {_h.escape(name)} team,</p>"
+        f"<p>I run OnePass Interior. {body}</p>"
+        f'<p>{_h.escape(cta)}: <a href="{_h.escape(link)}">{_h.escape(link.split("?")[0])}</a></p>'
+        "<p><strong>Placement can&rsquo;t be bought.</strong> "
+        "If anything on your listing is wrong, reply and I&rsquo;ll fix it today.</p>"
+        "<p>Bruno<br>OnePass Interior &middot; onepassinterior.com</p>"
+    )
     return subject, text, html_body
+
 
 def main():
     ap = argparse.ArgumentParser()
