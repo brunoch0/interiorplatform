@@ -49,6 +49,16 @@ export async function POST(req: NextRequest) {
   }
 
   const d = evt.data ?? {};
+
+  // Resend webhooks are account-wide, not per-domain, so this endpoint also
+  // receives events for the other ventures sending from the same account.
+  // Acknowledge them — a non-2xx would make Resend retry — but never store
+  // another venture's recipients in this database.
+  const from = typeof d.from === "string" ? d.from : "";
+  if (!from.includes("@onepassinterior.com")) {
+    return NextResponse.json({ ok: true, ignored: "other sending domain" });
+  }
+
   const to = Array.isArray(d.to) ? d.to[0] : d.to;
 
   const { error } = await supabase.from("email_events").insert({

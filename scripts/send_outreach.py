@@ -4,7 +4,7 @@ Usage:
   python3 scripts/send_outreach.py --dry-run          # print 3 samples, send nothing
   python3 scripts/send_outreach.py --batch 30         # send next 30 (skips already-sent)
 Reads RESEND_API_KEY from web/.env.local. Logs to data/outreach_email_log.csv."""
-import argparse, csv, json, math, os, subprocess, sys, time
+import argparse, csv, json, math, os, re, subprocess, sys, time
 
 SUPABASE = "https://hpirwzpdqaxzsvlqvwod.supabase.co"
 ANON = "sb_publishable_c1vJb-6zmLs-y7mJ-UnWTQ_7Klye6EX"
@@ -13,6 +13,9 @@ REPLY_TO = "business@growtodayholdings.com"
 LOG = "data/outreach_email_log.csv"
 UTM = "utm_source=resend&utm_medium=email&utm_campaign=contractor_outreach_2026q3"
 FREEMAIL = ("gmail.", "hotmail.", "yahoo.", "outlook.", "icloud.")
+# Scraped addresses arrive with URL-encoding artefacts ("%20info@..."), which
+# bounce and cost sending reputation. Screen them out rather than burn a send.
+VALID_EMAIL = re.compile(r"^[^@\s%]+@[^@\s%]+\.[a-z]{2,}$", re.I)
 
 def curl_json(url):
     r = subprocess.run(["curl", "-sL", "--max-time", "30", url + ("&" if "?" in url else "?") + "apikey=" + ANON],
@@ -147,9 +150,15 @@ def main():
     ap.add_argument("--batch", type=int, default=30)
     args = ap.parse_args()
 
-    emails = {}
+    emails, skipped = {}, []
     for row in csv.DictReader(open("data/company_emails.csv")):
-        emails[row["id"]] = row["email"].lower()
+        e = row["email"].strip().lower()
+        if VALID_EMAIL.match(e):
+            emails[row["id"]] = e
+        else:
+            skipped.append(e)
+    if skipped:
+        print(f"형식 이상으로 제외 {len(skipped)}건: {skipped[:5]}")
 
     # Rank against the whole directory, not just the companies we can email —
     # the number in the subject line has to match the public page they'll open.
