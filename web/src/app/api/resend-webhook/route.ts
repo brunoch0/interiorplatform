@@ -9,6 +9,19 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 );
 
+/**
+ * Resend only ever POSTs here. GET exists so that opening the URL in a browser
+ * — which happens, the address appears in test emails — reports status instead
+ * of Chrome's "this page isn't working" 405 screen.
+ */
+export async function GET() {
+  return NextResponse.json({
+    endpoint: "resend-webhook",
+    method: "POST only",
+    configured: Boolean(process.env.RESEND_WEBHOOK_SECRET),
+  });
+}
+
 export async function POST(req: NextRequest) {
   const secret = process.env.RESEND_WEBHOOK_SECRET;
   if (!secret) {
