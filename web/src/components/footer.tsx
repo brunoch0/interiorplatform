@@ -33,6 +33,14 @@ export default function Footer() {
           <p className="font-serif text-lg font-semibold text-walnut">OnePass Interior<span className="text-terracotta">.</span></p>
           <p className="mt-3 text-xs leading-relaxed text-gray-400">{t.legal}</p>
           <p className="mt-3 text-xs text-gray-500">{t.company}</p>
+          <a
+            href="https://instagram.com/onepass_interior"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-block text-sm text-gray-500 hover:text-terracotta"
+          >
+            @onepass_interior
+          </a>
           <div className="mt-4"><LanguageSwitcher /></div>
         </div>
         <div>

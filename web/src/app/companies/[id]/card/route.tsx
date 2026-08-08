@@ -22,8 +22,10 @@ const TERRACOTTA = "#C06A45";
 const BORDER = "#E5DED2";
 const MUTED = "#8C765B";
 
-export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  // ?square renders 1080x1080 for Instagram; default stays 1200x630 for email.
+  const square = new URL(req.url).searchParams.has("square");
   if (!/^[0-9a-f-]{36}$/.test(id)) return new Response("not found", { status: 404 });
 
   const [c, all] = await Promise.all([fetchCompanyById(id), fetchCompanies()]);
@@ -72,7 +74,10 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
+            // 1:1 spreads the three blocks to the edges and leaves the middle
+            // empty, so centre them there and only justify on the wide card.
+            justifyContent: square ? "center" : "space-between",
+            gap: square ? 56 : 0,
             width: "100%",
             background: CREAM,
             border: `2px solid ${BORDER}`,
@@ -117,6 +122,6 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
         </div>
       </div>
     ),
-    { width: 1200, height: 630 },
+    square ? { width: 1080, height: 1080 } : { width: 1200, height: 630 },
   );
 }
