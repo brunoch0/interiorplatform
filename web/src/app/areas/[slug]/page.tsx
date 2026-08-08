@@ -40,6 +40,15 @@ function leadParagraph(s: AreaStats, rank: number | null) {
   if (top) {
     parts.push(`The most common specialism here is ${top.name} (${fmt(top.count)} companies).`);
   }
+  // Nobody else publishes this: a company can hold hundreds of Google reviews
+  // and still have no website, which is the one thing a homeowner searching
+  // for it will not find out from the search results themselves.
+  const noSite = s.companies.filter((c) => !c.website).length;
+  if (noSite) {
+    parts.push(
+      `${fmt(noSite)} of them have no website at all — reachable only through their Google listing.`,
+    );
+  }
   return parts.join(" ");
 }
 
@@ -230,6 +239,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
                 <div className="flex flex-wrap items-center gap-2">
                   <Link href={`/companies/${c.id}`} className="truncate font-bold hover:underline">{c.name}</Link>
                   {c.verified ? <Badge tone="green">Verified</Badge> : <Badge tone="gray">Unclaimed</Badge>}
+                  {!c.website && <Badge tone="amber">No website</Badge>}
                 </div>
                 <p className="mt-0.5 truncate text-xs text-gray-400">
                   {c.googleRating ? `★ ${c.googleRating.toFixed(1)} · ${fmt(c.googleRatingCount ?? 0)} reviews · ` : ""}
